@@ -1,6 +1,6 @@
 "use client";
 
-import { ClipPathLinks } from "@/components/ui/clip-path-links";
+import { ClipPathLinks } from "@/components/ui/content/clip-path-links";
 
 export default function Footer() {
   return (

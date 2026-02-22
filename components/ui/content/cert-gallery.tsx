@@ -6,7 +6,8 @@ const LINKEDIN_CERTS_URL = "https://www.linkedin.com/in/daniel-steven-rodriguez-
 
 // Files copied to public/certifications/
 function certSrc(name: string) {
-  return `/certifications/${encodeURIComponent(name)}`;
+  // Use encodeURI for whole filename so "&" remains literal (Next public serving for this file path is strict on it).
+  return `/certifications/${encodeURI(name)}`;
 }
 
 const CERTS = [
@@ -99,19 +100,20 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(to top, rgba(3,7,18,0.85) 0%, transparent 50%)",
+          background: "linear-gradient(to top, rgba(3,7,18,0.92) 0%, rgba(3,7,18,0.3) 40%, transparent 55%)",
           display: "flex",
           alignItems: "flex-end",
-          padding: "0.6rem",
+          padding: "0.65rem",
         }}
       >
         <p
           style={{
-            fontSize: "0.58rem",
+            fontSize: "0.65rem",
             fontWeight: 600,
-            color: "rgba(255,255,255,0.9)",
+            color: "#ffffff",
             letterSpacing: "0.03em",
-            lineHeight: 1.3,
+            lineHeight: 1.35,
+            textShadow: "0 1px 4px rgba(0,0,0,0.7)",
           }}
         >
           {cert.label}

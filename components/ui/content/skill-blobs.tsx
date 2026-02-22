@@ -11,11 +11,11 @@ interface BlobGroup {
 
 // Cohesive palette — all from the same blue-indigo-teal family
 const BLOB_GROUPS: BlobGroup[] = [
-  { id: "data",  label: "Data &\nAnalytics",    color: "#4A6FA5", skills: ["SQL", "Python", "Tableau", "Power BI", "Looker", "Excel"] },
-  { id: "ml",    label: "Machine\nLearning",     color: "#3D8FCF", skills: ["Scikit-learn", "XGBoost", "TensorFlow", "BERT", "RandomForest"] },
-  { id: "ai",    label: "AI &\nAutomation",      color: "#7B5EA7", skills: ["Claude API", "OpenAI", "n8n", "Make", "Vertex AI", "GenAI"] },
-  { id: "cloud", label: "Cloud &\nEngineering",  color: "#2E9A88", skills: ["GCP", "BigQuery", "FastAPI", "Git", "ETL Pipelines"] },
-  { id: "lang",  label: "Languages",             color: "#B07A45", skills: ["English", "Spanish", "French", "Portuguese"] },
+  { id: "data", label: "Data &\nAnalytics", color: "#5B8FD4", skills: ["SQL", "Python", "Tableau", "Power BI", "Looker", "Excel"] },
+  { id: "ml", label: "Machine\nLearning", color: "#4BA3E3", skills: ["Scikit-learn", "XGBoost", "TensorFlow", "BERT", "RandomForest"] },
+  { id: "ai", label: "AI &\nAutomation", color: "#9B7BD4", skills: ["Claude API", "OpenAI", "n8n", "Make", "Vertex AI", "GenAI"] },
+  { id: "cloud", label: "Cloud &\nEngineering", color: "#3DBAA3", skills: ["GCP", "BigQuery", "FastAPI", "Git", "ETL Pipelines"] },
+  { id: "lang", label: "Languages", color: "#D49B5B", skills: ["English", "Spanish", "French", "Portuguese"] },
 ];
 
 const RADIUS_X = 138;
@@ -209,7 +209,8 @@ function PlanetBlob({ group, globalMouse }: { group: BlobGroup; globalMouse: { x
             fontWeight: 800,
             letterSpacing: "0.07em",
             textTransform: "uppercase",
-            color: group.color,
+            color: "#ffffff",
+            textShadow: `0 1px 8px ${group.color}80`,
             textAlign: "center",
             lineHeight: 1.5,
             whiteSpace: "pre-line",

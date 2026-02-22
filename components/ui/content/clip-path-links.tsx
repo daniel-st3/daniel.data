@@ -105,7 +105,7 @@ const LinkBox = ({ Icon, href, label }: LinkBoxProps) => {
       rel="noopener noreferrer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative grid h-20 w-full place-content-center sm:h-28 md:h-36 text-foreground bg-background"
+      className="relative grid h-20 w-full place-content-center sm:h-24 md:h-24 text-foreground bg-background"
     >
       <div className="flex flex-col items-center gap-1.5">
         <Icon className="text-xl sm:text-3xl md:text-4xl" />

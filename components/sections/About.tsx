@@ -2,81 +2,115 @@
 
 import { useEffect, useRef, useState } from "react";
 import { loadGSAP } from "@/lib/gsap";
-import { GlowingEffect } from "@/components/ui/glowing-effect";
-import { MagneticText } from "@/components/ui/morphing-cursor";
+import { useCinematicReveal } from "@/lib/useCinematicReveal";
+import { GlowingEffect } from "@/components/ui/effects/glowing-effect";
+import { MagneticText } from "@/components/ui/effects/morphing-cursor";
 
 interface StatDef {
   target: number;
   suffix: string;
   label: string;
+  accent?: string;
 }
 
 const STATS: StatDef[] = [
-  { target: 4,  suffix: "",  label: "Languages\nEN · ES · FR · PT" },
-  { target: 13, suffix: "",  label: "Certifications\nearned" },
+  { target: 4, suffix: "", label: "Languages\nEN · ES · FR · PT" },
+  { target: 13, suffix: "", label: "Certifications\nearned" },
   { target: 50, suffix: "+", label: "SMEs\nadvised" },
-  { target: 3,  suffix: "",  label: "Degrees\n2× BSc · MSc" },
+  { target: 2, suffix: "", label: "Bachelor Degrees\nBusiness & International Biz", accent: "#7096C8" },
+  { target: 1, suffix: "", label: "Master Degree\nData Analytics for Business", accent: "#a88beb" },
 ];
 
 const TAGS = ["US Citizen", "No visa sponsorship required", "Remote / Hybrid"];
 
-// Animated counter hook
+// Animated counter with a quick, clear finish.
 function useCountUp(target: number, duration: number, active: boolean) {
   const [count, setCount] = useState(0);
+
   useEffect(() => {
-    if (!active) return;
-    let startTime = 0;
+    if (!active) {
+      setCount(0);
+      return;
+    }
+
+    const startTime = performance.now();
     let raf: number;
+
     const animate = (t: number) => {
-      if (!startTime) startTime = t;
       const progress = Math.min((t - startTime) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) raf = requestAnimationFrame(animate);
-      else setCount(target);
+      const next = Math.round(eased * target);
+      setCount(next >= target ? target : next);
+
+      if (progress < 1) {
+        raf = requestAnimationFrame(animate);
+      } else {
+        setCount(target);
+      }
     };
+
     raf = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(raf);
   }, [active, target, duration]);
+
   return count;
 }
 
-function StatCard({ stat, active }: { stat: StatDef; active: boolean }) {
-  const count = useCountUp(stat.target, 1600, active);
+function StatCard({ stat, active, index }: { stat: StatDef; active: boolean; index: number }) {
+  const duration = stat.target > 10 ? 1350 : 1050;
+  const count = useCountUp(stat.target, duration, active);
+  const accentColor = stat.accent || "var(--accent)";
+
   return (
     <div
       style={{
         position: "relative",
-        borderRadius: "1rem",
+        borderRadius: "1.15rem",
         border: "1px solid var(--border)",
         padding: "3px",
+        transition: "transform 0.25s ease, box-shadow 0.25s ease",
+        opacity: active ? 1 : 0.5,
+        transform: active ? "translateY(0)" : "translateY(12px)",
+        transitionDelay: `${index * 0.1}s`,
+        transitionProperty: "transform, opacity, box-shadow",
+        transitionDuration: "0.6s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-4px)";
+        e.currentTarget.style.boxShadow = `0 8px 30px rgba(74,111,165,0.12)`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+        e.currentTarget.style.boxShadow = "none";
       }}
     >
-      <GlowingEffect spread={30} glow={true} disabled={false} proximity={50} inactiveZone={0.01} borderWidth={2} />
+      <GlowingEffect spread={40} glow={true} disabled={false} proximity={60} inactiveZone={0.01} borderWidth={2} />
       <div
         style={{
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          gap: "0.35rem",
-          borderRadius: "0.75rem",
+          gap: "0.4rem",
+          borderRadius: "0.9rem",
           background: "var(--bg-subtle)",
-          padding: "1.1rem 1rem",
+          padding: "1.5rem 1.25rem",
+          minHeight: "110px",
+          justifyContent: "center",
         }}
       >
         <span
           style={{
-            fontSize: "2rem",
-            fontWeight: 700,
-            letterSpacing: "-0.05em",
-            color: "var(--fg)",
+            fontSize: "clamp(2.8rem, 5vw, 3.8rem)",
+            fontWeight: 800,
+            letterSpacing: "-0.06em",
+            color: accentColor,
             lineHeight: 1,
             fontVariantNumeric: "tabular-nums",
           }}
         >
           {count}{stat.suffix}
         </span>
-        <span style={{ fontSize: "0.65rem", color: "var(--fg-subtle)", lineHeight: 1.45, whiteSpace: "pre-line" }}>
+        <span style={{ fontSize: "0.72rem", color: "var(--fg-muted)", lineHeight: 1.45, whiteSpace: "pre-line", fontWeight: 500 }}>
           {stat.label}
         </span>
       </div>
@@ -90,6 +124,9 @@ export default function About() {
   const photoWrapRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsActive, setStatsActive] = useState(false);
+
+  // Cinematic 3D scroll reveal
+  useCinematicReveal(sectionRef, { yOffset: 40, rotateX: 2.5, scale: 0.98 });
 
   // Cursor tilt on photo
   useEffect(() => {
@@ -134,18 +171,18 @@ export default function About() {
 
       gsap.fromTo(
         leftRef.current,
-        { opacity: 0, x: -32 },
+        { opacity: 0, x: -32, rotateX: 4 },
         {
-          opacity: 1, x: 0, duration: 1, ease: "power3.out",
+          opacity: 1, x: 0, rotateX: 0, duration: 1, ease: "power3.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 82%", toggleActions: "play none none reverse" },
         }
       );
 
       gsap.fromTo(
         photoWrapRef.current,
-        { opacity: 0, x: 32, scale: 0.95 },
+        { opacity: 0, x: 32, scale: 0.95, rotateY: -6 },
         {
-          opacity: 1, x: 0, scale: 1, duration: 1, delay: 0.15, ease: "power3.out",
+          opacity: 1, x: 0, scale: 1, rotateY: 0, duration: 1, delay: 0.15, ease: "power3.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 82%", toggleActions: "play none none reverse" },
         }
       );
@@ -204,7 +241,7 @@ export default function About() {
                   }}
                 >
                   Business and Data Analyst with international experience across France and Colombia,
-                  specializing in B2B partnerships and operational analytics. I build AI-integrated
+                  specializing in B2B partnerships and operational analytics. I build AI integrated
                   workflows and translate complex data into pricing, margin, and growth decisions using
                   SQL, Python, and Tableau, spanning European and American time zones.
                 </p>
@@ -218,9 +255,9 @@ export default function About() {
             <div
               ref={statsRef}
               className="about-stats-grid"
-              style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.65rem" }}
+              style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.5rem" }}
             >
-              {STATS.map((s) => <StatCard key={s.label} stat={s} active={statsActive} />)}
+              {STATS.map((s, i) => <StatCard key={s.label} stat={s} active={statsActive} index={i} />)}
             </div>
           </div>
 
@@ -261,7 +298,7 @@ export default function About() {
               {/* Name card */}
               <div style={{ marginTop: "0.85rem", textAlign: "center", padding: "0.8rem 1rem", borderRadius: "0.75rem", background: "var(--bg-card)", border: "1px solid var(--border)" }}>
                 <p style={{ fontSize: "0.9rem", fontWeight: 600, letterSpacing: "-0.02em", color: "var(--fg)" }}>Daniel Rodriguez</p>
-                <p style={{ fontSize: "0.7rem", color: "var(--fg-muted)", marginTop: "0.15rem" }}>Business &amp; Data Analyst</p>
+                <p style={{ fontSize: "0.7rem", color: "var(--fg-muted)", marginTop: "0.15rem" }}>Business & Data Analyst</p>
               </div>
             </div>
           </div>
@@ -278,6 +315,11 @@ export default function About() {
             max-width: 220px;
             margin: 0 auto;
           }
+          .about-stats-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 480px) {
           .about-stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }

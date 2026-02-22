@@ -4,13 +4,13 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/base/button";
 import {
   Carousel,
   CarouselApi,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
+} from "@/components/ui/base/carousel";
 
 export interface Gallery4Item {
   id: string;
@@ -97,7 +97,7 @@ const Gallery4 = ({ items = [] }: Gallery4Props) => {
         <Carousel setApi={setCarouselApi} opts={{ dragFree: true, align: "start", loop: true }}>
           <CarouselContent style={{ marginLeft: 0 }}>
             {items.map((item, idx) => (
-              <CarouselItem key={item.id} style={{ maxWidth: 340, paddingLeft: 20 }}>
+              <CarouselItem key={item.id} style={{ maxWidth: 380, paddingLeft: 20 }}>
                 <motion.div
                   initial={{ opacity: 0, y: 24 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
