@@ -200,6 +200,14 @@ export default function Header() {
               GitHub ↗
             </a>
             <a
+              href="/cv/Daniel-Rodriguez-CV.pdf"
+              download
+              className="btn-ghost-dark"
+              style={{ fontSize: "0.78rem", padding: "0.4rem 1rem" }}
+            >
+              Download Resume
+            </a>
+            <a
               href="mailto:danielst.data@gmail.com"
               className="btn-ghost-dark"
               style={{ fontSize: "0.78rem", padding: "0.4rem 1rem" }}
@@ -308,7 +316,7 @@ export default function Header() {
           );
         })}
 
-        <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
+        <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem", flexWrap: "wrap", justifyContent: "center" }}>
           <a
             href="https://github.com/daniel-st3"
             target="_blank"
@@ -318,6 +326,15 @@ export default function Header() {
             onClick={() => setMenuOpen(false)}
           >
             GitHub ↗
+          </a>
+          <a
+            href="/cv/Daniel-Rodriguez-CV.pdf"
+            download
+            className="btn-ghost-dark"
+            style={{ fontSize: "0.85rem", padding: "0.6rem 1.2rem" }}
+            onClick={() => setMenuOpen(false)}
+          >
+            Resume
           </a>
           <a
             href="mailto:danielst.data@gmail.com"

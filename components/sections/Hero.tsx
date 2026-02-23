@@ -167,7 +167,7 @@ export default function Hero() {
           </div>
 
           {/* Secondary links */}
-          <div style={{ display: "flex", gap: "1.75rem", marginTop: "1.25rem", animation: "hero-sub-in 0.6s 1.1s ease-out both" }}>
+          <div style={{ display: "flex", gap: "1.75rem", rowGap: "0.7rem", flexWrap: "wrap", marginTop: "1.25rem", animation: "hero-sub-in 0.6s 1.1s ease-out both" }}>
             <a
               href="mailto:danielst.data@gmail.com"
               style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.82)", fontWeight: 500, transition: "color 0.2s ease", textDecoration: "none" }}
@@ -175,6 +175,15 @@ export default function Hero() {
               onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
             >
               Email me
+            </a>
+            <a
+              href="/cv/Daniel-Rodriguez-CV.pdf"
+              download
+              style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.82)", fontWeight: 500, transition: "color 0.2s ease", textDecoration: "none" }}
+              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,1)")}
+              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
+            >
+              Download Resume
             </a>
             <a
               href="/pdfs/thesis.pdf"
