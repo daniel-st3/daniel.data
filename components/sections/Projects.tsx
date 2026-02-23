@@ -17,6 +17,13 @@ interface ProjectItem {
 
 const ROW_1: ProjectItem[] = [
   {
+    id: "ai-cfo-agent",
+    title: "AI CFO Agent",
+    description: "AI powered finance copilot for decision support, KPI tracking, and strategic analysis workflows focused on faster, clearer business actions.",
+    href: "https://github.com/daniel-st3/ai-cfo-agent",
+    image: "/images/gradient-desktop-bg.jpeg",
+  },
+  {
     id: "nlp-thesis",
     title: "Predictive NLP Financial Pipeline",
     description: "End to end ML pipeline quantifying political bias in financial news. Retail Reddit sentiment outperforms professional news by 50x as a short term price predictor.",

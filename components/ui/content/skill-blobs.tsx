@@ -13,7 +13,7 @@ interface BlobGroup {
 const BLOB_GROUPS: BlobGroup[] = [
   { id: "data", label: "Data &\nAnalytics", color: "#5B8FD4", skills: ["SQL", "Python", "Tableau", "Power BI", "Looker", "Excel"] },
   { id: "ml", label: "Machine\nLearning", color: "#4BA3E3", skills: ["Scikit-learn", "XGBoost", "TensorFlow", "BERT", "RandomForest"] },
-  { id: "ai", label: "AI &\nAutomation", color: "#9B7BD4", skills: ["Claude API", "OpenAI", "n8n", "Make", "Vertex AI", "GenAI"] },
+  { id: "ai", label: "AI &\nAutomation", color: "#9B7BD4", skills: ["Claude API", "OpenAI", "LangChain", "LangGraph", "n8n", "Make", "Vertex AI", "GenAI"] },
   { id: "cloud", label: "Cloud &\nEngineering", color: "#3DBAA3", skills: ["GCP", "BigQuery", "FastAPI", "Git", "ETL Pipelines"] },
   { id: "lang", label: "Languages", color: "#D49B5B", skills: ["English", "Spanish", "French", "Portuguese"] },
 ];

@@ -208,8 +208,8 @@ export default function About() {
       <div className="container-site">
         {/* Interactive heading */}
         <div style={{ marginBottom: "2.5rem", display: "flex", gap: "2rem", flexWrap: "wrap", alignItems: "center" }}>
-          <MagneticText text="ANALYST" hoverText="BUILDER" className="text-[var(--fg)]" />
-          <MagneticText text="ENGINEER" hoverText="CREATOR" className="text-[var(--fg-muted)]" />
+          <MagneticText text="ANALYST" hoverText="STRATEGIST" className="text-[var(--fg)]" />
+          <MagneticText text="ENGINEER" hoverText="AUTOMATOR" className="text-[var(--fg-muted)]" />
         </div>
 
         {/* Two-column layout */}
@@ -296,10 +296,33 @@ export default function About() {
               </div>
 
               {/* Name card */}
-              <div style={{ marginTop: "0.85rem", textAlign: "center", padding: "0.8rem 1rem", borderRadius: "0.75rem", background: "var(--bg-card)", border: "1px solid var(--border)" }}>
+              <a
+                href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  marginTop: "0.85rem",
+                  textAlign: "center",
+                  padding: "0.8rem 1rem",
+                  borderRadius: "0.75rem",
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border)",
+                  display: "block",
+                  textDecoration: "none",
+                  transition: "border-color 0.2s ease, transform 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--accent)";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
                 <p style={{ fontSize: "0.9rem", fontWeight: 600, letterSpacing: "-0.02em", color: "var(--fg)" }}>Daniel Rodriguez</p>
                 <p style={{ fontSize: "0.7rem", color: "var(--fg-muted)", marginTop: "0.15rem" }}>Business & Data Analyst</p>
-              </div>
+              </a>
             </div>
           </div>
         </div>

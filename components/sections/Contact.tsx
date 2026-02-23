@@ -295,7 +295,7 @@ export default function Contact() {
               </span>
             </div>
             <p style={{ fontSize: "0.82rem", color: "var(--fg-muted)", lineHeight: 1.5 }}>
-              Ready for new opportunities starting February 2026. Full time or contract.
+              Available immediately for new opportunities. Full time or contract.
             </p>
           </div>
 
