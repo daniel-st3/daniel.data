@@ -4,21 +4,27 @@ import "./globals.css";
 const siteUrl = "https://danielst-data.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Daniel Rodriguez — Business & Data Analyst",
+  title: "Daniel Rodriguez | Business and Data Analyst",
   description:
-    "Business & Data Analyst with international experience in B2B partnerships, AI-integrated workflows, and data-driven strategy. Based in Bogotá, open to remote roles.",
+    "Business and Data Analyst with international experience in B2B partnerships, AI integrated workflows, and data driven strategy. Based in Bogota and open to remote roles.",
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
   },
+  authors: [{ name: "Daniel Rodriguez", url: siteUrl }],
+  creator: "Daniel Rodriguez",
+  publisher: "Daniel Rodriguez",
   openGraph: {
-    title: "Daniel Rodriguez — Business & Data Analyst",
+    title: "Daniel Rodriguez | Business and Data Analyst",
     description:
-      "Turning signal into decision — building AI-powered analytics that move businesses.",
+      "I build AI integrated analytics systems that turn raw business signals into clear decisions, measurable growth, and practical operating improvements for modern teams.",
     url: siteUrl,
     siteName: "Daniel Rodriguez Portfolio",
     locale: "en_US",
-    type: "website",
+    type: "article",
+    publishedTime: "2026-02-23T00:00:00.000Z",
+    modifiedTime: "2026-02-23T00:00:00.000Z",
+    authors: ["Daniel Rodriguez"],
     images: [
       {
         url: "/og-image.png",
@@ -30,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daniel Rodriguez — Business & Data Analyst",
+    title: "Daniel Rodriguez | Business and Data Analyst",
     description:
-      "AI-integrated workflows and data-driven growth for business decisions.",
+      "AI integrated workflows and data driven growth strategies that help teams move from noisy data to confident business decisions.",
     images: ["/og-image.png"],
   },
   icons: {
