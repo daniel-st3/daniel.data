@@ -195,7 +195,7 @@ export default function Skills() {
               Certifications
             </h2>
             <p style={{ fontSize: "0.875rem", color: "var(--fg-muted)", marginTop: "0.65rem" }}>
-              Click to zoom. Click again to view on LinkedIn.
+              Click to zoom. Click again to open the certificate source.
             </p>
           </div>
         </div>

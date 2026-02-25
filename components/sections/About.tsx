@@ -15,7 +15,7 @@ interface StatDef {
 
 const STATS: StatDef[] = [
   { target: 4, suffix: "", label: "Languages\nEN · ES · FR · PT" },
-  { target: 13, suffix: "", label: "Certifications\nearned" },
+  { target: 15, suffix: "", label: "Certifications\nearned" },
   { target: 50, suffix: "+", label: "SMEs\nadvised" },
   { target: 2, suffix: "", label: "Bachelor Degrees\nBusiness & International Biz", accent: "#7096C8" },
   { target: 1, suffix: "", label: "Master Degree\nData Analytics for Business", accent: "#a88beb" },

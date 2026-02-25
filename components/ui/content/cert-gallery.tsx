@@ -10,7 +10,23 @@ function certSrc(name: string) {
   return `/certifications/${encodeURI(name)}`;
 }
 
-const CERTS = [
+interface CertItem {
+  file: string;
+  label: string;
+  description?: string;
+}
+
+const CERTS: CertItem[] = [
+  {
+    file: "Model Context Protocol: Advanced Topics by Anthropic.pdf",
+    label: "Model Context Protocol: Advanced Topics · Anthropic",
+    description: "Advanced MCP patterns for server-client transport, production deployment, sampling, notifications, and file system access control.",
+  },
+  {
+    file: "Claude Code in Action by Anthropic.pdf",
+    label: "Claude Code in Action · Anthropic",
+    description: "Hands-on Claude Code architecture, implementation techniques, context management, MCP server extensions, and GitHub integration.",
+  },
   { file: "Google Advanced Data Analytics Specialization  Google.jpeg", label: "Google Advanced Data Analytics" },
   { file: "Google Business Intelligence Specialization  Google.jpeg", label: "Google Business Intelligence" },
   { file: "Natural Language Processing on Google Cloud  Google Cloud Skills Boost.jpeg", label: "NLP on Google Cloud" },
@@ -26,19 +42,23 @@ const CERTS = [
   { file: "Total Python Advanced Programming.jpeg", label: "Total Python Advanced" },
 ];
 
-// Split into 3 rows
-const ROW1 = CERTS.slice(0, 5);
-const ROW2 = CERTS.slice(5, 9);
-const ROW3 = CERTS.slice(9);
+const ROW_SIZE = Math.ceil(CERTS.length / 3);
+const ROW1 = CERTS.slice(0, ROW_SIZE);
+const ROW2 = CERTS.slice(ROW_SIZE, ROW_SIZE * 2);
+const ROW3 = CERTS.slice(ROW_SIZE * 2);
 
 interface CertCardProps {
-  cert: { file: string; label: string };
+  cert: CertItem;
   rowIdx: number;
 }
 
 function CertCard({ cert, rowIdx }: CertCardProps) {
   const [expanded, setExpanded] = useState(false);
   const [clickCount, setClickCount] = useState(0);
+  const [imageError, setImageError] = useState(false);
+  const isPdf = cert.file.toLowerCase().endsWith(".pdf");
+  const openText = isPdf ? "open certificate PDF" : "view on LinkedIn";
+  const openBadgeText = isPdf ? "Open PDF ↗" : "LinkedIn ↗";
 
   // Auto-collapse after 2s if user doesn't click a second time
   useEffect(() => {
@@ -58,14 +78,15 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
     } else {
       setExpanded(false);
       setClickCount(0);
-      window.open(LINKEDIN_CERTS_URL, "_blank", "noopener");
+      const targetUrl = isPdf ? certSrc(cert.file) : LINKEDIN_CERTS_URL;
+      window.open(targetUrl, "_blank", "noopener");
     }
   };
 
   return (
     <div
       onClick={handleClick}
-      title={expanded ? "Click again to view on LinkedIn" : "Click to expand"}
+      title={expanded ? `Click again to ${openText}` : "Click to expand"}
       style={{
         flexShrink: 0,
         width: expanded ? 360 : 200,
@@ -79,22 +100,30 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
         border: expanded ? "1px solid rgba(74,111,165,0.4)" : "1px solid var(--border)",
       }}
     >
-      <img
-        src={certSrc(cert.file)}
-        alt={cert.label}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "center",
-          transition: "transform 0.4s ease",
-          transform: expanded ? "scale(1.05)" : "scale(1)",
-          display: "block",
-        }}
-        onError={(e) => {
-          (e.currentTarget as HTMLImageElement).style.display = "none";
-        }}
-      />
+      {!isPdf && !imageError ? (
+        <img
+          src={certSrc(cert.file)}
+          alt={cert.label}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+            transition: "transform 0.4s ease",
+            transform: expanded ? "scale(1.05)" : "scale(1)",
+            display: "block",
+          }}
+          onError={() => setImageError(true)}
+        />
+      ) : (
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(135deg, #1a2740 0%, #102c4a 45%, #1b3a61 100%)",
+          }}
+        />
+      )}
       {/* Label overlay */}
       <div
         style={{
@@ -102,7 +131,9 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
           inset: 0,
           background: "linear-gradient(to top, rgba(3,7,18,0.92) 0%, rgba(3,7,18,0.3) 40%, transparent 55%)",
           display: "flex",
-          alignItems: "flex-end",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          alignItems: "flex-start",
           padding: "0.65rem",
         }}
       >
@@ -118,6 +149,20 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
         >
           {cert.label}
         </p>
+        {expanded && cert.description && (
+          <p
+            style={{
+              marginTop: "0.35rem",
+              fontSize: "0.55rem",
+              color: "rgba(255,255,255,0.85)",
+              lineHeight: 1.35,
+              maxHeight: "3.8em",
+              overflow: "hidden",
+            }}
+          >
+            {cert.description}
+          </p>
+        )}
       </div>
       {expanded && (
         <div
@@ -133,7 +178,7 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
             fontWeight: 600,
           }}
         >
-          Click for LinkedIn ↗
+          {openBadgeText}
         </div>
       )}
     </div>
@@ -141,7 +186,7 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
 }
 
 interface CertRowProps {
-  certs: { file: string; label: string }[];
+  certs: CertItem[];
   direction: "left" | "right";
   rowIdx: number;
 }
