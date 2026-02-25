@@ -1,17 +1,29 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { FileDown, GraduationCap, BookOpen } from "lucide-react";
+import { Mail, GraduationCap, BookOpen } from "lucide-react";
 import { loadGSAP } from "@/lib/gsap";
 import { useCinematicReveal } from "@/lib/useCinematicReveal";
+
+const THESIS_REQUEST_SUBJECT = "Request to read your thesis";
+const THESIS_REQUEST_BODY = [
+  "Hi Daniel,",
+  "",
+  "I found your portfolio and I would love to read your MSc thesis on AI-driven analysis of political bias in financial media.",
+  "Could you please share the thesis and defense slides with me?",
+  "",
+  "Thank you,",
+  "[Your Name]",
+].join("\n");
+const THESIS_REQUEST_MAILTO = `mailto:danielst.data@gmail.com?subject=${encodeURIComponent(THESIS_REQUEST_SUBJECT)}&body=${encodeURIComponent(THESIS_REQUEST_BODY)}`;
 
 const DOWNLOADS = [
   {
     title: "MSc Thesis",
     subtitle: "AI Driven Analysis of Political Bias in Financial Media",
     meta: "KEDGE Business School · 2025 · Data Analytics for Business",
-    href: "/pdfs/thesis.pdf",
-    label: "Download Thesis (PDF)",
+    href: THESIS_REQUEST_MAILTO,
+    label: "Request Thesis by Email",
     preview: "/images/thesis-cover.jpeg",
     previewAlt: "MSc thesis cover",
     previewPosition: "center center",
@@ -22,8 +34,8 @@ const DOWNLOADS = [
     title: "Thesis Presentation",
     subtitle: "Research overview, methodology, and key findings",
     meta: "Defense slides · MSc Data Analytics · Feb 2026",
-    href: "/pdfs/thesis-slides.pdf",
-    label: "Download Slides (PDF)",
+    href: THESIS_REQUEST_MAILTO,
+    label: "Request Slides by Email",
     preview: "/images/slides-preview.png",
     previewAlt: "KEDGE defense presentation slide",
     previewPosition: "center center",
@@ -88,7 +100,7 @@ export default function ThesisDownloads() {
             color: "var(--fg)",
             lineHeight: 1.1,
           }}>
-            MSc Thesis Downloads
+            MSc Thesis Access
           </h2>
           <p style={{
             fontSize: "0.95rem",
@@ -97,7 +109,7 @@ export default function ThesisDownloads() {
             maxWidth: "50ch",
             lineHeight: 1.65,
           }}>
-            Defended February 2026 at KEDGE Business School, Bordeaux. Full paper and presentation slides available below.
+            Defended February 2026 at KEDGE Business School, Bordeaux. The full paper and presentation slides are shared on direct email request.
           </p>
         </div>
 
@@ -110,9 +122,8 @@ export default function ThesisDownloads() {
             const Icon = d.icon;
             return (
               <a
-                key={d.href}
+                key={d.title}
                 href={d.href}
-                download
                 className="thesis-card"
                 style={{
                   display: "flex",
@@ -184,7 +195,7 @@ export default function ThesisDownloads() {
                     padding: "0.25rem 0.65rem",
                   }}>
                     <Icon size={10} />
-                    PDF
+                    EMAIL
                   </div>
                 </div>
 
@@ -217,7 +228,7 @@ export default function ThesisDownloads() {
                     marginTop: "auto",
                     paddingTop: "0.5rem",
                   }}>
-                    <FileDown size={15} />
+                    <Mail size={15} />
                     {d.label}
                   </div>
                 </div>

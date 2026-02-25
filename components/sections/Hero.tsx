@@ -6,6 +6,17 @@ import { loadGSAP } from "@/lib/gsap";
 
 const ParticleField = dynamic(() => import("@/components/ui/backgrounds/ParticleField"), { ssr: false });
 const ScrollingConstellation = dynamic(() => import("@/components/ui/backgrounds/ScrollingConstellation"), { ssr: false });
+const THESIS_REQUEST_SUBJECT = "Request to read your thesis";
+const THESIS_REQUEST_BODY = [
+  "Hi Daniel,",
+  "",
+  "I found your portfolio and I would love to read your MSc thesis on AI-driven analysis of political bias in financial media.",
+  "Could you please share the thesis and defense slides with me?",
+  "",
+  "Thank you,",
+  "[Your Name]",
+].join("\n");
+const THESIS_REQUEST_MAILTO = `mailto:danielst.data@gmail.com?subject=${encodeURIComponent(THESIS_REQUEST_SUBJECT)}&body=${encodeURIComponent(THESIS_REQUEST_BODY)}`;
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -177,7 +188,7 @@ export default function Hero() {
               Email me
             </a>
             <a
-              href="/cv/Daniel-Rodriguez-CV.pdf"
+              href="/cv/Daniel%20Rodriguez.pdf"
               download
               style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.82)", fontWeight: 500, transition: "color 0.2s ease", textDecoration: "none" }}
               onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,1)")}
@@ -186,13 +197,12 @@ export default function Hero() {
               Download Resume
             </a>
             <a
-              href="/pdfs/thesis.pdf"
-              download
+              href={THESIS_REQUEST_MAILTO}
               style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.82)", fontWeight: 500, transition: "color 0.2s ease", textDecoration: "none" }}
               onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,1)")}
               onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
             >
-              Download Thesis
+              Request Thesis
             </a>
           </div>
         </div>

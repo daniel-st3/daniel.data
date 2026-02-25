@@ -5,6 +5,7 @@ node_modules
 .next
 out
 archive/next_runtime_backups/
+archive/private-pdfs/
 
 # Environment variables
 .env
