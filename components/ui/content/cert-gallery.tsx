@@ -18,12 +18,12 @@ interface CertItem {
 
 const CERTS: CertItem[] = [
   {
-    file: "Model Context Protocol: Advanced Topics by Anthropic.pdf",
+    file: "Model Context Protocol Advanced Topics by Anthropic.png",
     label: "Model Context Protocol: Advanced Topics · Anthropic",
     description: "Advanced MCP patterns for server-client transport, production deployment, sampling, notifications, and file system access control.",
   },
   {
-    file: "Claude Code in Action by Anthropic.pdf",
+    file: "Claude Code in Action by Anthropic.png",
     label: "Claude Code in Action · Anthropic",
     description: "Hands-on Claude Code architecture, implementation techniques, context management, MCP server extensions, and GitHub integration.",
   },
