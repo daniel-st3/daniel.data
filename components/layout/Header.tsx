@@ -200,7 +200,7 @@ export default function Header() {
               GitHub ↗
             </a>
             <a
-              href="/cv/Daniel%20Rodriguez.pdf"
+              href="/cv/Daniel_Rodriguez.pdf"
               download
               className="btn-ghost-dark"
               style={{ fontSize: "0.78rem", padding: "0.4rem 1rem" }}
@@ -328,7 +328,7 @@ export default function Header() {
             GitHub ↗
           </a>
           <a
-            href="/cv/Daniel%20Rodriguez.pdf"
+            href="/cv/Daniel_Rodriguez.pdf"
             download
             className="btn-ghost-dark"
             style={{ fontSize: "0.85rem", padding: "0.6rem 1.2rem" }}

@@ -188,7 +188,7 @@ export default function Hero() {
               Email me
             </a>
             <a
-              href="/cv/Daniel%20Rodriguez.pdf"
+              href="/cv/Daniel_Rodriguez.pdf"
               download
               style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.82)", fontWeight: 500, transition: "color 0.2s ease", textDecoration: "none" }}
               onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,1)")}
