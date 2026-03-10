@@ -10,6 +10,7 @@ export default function StarfieldCanvas() {
     if (!mount) return;
 
     let animId: number;
+    let cleanup: (() => void) | undefined;
 
     (async () => {
       const THREE = await import("three");
@@ -25,7 +26,24 @@ export default function StarfieldCanvas() {
       );
       camera.position.set(0, 20, 100);
 
-      const renderer = new THREE.WebGLRenderer({ antialias: false });
+      let renderer: InstanceType<typeof THREE.WebGLRenderer> | null = null;
+      const originalConsoleError = console.error.bind(console) as (...args: unknown[]) => void;
+      try {
+        // Three logs loudly before throwing when WebGL is unavailable. Suppress
+        // only those renderer bootstrap messages and fall back to the static backdrop.
+        console.error = (...args: unknown[]) => {
+          const message = args.map(String).join(" ");
+          if (message.includes("THREE.WebGLRenderer")) return;
+          originalConsoleError(...args);
+        };
+        renderer = new THREE.WebGLRenderer({ antialias: false });
+      } catch {
+        return;
+      } finally {
+        console.error = originalConsoleError;
+      }
+      if (!renderer) return;
+
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(1);
       mount.appendChild(renderer.domElement);
@@ -318,7 +336,7 @@ export default function StarfieldCanvas() {
 
       animate();
 
-      (mount as any).__threeCleanup = () => {
+      cleanup = () => {
         cancelAnimationFrame(animId);
         window.removeEventListener("scroll", onScroll);
         window.removeEventListener("scroll", onScrollCam);
@@ -331,7 +349,7 @@ export default function StarfieldCanvas() {
     })();
 
     return () => {
-      if ((mount as any).__threeCleanup) (mount as any).__threeCleanup();
+      if (cleanup) cleanup();
       else cancelAnimationFrame(animId);
     };
   }, []);
@@ -339,7 +357,7 @@ export default function StarfieldCanvas() {
   return (
     <div
       ref={mountRef}
-      style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}
+      style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", background: "#030712" }}
     />
   );
 }

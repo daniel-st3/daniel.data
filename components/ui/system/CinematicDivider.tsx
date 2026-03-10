@@ -9,7 +9,7 @@ import { loadGSAP } from "@/lib/gsap";
  */
 export default function CinematicDivider({
     color = "var(--accent)",
-    glowColor = "rgba(74,111,165,0.35)",
+    glowColor = "rgba(195,111,61,0.28)",
     style = {},
 }: {
     color?: string;

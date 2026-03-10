@@ -96,8 +96,8 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
         cursor: "pointer",
         position: "relative",
         transition: "width 0.4s cubic-bezier(0.22,1,0.36,1), height 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease",
-        boxShadow: expanded ? "0 8px 40px rgba(74,111,165,0.35)" : "0 2px 12px rgba(0,0,0,0.2)",
-        border: expanded ? "1px solid rgba(74,111,165,0.4)" : "1px solid var(--border)",
+        boxShadow: expanded ? "0 8px 40px rgba(195,111,61,0.24)" : "0 2px 12px rgba(0,0,0,0.15)",
+        border: expanded ? "1px solid rgba(195,111,61,0.34)" : "1px solid var(--border)",
       }}
     >
       {!isPdf && !imageError ? (
@@ -120,7 +120,7 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
           style={{
             width: "100%",
             height: "100%",
-            background: "linear-gradient(135deg, #1a2740 0%, #102c4a 45%, #1b3a61 100%)",
+            background: "linear-gradient(135deg, #493224 0%, #6b4731 45%, #8e6442 100%)",
           }}
         />
       )}
@@ -171,7 +171,7 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
             top: "0.4rem",
             right: "0.4rem",
             fontSize: "0.55rem",
-            background: "rgba(74,111,165,0.8)",
+            background: "rgba(195,111,61,0.84)",
             color: "#fff",
             borderRadius: "999px",
             padding: "0.15rem 0.45rem",

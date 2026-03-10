@@ -7,32 +7,36 @@
 
 /* ─── Design tokens ─────────────────────────────────────────── */
 :root {
-  --bg: #f7f6f3;
-  --bg-card: #ffffff;
-  --bg-subtle: #f0efec;
-  --fg: #0f0f0f;
-  --fg-muted: #6b6b6b;
-  --fg-subtle: #a8a8a8;
-  --accent: #4A6FA5;
-  --accent-light: #7096C8;
-  --accent-bg: rgba(74, 111, 165, 0.08);
-  --border: #e4e4e0;
+  --bg: #f5ecdd;
+  --bg-card: #fcf4e8;
+  --bg-subtle: #efdfc7;
+  --fg: #2d2218;
+  --fg-muted: #6f5843;
+  --fg-subtle: #a2876a;
+  --accent: #c36f3d;
+  --accent-light: #d9a56b;
+  --accent-deep: #8a4a2d;
+  --accent-sage: #6f7b64;
+  --accent-sky: #9ba9a2;
+  --accent-rose: #b8896e;
+  --accent-bg: rgba(195, 111, 61, 0.1);
+  --border: #dcc6a8;
   --header-h: 64px;
 
   /* shadcn CSS var compatibility (HSL space-separated) */
-  --primary: 216 38% 47%;
+  --primary: 23 53% 50%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 6%;
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 42%;
+  --secondary: 35 47% 92%;
+  --secondary-foreground: 24 31% 15%;
+  --muted: 35 47% 92%;
+  --muted-foreground: 24 22% 40%;
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 6%;
+  --card-foreground: 24 31% 15%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  --input: 0 0% 89%;
-  --ring: 216 38% 47%;
-  --radius: 0.3rem;
+  --input: 35 34% 82%;
+  --ring: 23 53% 50%;
+  --radius: 0.8rem;
 }
 
 /* ─── Base reset ─────────────────────────────────────────────── */
@@ -52,7 +56,10 @@ html {
 }
 
 body {
-  background-color: var(--bg);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(217, 165, 107, 0.2), transparent 34%),
+    radial-gradient(circle at 82% 8%, rgba(155, 169, 162, 0.17), transparent 28%),
+    linear-gradient(180deg, #f1e2c8 0%, var(--bg) 32%, #f8f1e7 100%);
   color: var(--fg);
   font-family: "General Sans", Arial, Helvetica, sans-serif;
   font-weight: 400;
@@ -139,6 +146,16 @@ h6 {
   pointer-events: none;
 }
 
+/* ─── Experience scroll track ───────────────────────────────── */
+.exp-track::-webkit-scrollbar { display: none; }
+.exp-leading-spacer {
+  flex-shrink: 0;
+  width: max(2rem, calc((100vw - 1100px) / 2 + 2rem));
+}
+@media (max-width: 640px) {
+  .exp-leading-spacer { width: 1.25rem; }
+}
+
 /* ─── Section utilities ──────────────────────────────────────── */
 .section-pad {
   padding-top: 4rem;
@@ -192,17 +209,19 @@ h6 {
   align-items: center;
   gap: 0.4rem;
   padding: 0.65rem 1.4rem;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
   color: #fff;
   font-size: 0.875rem;
   font-weight: 500;
-  border-radius: 3px;
-  transition: background 0.2s ease, transform 0.15s ease;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(138, 74, 45, 0.18);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
   letter-spacing: -0.01em;
 }
 
 .btn-primary:hover {
-  background: #3a5a8a;
+  background: linear-gradient(135deg, var(--accent-deep) 0%, #6e3820 100%);
+  box-shadow: 0 14px 32px rgba(138, 74, 45, 0.24);
   transform: translateY(-1px);
 }
 
@@ -215,14 +234,16 @@ h6 {
   color: var(--fg);
   font-size: 0.875rem;
   font-weight: 500;
-  border-radius: 3px;
+  border-radius: 999px;
   border: 1px solid var(--border);
-  transition: border-color 0.2s ease, transform 0.15s ease;
+  transition: border-color 0.2s ease, transform 0.15s ease, background 0.2s ease, color 0.2s ease;
   letter-spacing: -0.01em;
 }
 
 .btn-ghost:hover {
-  border-color: var(--fg-muted);
+  border-color: var(--accent);
+  background: rgba(195, 111, 61, 0.06);
+  color: var(--accent-deep);
   transform: translateY(-1px);
 }
 
@@ -232,17 +253,19 @@ h6 {
   gap: 0.4rem;
   padding: 0.65rem 1.4rem;
   background: transparent;
-  color: #fff;
+  color: #fff7ee;
   font-size: 0.875rem;
   font-weight: 500;
-  border-radius: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  transition: border-color 0.2s ease, transform 0.15s ease;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 232, 206, 0.45);
+  background: rgba(41, 25, 16, 0.16);
+  transition: border-color 0.2s ease, transform 0.15s ease, background 0.2s ease;
   letter-spacing: -0.01em;
 }
 
 .btn-ghost-dark:hover {
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 232, 206, 0.75);
+  background: rgba(41, 25, 16, 0.28);
   transform: translateY(-1px);
 }
 
@@ -253,8 +276,10 @@ h6 {
   gap: 0.5rem;
   font-size: 0.75rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 244, 231, 0.86);
+  border: 1px solid rgba(255, 224, 195, 0.28);
+  background: rgba(59, 38, 24, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 244, 231, 0.08);
   border-radius: 99px;
   padding: 0.3rem 0.9rem;
   letter-spacing: 0.01em;
@@ -263,7 +288,7 @@ h6 {
 .pill-dot {
   width: 6px;
   height: 6px;
-  background: #22c55e;
+  background: var(--accent-light);
   border-radius: 50%;
   animation: pulse-dot 2.5s ease-in-out infinite;
 }
@@ -297,9 +322,10 @@ h6 {
   display: inline-block;
   font-size: 0.7rem;
   font-weight: 500;
-  color: var(--fg-muted);
+  color: var(--accent-deep);
   border: 1px solid var(--border);
-  border-radius: 2px;
+  border-radius: 999px;
+  background: rgba(195, 111, 61, 0.06);
   padding: 0.2rem 0.55rem;
   letter-spacing: 0.01em;
 }

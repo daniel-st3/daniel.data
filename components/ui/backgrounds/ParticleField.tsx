@@ -3,11 +3,11 @@
 import { useEffect, useRef } from "react";
 
 const PALETTE: [number, number, number][] = [
-  [74, 111, 165],
-  [112, 150, 200],
-  [155, 190, 230],
-  [180, 160, 220],
-  [200, 220, 255],
+  [195, 111, 61],
+  [217, 165, 107],
+  [173, 151, 118],
+  [151, 169, 162],
+  [255, 236, 211],
 ];
 
 interface Particle {
@@ -106,7 +106,7 @@ export default function ParticleField() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(112,150,200,${(1 - d / LINK) * 0.26})`;
+            ctx.strokeStyle = `rgba(217,165,107,${(1 - d / LINK) * 0.24})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }

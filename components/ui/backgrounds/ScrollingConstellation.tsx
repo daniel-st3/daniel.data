@@ -92,7 +92,7 @@ export default function ScrollingConstellation() {
                         ctx.beginPath();
                         ctx.moveTo(NODES[i].x, NODES[i].y);
                         ctx.lineTo(NODES[j].x, NODES[j].y);
-                        ctx.strokeStyle = `rgba(112, 150, 200, ${alpha})`;
+                        ctx.strokeStyle = `rgba(217, 165, 107, ${alpha})`;
                         ctx.lineWidth = 0.8;
                         ctx.stroke();
                     }
@@ -104,13 +104,13 @@ export default function ScrollingConstellation() {
                 // Outer glow
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, n.r * 3, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(112, 150, 200, ${n.opacity * 0.08})`;
+                ctx.fillStyle = `rgba(195, 111, 61, ${n.opacity * 0.08})`;
                 ctx.fill();
 
                 // Core dot
                 ctx.beginPath();
                 ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(160, 190, 230, ${n.opacity})`;
+                ctx.fillStyle = `rgba(255, 233, 205, ${n.opacity})`;
                 ctx.fill();
             });
 
@@ -128,7 +128,7 @@ export default function ScrollingConstellation() {
                 ctx.rotate(angle);
                 ctx.beginPath();
                 ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(112, 150, 200, ${0.06 + i * 0.02})`;
+                ctx.strokeStyle = `rgba(151, 169, 162, ${0.07 + i * 0.02})`;
                 ctx.lineWidth = 0.6;
                 ctx.stroke();
                 ctx.restore();

@@ -77,8 +77,8 @@ export default function Header() {
           alignItems: "center",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          backgroundColor: scrolled ? "rgba(3,7,18,0.92)" : "rgba(3,7,18,0.6)",
-          borderBottom: scrolled ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(255,255,255,0.04)",
+          backgroundColor: scrolled ? "rgba(43,28,19,0.86)" : "rgba(43,28,19,0.36)",
+          borderBottom: scrolled ? "1px solid rgba(255,231,206,0.14)" : "1px solid rgba(255,231,206,0.05)",
           transition: "background-color 0.3s ease, border-color 0.3s ease",
         }}
       >
@@ -134,7 +134,7 @@ export default function Header() {
                 style={{
                   display: "block",
                   fontSize: "0.62rem",
-                  color: "rgba(255,255,255,0.4)",
+                  color: "rgba(255,235,214,0.48)",
                   letterSpacing: "0.06em",
                   textTransform: "uppercase",
                   lineHeight: 1,
@@ -157,15 +157,15 @@ export default function Header() {
                   style={{
                     fontSize: "0.82rem",
                     fontWeight: isActive ? 600 : 500,
-                    color: isActive ? "#ffffff" : "rgba(255,255,255,0.5)",
+                    color: isActive ? "#ffffff" : "rgba(255,241,228,0.58)",
                     letterSpacing: "-0.01em",
                     transition: "color 0.2s ease",
                     position: "relative",
                     textDecoration: "none",
                   }}
-                  onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.95)")}
+                  onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.96)")}
                   onMouseLeave={(e) =>
-                    ((e.target as HTMLElement).style.color = isActive ? "#ffffff" : "rgba(255,255,255,0.5)")
+                    ((e.target as HTMLElement).style.color = isActive ? "#ffffff" : "rgba(255,241,228,0.58)")
                   }
                 >
                   {link.label}
@@ -193,9 +193,9 @@ export default function Header() {
               href="https://github.com/daniel-st3"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,255,255,0.5)", transition: "color 0.2s ease" }}
-              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.95)")}
-              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.5)")}
+              style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(255,241,228,0.6)", transition: "color 0.2s ease" }}
+              onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.96)")}
+              onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,241,228,0.6)")}
             >
               GitHub ↗
             </a>
@@ -276,7 +276,7 @@ export default function Header() {
           position: "fixed",
           inset: 0,
           zIndex: 99,
-          background: "rgba(3,7,18,0.97)",
+          background: "rgba(34,22,15,0.96)",
           backdropFilter: "blur(30px)",
           WebkitBackdropFilter: "blur(30px)",
           display: "flex",
@@ -299,7 +299,7 @@ export default function Header() {
               style={{
                 fontSize: "clamp(1.5rem, 5vw, 2.2rem)",
                 fontWeight: isActive ? 700 : 500,
-                color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
+                color: isActive ? "#fff" : "rgba(255,239,223,0.68)",
                 letterSpacing: "-0.03em",
                 textDecoration: "none",
                 transition: "color 0.2s ease, transform 0.3s ease",

@@ -19,7 +19,7 @@ const ROW_1: ProjectItem[] = [
   {
     id: "ai-cfo-agent",
     title: "AI CFO Agent",
-    description: "AI powered finance copilot for decision support, KPI tracking, and strategic analysis workflows focused on faster, clearer business actions.",
+    description: "Self-hosted financial intelligence for startups. Upload a CSV → board-ready finance cockpit in 30 sec. Health scores, KPI tracking, Monte Carlo survival, runway modeling, fraud detection, autonomous agent loop. 24 features · $0.003/run.",
     href: "https://github.com/daniel-st3/ai-cfo-agent",
     image: "/images/gradient-desktop-bg.jpeg",
   },
@@ -227,7 +227,12 @@ export default function Projects() {
       ref={sectionRef}
       id="projects"
       className="section-pad"
-      style={{ position: "relative", zIndex: 1, overflow: "hidden" }}
+      style={{
+        position: "relative",
+        zIndex: 1,
+        overflow: "hidden",
+        background: "linear-gradient(to bottom, rgba(255,246,233,0.58) 0%, rgba(245,236,221,0) 16%, transparent 100%)",
+      }}
     >
       <div className="container-site">
         <div

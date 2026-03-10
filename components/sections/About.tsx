@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Award, GraduationCap, Medal, Trophy, type LucideIcon } from "lucide-react";
 import { loadGSAP } from "@/lib/gsap";
 import { useCinematicReveal } from "@/lib/useCinematicReveal";
 import { GlowingEffect } from "@/components/ui/effects/glowing-effect";
@@ -11,14 +12,20 @@ interface StatDef {
   suffix: string;
   label: string;
   accent?: string;
+  icon?: LucideIcon;
 }
 
 const STATS: StatDef[] = [
-  { target: 4, suffix: "", label: "Languages\nEN · ES · FR · PT" },
-  { target: 15, suffix: "", label: "Certifications\nearned" },
-  { target: 50, suffix: "+", label: "SMEs\nadvised" },
-  { target: 2, suffix: "", label: "Bachelor Degrees\nBusiness & International Biz", accent: "#7096C8" },
-  { target: 1, suffix: "", label: "Master Degree\nData Analytics for Business", accent: "#a88beb" },
+  { target: 4,  suffix: "",  label: "Languages\nEN · ES · FR · PT",           accent: "#a4b1aa" },
+  { target: 17, suffix: "",  label: "Certifications\nearned",                  accent: "#c36f3d" },
+  { target: 50, suffix: "+", label: "SMEs\nadvised",                           accent: "#78856d" },
+  { target: 2,  suffix: "",  label: "Bachelor Degrees\nBusiness & Intl Biz",   accent: "#d3a16d" },
+  { target: 1,  suffix: "",  label: "Master's Degree\nData Analytics",         accent: "#b8896e", icon: GraduationCap },
+  { target: 2,  suffix: "",  label: "Specializations\n(ML Finance & Adv. Data Analytics)", accent: "#a09a84" },
+  { target: 1,  suffix: "★", label: "Best Thesis\nKEDGE 2026",                accent: "#d3a16d", icon: Trophy },
+  { target: 1,  suffix: "★", label: "Colfuturo\nScholarship",                  accent: "#c36f3d", icon: Medal },
+  { target: 3,  suffix: "×", label: "Distinguished\nStudent Award",            accent: "#78856d" },
+  { target: 1,  suffix: "★", label: "KEDGE Academic\nExcellence Grant",        accent: "#b8896e", icon: Award },
 ];
 
 const TAGS = ["US Citizen", "No visa sponsorship required", "Remote / Hybrid"];
@@ -60,6 +67,8 @@ function StatCard({ stat, active, index }: { stat: StatDef; active: boolean; ind
   const duration = stat.target > 10 ? 1350 : 1050;
   const count = useCountUp(stat.target, duration, active);
   const accentColor = stat.accent || "var(--accent)";
+  const labelLines = stat.label.split("\n");
+  const Icon = stat.icon;
 
   return (
     <div
@@ -77,7 +86,7 @@ function StatCard({ stat, active, index }: { stat: StatDef; active: boolean; ind
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.boxShadow = `0 8px 30px rgba(74,111,165,0.12)`;
+        e.currentTarget.style.boxShadow = `0 8px 30px rgba(195,111,61,0.12)`;
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "translateY(0)";
@@ -95,24 +104,75 @@ function StatCard({ stat, active, index }: { stat: StatDef; active: boolean; ind
           background: "var(--bg-subtle)",
           padding: "1.5rem 1.25rem",
           minHeight: "110px",
+          height: "100%",
           justifyContent: "center",
         }}
       >
-        <span
-          style={{
-            fontSize: "clamp(2.8rem, 5vw, 3.8rem)",
-            fontWeight: 800,
-            letterSpacing: "-0.06em",
-            color: accentColor,
-            lineHeight: 1,
-            fontVariantNumeric: "tabular-nums",
-          }}
-        >
-          {count}{stat.suffix}
-        </span>
-        <span style={{ fontSize: "0.72rem", color: "var(--fg-muted)", lineHeight: 1.45, whiteSpace: "pre-line", fontWeight: 500 }}>
-          {stat.label}
-        </span>
+        {stat.target === 1 ? (
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+            <span
+              style={{
+                width: "1.9rem",
+                height: "1.9rem",
+                borderRadius: "999px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background: `${accentColor}1a`,
+                border: `1px solid ${accentColor}45`,
+                color: accentColor,
+                lineHeight: 1,
+                boxShadow: `0 8px 18px ${accentColor}18`,
+              }}
+            >
+              {Icon ? <Icon size={15} strokeWidth={2.2} /> : null}
+            </span>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
+              {labelLines.map((line) => (
+                <span
+                  key={line}
+                  style={{
+                    fontSize: "clamp(0.96rem, 1.45vw, 1.04rem)",
+                    fontWeight: 700,
+                    letterSpacing: "-0.035em",
+                    lineHeight: 1.18,
+                    color: "var(--fg)",
+                    maxWidth: "14ch",
+                    fontFamily: "inherit",
+                  }}
+                >
+                  {line}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <span
+            style={{
+              fontSize: "clamp(2.8rem, 5vw, 3.8rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.06em",
+              color: accentColor,
+              lineHeight: 1,
+              fontVariantNumeric: "tabular-nums",
+            }}
+          >
+            {count}{stat.suffix}
+          </span>
+        )}
+        {stat.target !== 1 ? (
+          <span
+                style={{
+                  fontSize: "0.72rem",
+                  color: "var(--fg-muted)",
+                  lineHeight: 1.45,
+                  whiteSpace: "pre-line",
+                  fontWeight: 500,
+                }}
+              >
+                {stat.label}
+              </span>
+        ) : null}
       </div>
     </div>
   );
@@ -213,7 +273,7 @@ export default function About() {
         </div>
 
         {/* Two-column layout */}
-        <div className="about-layout" style={{ display: "grid", gridTemplateColumns: "1fr 260px", gap: "3.5rem", alignItems: "start" }}>
+        <div className="about-layout" style={{ display: "grid", gridTemplateColumns: "1fr 300px", gap: "3.5rem", alignItems: "stretch" }}>
 
           {/* Left: text + tags + stats */}
           <div ref={leftRef}>
@@ -229,7 +289,7 @@ export default function About() {
                   padding: "clamp(1.75rem, 3.5vw, 2.75rem)",
                 }}
               >
-                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 15% 50%, rgba(74,111,165,0.1) 0%, transparent 60%)", pointerEvents: "none" }} />
+                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 15% 50%, rgba(195,111,61,0.1) 0%, transparent 60%)", pointerEvents: "none" }} />
                 <p
                   style={{
                     position: "relative",
@@ -240,10 +300,7 @@ export default function About() {
                     fontWeight: 400,
                   }}
                 >
-                  Business and Data Analyst with international experience across France and Colombia,
-                  specializing in B2B partnerships and operational analytics. I build AI integrated
-                  workflows and translate complex data into pricing, margin, and growth decisions using
-                  SQL, Python, and Tableau, spanning European and American time zones.
+                  Business and Data Analyst with international experience across France and Colombia. I specialize in B2B partnerships, operational analytics, and AI-integrated automation. I build agentic AI systems using Claude API, LangGraph, and FastAPI, translating complex data into pricing, margin, and growth decisions. Currently freelancing across data, AI strategy, and automation for startups and SMEs across European and American time zones.
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "1.5rem", position: "relative" }}>
                   {TAGS.map((t) => <span key={t} className="tag">{t}</span>)}
@@ -251,30 +308,30 @@ export default function About() {
               </div>
             </div>
 
-            {/* Animated stat cards */}
+            {/* Primary stat cards */}
             <div
               ref={statsRef}
               className="about-stats-grid"
               style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.5rem" }}
             >
-              {STATS.map((s, i) => <StatCard key={s.label} stat={s} active={statsActive} index={i} />)}
+              {STATS.slice(0, 5).map((s, i) => <StatCard key={s.label} stat={s} active={statsActive} index={i} />)}
             </div>
           </div>
 
-          {/* Right: photo in spinning gradient frame */}
-          <div className="about-photo" style={{ position: "relative" }}>
+          {/* Right: photo + name card only */}
+          <div className="about-photo" style={{ position: "relative", display: "flex", flexDirection: "column" }}>
             <div
               ref={photoWrapRef}
-              style={{ width: "100%", transition: "transform 0.08s ease" }}
+              style={{ width: "100%", transition: "transform 0.08s ease", display: "flex", flexDirection: "column", flex: 1 }}
             >
-              {/* Spinning gradient border */}
-              <div style={{ position: "relative", width: "100%", paddingBottom: "130%" }}>
+              {/* Spinning gradient border — fills available height */}
+              <div style={{ position: "relative", width: "100%", flex: 1, minHeight: "280px" }}>
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
                     borderRadius: "1.35rem",
-                    background: "conic-gradient(from 0deg, #4A6FA5, #7096C8, #a88beb, #ec4899, #f59e0b, #4A6FA5)",
+                    background: "conic-gradient(from 0deg, #c36f3d, #d3a16d, #b8896e, #78856d, #f0bf7f, #c36f3d)",
                     animation: "spin-slow 7s linear infinite",
                   }}
                 />
@@ -326,6 +383,14 @@ export default function About() {
             </div>
           </div>
         </div>
+
+        {/* Awards & distinctions — full-width strip below */}
+        <div
+          className="about-awards-grid"
+          style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "0.5rem", marginTop: "1.25rem" }}
+        >
+          {STATS.slice(5).map((s, i) => <StatCard key={s.label} stat={s} active={statsActive} index={i + 5} />)}
+        </div>
       </div>
 
       <style>{`
@@ -341,9 +406,12 @@ export default function About() {
           .about-stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
+          .about-awards-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
         }
         @media (max-width: 480px) {
-          .about-stats-grid {
+          .about-stats-grid, .about-awards-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }

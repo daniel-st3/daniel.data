@@ -53,12 +53,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const showVercelAnalytics = process.env.VERCEL === "1";
+
   return (
     <html lang="en">
       <body>
         {children}
-        <Analytics />
-        <SpeedInsights />
+        {showVercelAnalytics ? <Analytics /> : null}
+        {showVercelAnalytics ? <SpeedInsights /> : null}
       </body>
     </html>
   );

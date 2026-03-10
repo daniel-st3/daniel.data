@@ -99,7 +99,7 @@ export default function Contact() {
                 width: "200px",
                 height: "200px",
                 borderRadius: "50%",
-                border: "1px solid rgba(74,111,165,0.1)",
+                border: "1px solid rgba(195,111,61,0.12)",
                 pointerEvents: "none",
               }}
             >
@@ -112,7 +112,7 @@ export default function Contact() {
                 borderRadius: "50%",
                 background: "var(--accent)",
                 transform: "translate(-50%, -50%)",
-                boxShadow: "0 0 12px rgba(74,111,165,0.5)",
+                boxShadow: "0 0 12px rgba(195,111,61,0.4)",
               }} />
             </div>
 
@@ -193,11 +193,11 @@ export default function Contact() {
                     alignItems: "center",
                     gap: "0.5rem",
                     padding: "0.5rem 1rem",
-                    background: copied ? "rgba(34,197,94,0.08)" : "var(--bg-subtle)",
-                    border: `1px solid ${copied ? "rgba(34,197,94,0.3)" : "var(--border)"}`,
+                    background: copied ? "rgba(111,123,100,0.1)" : "var(--bg-subtle)",
+                    border: `1px solid ${copied ? "rgba(111,123,100,0.34)" : "var(--border)"}`,
                     borderRadius: "0.5rem",
                     fontSize: "0.8rem",
-                    color: copied ? "#22c55e" : "var(--fg-muted)",
+                    color: copied ? "var(--accent-sage)" : "var(--fg-muted)",
                     fontWeight: 500,
                     cursor: "pointer",
                     transition: "all 0.2s ease",
@@ -248,19 +248,19 @@ export default function Contact() {
                     textAlign: "left",
                     padding: "0.95rem 1.1rem",
                     borderRadius: "0.75rem",
-                    background: "linear-gradient(135deg, rgba(34,197,94,0.15), rgba(34,197,94,0.05))",
-                    border: "1px solid rgba(34,197,94,0.32)",
+                    background: "linear-gradient(135deg, rgba(111,123,100,0.18), rgba(111,123,100,0.06))",
+                    border: "1px solid rgba(111,123,100,0.32)",
                     minWidth: "160px",
                     boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.25)",
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: "0.35rem", marginBottom: "0.3rem" }}>
-                    <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#22c55e", animation: "pulse-dot 2.3s ease-in-out infinite" }} />
-                    <p style={{ fontSize: "0.65rem", color: "#16a34a", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700 }}>
+                    <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent-sage)", animation: "pulse-dot 2.3s ease-in-out infinite" }} />
+                    <p style={{ fontSize: "0.65rem", color: "var(--accent-sage)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700 }}>
                       No Visa Needed
                     </p>
                   </div>
-                  <p style={{ fontSize: "0.84rem", color: "rgba(22,101,52,0.92)", fontWeight: 500, lineHeight: 1.45 }}>
+                  <p style={{ fontSize: "0.84rem", color: "rgba(73,84,65,0.94)", fontWeight: 500, lineHeight: 1.45 }}>
                     US citizen. No visa sponsorship required.
                   </p>
                 </div>
@@ -285,12 +285,12 @@ export default function Contact() {
             border: "1px solid var(--border)",
             transition: "border-color 0.2s ease",
           }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#22c55e"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent-sage)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.5rem" }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", animation: "pulse-dot 2s ease-in-out infinite" }} />
-              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#22c55e" }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent-sage)", animation: "pulse-dot 2s ease-in-out infinite" }} />
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent-sage)" }}>
                 Available Now
               </span>
             </div>
@@ -327,12 +327,12 @@ export default function Contact() {
             border: "1px solid var(--border)",
             transition: "border-color 0.2s ease",
           }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#a88beb"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent-rose)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.5rem" }}>
-              <Sparkles size={12} style={{ color: "#a88beb" }} />
-              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#a88beb" }}>
+              <Sparkles size={12} style={{ color: "var(--accent-rose)" }} />
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent-rose)" }}>
                 Open To
               </span>
             </div>

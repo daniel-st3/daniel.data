@@ -9,13 +9,13 @@ import { RetroGrid } from "@/components/ui/backgrounds/retro-grid";
 const NOW_BUILD = {
   title: "AI CFO Agent",
   subtitle:
-    "Building an AI-powered finance copilot focused on decision support, KPI tracking, and strategic analysis workflows.",
-  meta: "Current Build · GitHub",
+    "Open-source financial intelligence for startups. Upload a transaction CSV and get a board-ready finance cockpit in 30 seconds — KPI scoring, runway modeling, Monte Carlo survival analysis, fraud detection, and an autonomous agent loop. 24 features at $0.003/run.",
+  meta: "Open Source · FastAPI + LangGraph + Claude Haiku · GitHub",
   href: "https://github.com/daniel-st3/ai-cfo-agent",
   label: "View Repository",
-  preview: "/images/gradient-desktop-bg.jpeg",
-  previewAlt: "Gradient desktop background for AI CFO Agent project",
-  accent: "#7096C8",
+  preview: "/images/hero-landscape.png",
+  previewAlt: "AI CFO Agent — financial intelligence platform",
+  accent: "#c36f3d",
 };
 
 export default function WorkingNow() {
@@ -66,7 +66,7 @@ export default function WorkingNow() {
       style={{
         position: "relative",
         zIndex: 1,
-        background: "linear-gradient(to bottom, rgba(112,150,200,0.18) 0%, var(--bg) 38%)",
+        background: "linear-gradient(to bottom, rgba(217,165,107,0.24) 0%, rgba(245,236,221,0.9) 40%, var(--bg) 100%)",
         overflow: "hidden",
       }}
     >
@@ -77,8 +77,8 @@ export default function WorkingNow() {
             position: "absolute",
             inset: 0,
             background: `
-              radial-gradient(ellipse at 50% 10%, rgba(112,150,200,0.26) 0%, transparent 55%),
-              linear-gradient(to bottom, rgba(255,255,255,0.35), transparent 65%)
+              radial-gradient(ellipse at 50% 10%, rgba(217,165,107,0.24) 0%, transparent 55%),
+              linear-gradient(to bottom, rgba(255,247,236,0.34), transparent 65%)
             `,
           }}
         />
@@ -98,7 +98,7 @@ export default function WorkingNow() {
               lineHeight: 1.1,
             }}
           >
-            What am I working on now...
+            Flagship Build
           </h2>
           <p
             style={{
@@ -110,7 +110,7 @@ export default function WorkingNow() {
               lineHeight: 1.65,
             }}
           >
-            I am currently building an AI CFO Agent to turn financial and operational data into fast, actionable business decisions.
+            The AI CFO Agent is a self-hosted financial intelligence platform for startups. Upload a CSV of weekly transactions and get a board-ready finance cockpit in 30 seconds — 24 features at $0.003/run.
           </p>
         </div>
 
@@ -195,7 +195,7 @@ export default function WorkingNow() {
                 }}
               >
                 <Sparkles size={10} />
-                In Progress
+                Open Source
               </div>
             </div>
 

@@ -1,256 +1,283 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-interface BlobGroup {
-  id: string;
-  label: string;
-  color: string;
-  skills: string[];
-}
-
-// Cohesive palette — all from the same blue-indigo-teal family
-const BLOB_GROUPS: BlobGroup[] = [
-  { id: "data", label: "Data &\nAnalytics", color: "#5B8FD4", skills: ["SQL", "Python", "Tableau", "Power BI", "Looker", "Excel"] },
-  { id: "ml", label: "Machine\nLearning", color: "#4BA3E3", skills: ["Scikit-learn", "XGBoost", "TensorFlow", "BERT", "RandomForest"] },
-  { id: "ai", label: "AI &\nAutomation", color: "#9B7BD4", skills: ["Claude API", "OpenAI", "LangChain", "LangGraph", "n8n", "Make", "Vertex AI", "GenAI"] },
-  { id: "cloud", label: "Cloud &\nEngineering", color: "#3DBAA3", skills: ["GCP", "BigQuery", "FastAPI", "Git", "ETL Pipelines"] },
-  { id: "lang", label: "Languages", color: "#D49B5B", skills: ["English", "Spanish", "French", "Portuguese"] },
+const CATEGORIES = [
+  {
+    id: "data",
+    label: "Data & Analytics",
+    symbol: "◈",
+    color: "#c36f3d",
+    tools: ["SQL", "Python", "Tableau", "Power BI", "Looker", "Excel", "PostgreSQL", "BigQuery", "SQLite", "dbt", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Plotly", "Streamlit", "Google Sheets", "Metabase", "Dashboard Design", "KPI Tracking", "Web Scraping", "Financial Modeling", "EDA", "A/B Testing", "Time Series", "Statistics", "Data Cleaning", "Forecasting"],
+  },
+  {
+    id: "ml",
+    label: "Machine Learning",
+    symbol: "⬡",
+    color: "#b88868",
+    tools: ["Scikit-learn", "XGBoost", "TensorFlow", "BERT", "RandomForest", "Monte Carlo", "NLP Pipeline", "Regression", "Classification"],
+  },
+  {
+    id: "ai",
+    label: "AI & Agents",
+    symbol: "◎",
+    color: "#8a6a8a",
+    tools: ["Claude API", "Anthropic SDK", "LangGraph", "LangChain", "n8n", "Make", "Vertex AI", "OpenAI", "FastAPI", "Prompt Engineering"],
+  },
+  {
+    id: "cloud",
+    label: "Cloud & Engineering",
+    symbol: "⬢",
+    color: "#5e7a6a",
+    tools: ["GCP", "Next.js 15", "FastAPI", "WebSocket", "Alembic", "Git", "ETL Pipelines", "REST APIs", "Docker", "Vercel", "GitHub Actions", "Linux", "Bash", "CI/CD", "Redis", "Nginx"],
+  },
+  {
+    id: "biz",
+    label: "Business & Strategy",
+    symbol: "◆",
+    color: "#7a8a5e",
+    tools: ["B2B Partnerships", "Pricing Models", "KPI Design", "Market Mapping", "Go-to-Market", "P&L Analysis", "Commercial Strategy", "SME Consulting", "International Trade", "Market Entry", "Financial Analysis", "Project Management", "Stakeholder Management", "Lead Qualification", "Tender Negotiation", "Partner Integrations", "Pipeline Development", "Revenue Operations", "Cross-Functional Delivery", "Competitive Analysis"],
+  },
+  {
+    id: "lang",
+    label: "Languages",
+    symbol: "◇",
+    color: "#8e9e98",
+    tools: ["English (Native)", "Spanish (Native)", "French (B2)", "Portuguese (B2)"],
+    bigChips: true,
+    badgeLabel: "languages",
+  },
 ];
 
-const RADIUS_X = 138;
-const RADIUS_Y = 48;  // elliptical y-radius (planet ring look)
-const ORBIT_SPEED = 0.5; // degrees per frame
+// Row 1: Data (span-2) + ML (span-1)
+// Row 2: AI (span-1) + Cloud (span-2)
+// Row 3: Business (span-2) + Languages (span-1)
+const COL_SPAN = [2, 1, 1, 2, 2, 1];
 
-function PlanetBlob({ group, globalMouse }: { group: BlobGroup; globalMouse: { x: number; y: number } }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const blobRef = useRef<HTMLDivElement>(null);
-  const pillRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const anglesRef = useRef<number[]>(
-    group.skills.map((_, i) => (360 / group.skills.length) * i)
-  );
-  const [nearCursor, setNearCursor] = useState(false);
+type Category = typeof CATEGORIES[0] & { bigChips?: boolean; badgeLabel?: string };
 
-  // 3D tilt on local hover
+function SkillCard({ cat, colSpan }: { cat: Category; colSpan: number }) {
+  const cardRef  = useRef<HTMLDivElement>(null);
+  const pillsRef = useRef<HTMLDivElement>(null);
+
+  // Cursor parallax on pills
   useEffect(() => {
-    const el = containerRef.current;
-    const blob = blobRef.current;
-    if (!el || !blob) return;
-    let rafId: number;
+    const card  = cardRef.current;
+    const pills = pillsRef.current;
+    if (!card || !pills || typeof window === "undefined" || !window.matchMedia("(hover: hover)").matches) return;
+
+    let raf = 0;
     let tx = 0, ty = 0, cx = 0, cy = 0;
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-    const tick = () => {
-      cx = lerp(cx, tx, 0.07);
-      cy = lerp(cy, ty, 0.07);
-      blob.style.transform = `rotateX(${cy}deg) rotateY(${cx}deg)`;
-      rafId = requestAnimationFrame(tick);
-    };
-    const onMove = (e: MouseEvent) => {
-      const r = el.getBoundingClientRect();
-      tx = ((e.clientX - r.left - r.width / 2) / r.width) * 22;
-      ty = ((e.clientY - r.top - r.height / 2) / r.height) * -22;
-    };
-    const onLeave = () => { tx = 0; ty = 0; };
-    rafId = requestAnimationFrame(tick);
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", onLeave);
-    return () => { cancelAnimationFrame(rafId); el.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
-  }, []);
 
-  // Elliptical planet orbit animation (JS-driven for true 3D look)
-  useEffect(() => {
-    let raf: number;
     const tick = () => {
-      anglesRef.current = anglesRef.current.map((a) => a + ORBIT_SPEED);
-      pillRefs.current.forEach((el, i) => {
-        if (!el) return;
-        const deg = anglesRef.current[i] * (Math.PI / 180);
-        const x = Math.cos(deg) * RADIUS_X;
-        const y = Math.sin(deg) * RADIUS_Y;
-        const z = Math.sin(deg); // -1 (back) to 1 (front)
-        const scale = 0.7 + ((z + 1) / 2) * 0.35; // 0.7 → 1.05
-        const alpha = 0.45 + ((z + 1) / 2) * 0.55; // 0.45 → 1.0
-        const zIdx = Math.round((z + 1) * 50);
-        el.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-        el.style.opacity = String(Math.round(alpha * 100) / 100);
-        el.style.zIndex = String(zIdx);
-      });
+      cx = lerp(cx, tx, 0.06);
+      cy = lerp(cy, ty, 0.06);
+      pills.style.transform = `translate(${cx * 5}px, ${cy * 3}px)`;
       raf = requestAnimationFrame(tick);
     };
-    tick();
-    return () => cancelAnimationFrame(raf);
-  }, []);
 
-  // Global cursor proximity
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const d = Math.sqrt((globalMouse.x - cx) ** 2 + (globalMouse.y - cy) ** 2);
-    setNearCursor(d < 220);
-  }, [globalMouse]);
+    const onMove = (e: MouseEvent) => {
+      const r = card.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+      ty = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+    };
+    const onLeave = () => { tx = 0; ty = 0; };
+
+    raf = requestAnimationFrame(tick);
+    card.addEventListener("mousemove", onMove);
+    card.addEventListener("mouseleave", onLeave);
+    return () => {
+      cancelAnimationFrame(raf);
+      card.removeEventListener("mousemove", onMove);
+      card.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
 
   return (
     <div
-      ref={containerRef}
+      ref={cardRef}
+      className={`skill-card skill-card-span-${colSpan}`}
       style={{
+        gridColumn: `span ${colSpan}`,
+        borderRadius: "1.25rem",
+        border: `1.5px solid ${cat.color}4d`,
+        background: `linear-gradient(135deg, ${cat.color}1f 0%, ${cat.color}0a 100%)`,
+        padding: "1.75rem 1.75rem 1.75rem 2.25rem",
         position: "relative",
-        width: 310,
-        height: 310,
-        perspective: 800,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        transition: "transform 0.35s ease",
-        transform: nearCursor ? "scale(1.07)" : "scale(1)",
+        overflow: "hidden",
+        cursor: "default",
+        transition: "border-color 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease",
+        // Colored left border accent
+        borderLeft: `4px solid ${cat.color}`,
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = `${cat.color}80`;
+        el.style.borderLeftColor = cat.color;
+        el.style.transform = "translateY(-4px)";
+        el.style.boxShadow = `0 16px 48px ${cat.color}22, 0 4px 16px ${cat.color}14`;
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = `${cat.color}4d`;
+        el.style.borderLeftColor = cat.color;
+        el.style.transform = "translateY(0)";
+        el.style.boxShadow = "none";
       }}
     >
-      {/* Ambient glow */}
-      <div
+      {/* Large watermark symbol — visual texture */}
+      <span
+        aria-hidden
         style={{
           position: "absolute",
-          inset: nearCursor ? 0 : 25,
-          borderRadius: "50%",
-          background: `radial-gradient(circle, ${group.color}${nearCursor ? "22" : "10"} 0%, transparent 70%)`,
-          filter: `blur(${nearCursor ? 24 : 18}px)`,
-          transition: "all 0.5s ease",
+          bottom: "-0.5rem",
+          right: "0.75rem",
+          fontSize: "8rem",
+          lineHeight: 1,
+          color: cat.color,
+          opacity: 0.08,
+          userSelect: "none",
           pointerEvents: "none",
-        }}
-      />
-
-      {/* Orbit ring trace — visible ellipse */}
-      <div
-        style={{
-          position: "absolute",
-          width: RADIUS_X * 2,
-          height: RADIUS_Y * 2,
-          top: "50%",
-          left: "50%",
-          marginLeft: -RADIUS_X,
-          marginTop: -RADIUS_Y,
-          borderRadius: "50%",
-          border: `1px solid ${group.color}28`,
-          pointerEvents: "none",
-          zIndex: 1,
-        }}
-      />
-
-      {/* Orbiting skill pills — JS-positioned */}
-      {group.skills.map((skill, i) => (
-        <div
-          key={skill}
-          ref={(el) => { pillRefs.current[i] = el; }}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            marginTop: -13,
-            marginLeft: -40,
-            width: 80,
-            textAlign: "center",
-            pointerEvents: "none",
-          }}
-        >
-          <span
-            style={{
-              display: "inline-block",
-              fontSize: "0.6rem",
-              fontWeight: 700,
-              letterSpacing: "0.06em",
-              color: group.color,
-              background: `${group.color}20`,
-              border: `1.5px solid ${group.color}50`,
-              borderRadius: "999px",
-              padding: "0.2rem 0.48rem",
-              whiteSpace: "nowrap",
-              backdropFilter: "blur(6px)",
-              boxShadow: `0 2px 8px ${group.color}25`,
-            }}
-          >
-            {skill}
-          </span>
-        </div>
-      ))}
-
-      {/* Central blob (planet) */}
-      <div
-        ref={blobRef}
-        style={{
-          width: 172,
-          height: 172,
-          borderRadius: "50%",
-          background: `radial-gradient(circle at 35% 32%, ${group.color}88, ${group.color}30 55%, transparent 100%)`,
-          border: `2px solid ${group.color}65`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative",
-          zIndex: 60,
-          boxShadow: nearCursor
-            ? `0 0 100px ${group.color}75, 0 0 50px ${group.color}50, inset 0 0 50px ${group.color}25`
-            : `0 0 55px ${group.color}45, 0 0 25px ${group.color}30, inset 0 0 35px ${group.color}18`,
-          transition: "box-shadow 0.5s ease",
-          cursor: "default",
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 120px ${group.color}85, 0 0 60px ${group.color}55, inset 0 0 60px ${group.color}28`;
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 55px ${group.color}45, 0 0 25px ${group.color}30, inset 0 0 35px ${group.color}18`;
+          fontWeight: 700,
         }}
       >
-        {/* Inner highlight */}
-        <div style={{ position: "absolute", top: "14%", left: "16%", width: "42%", height: "36%", borderRadius: "50%", background: "rgba(255,255,255,0.25)", filter: "blur(8px)", pointerEvents: "none" }} />
-        <p
+        {cat.symbol}
+      </span>
+
+      {/* Header: symbol + gradient label + count badge */}
+      <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", marginBottom: "1.2rem" }}>
+        <span style={{ fontSize: "1.05rem", color: cat.color, lineHeight: 1, flexShrink: 0 }}>
+          {cat.symbol}
+        </span>
+        <span
           style={{
-            fontSize: "0.66rem",
-            fontWeight: 800,
-            letterSpacing: "0.07em",
+            fontSize: "0.68rem",
+            fontWeight: 700,
+            letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "#ffffff",
-            textShadow: `0 1px 8px ${group.color}80`,
-            textAlign: "center",
-            lineHeight: 1.5,
-            whiteSpace: "pre-line",
-            userSelect: "none",
-            position: "relative",
-            zIndex: 1,
+            background: `linear-gradient(90deg, ${cat.color} 0%, ${cat.color}bb 100%)`,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
           }}
         >
-          {group.label}
-        </p>
+          {cat.label}
+        </span>
+        {/* Count badge */}
+        <span
+          style={{
+            fontSize: "0.6rem",
+            fontWeight: 700,
+            color: cat.color,
+            background: `${cat.color}18`,
+            border: `1px solid ${cat.color}40`,
+            borderRadius: "999px",
+            padding: "0.1rem 0.45rem",
+            letterSpacing: "0.04em",
+            flexShrink: 0,
+          }}
+        >
+          {cat.tools.length} {cat.badgeLabel || "tools"}
+        </span>
+      </div>
+
+      {/* Skill pills */}
+      <div ref={pillsRef} style={{ display: "flex", flexWrap: "wrap", gap: "0.55rem", willChange: "transform" }}>
+        {cat.tools.map((tool) => (
+          <span
+            key={tool}
+            className={`skill-pill skill-pill-${cat.id}`}
+            data-color={cat.color}
+            style={{
+              display: "inline-block",
+              fontSize: cat.bigChips ? "1rem" : "0.82rem",
+              fontWeight: 600,
+              letterSpacing: "0.01em",
+              color: "var(--fg)",
+              background: `${cat.color}18`,
+              border: `1px solid ${cat.color}40`,
+              borderRadius: "8px",
+              padding: cat.bigChips ? "0.9rem 1.1rem" : "0.42rem 0.88rem",
+              transition: "background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease",
+              cursor: "default",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = cat.color;
+              el.style.borderColor = cat.color;
+              el.style.color = "#ffffff";
+              el.style.transform = "translateY(-2px) scale(1.04)";
+              el.style.boxShadow = `0 4px 14px ${cat.color}44`;
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = `${cat.color}18`;
+              el.style.borderColor = `${cat.color}40`;
+              el.style.color = "var(--fg)";
+              el.style.transform = "translateY(0) scale(1)";
+              el.style.boxShadow = "none";
+            }}
+          >
+            {tool}
+          </span>
+        ))}
       </div>
     </div>
   );
 }
 
 export default function SkillBlobs() {
-  const [globalMouse, setGlobalMouse] = useState({ x: -9999, y: -9999 });
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onMove = (e: MouseEvent) => setGlobalMouse({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", onMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMove);
+    (async () => {
+      const { gsap, ScrollTrigger } = await import("gsap/all");
+      gsap.registerPlugin(ScrollTrigger);
+      const cards = gridRef.current?.querySelectorAll(".skill-card");
+      if (!cards) return;
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 28 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          stagger: 0.09,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 84%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    })();
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "2rem",
-        justifyContent: "center",
-        paddingTop: "1rem",
-        paddingBottom: "2rem",
-        paddingLeft: "clamp(0.5rem, 3vw, 2rem)",
-        paddingRight: "clamp(0.5rem, 3vw, 2rem)",
-      }}
-    >
-      {BLOB_GROUPS.map((g) => (
-        <PlanetBlob key={g.id} group={g} globalMouse={globalMouse} />
-      ))}
-    </div>
+    <>
+      <div
+        ref={gridRef}
+        className="skills-bento-grid"
+        style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.85rem" }}
+      >
+        {CATEGORIES.map((cat, i) => (
+          <SkillCard key={cat.id} cat={cat as Category} colSpan={COL_SPAN[i]} />
+        ))}
+      </div>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (max-width: 900px) {
+          .skills-bento-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .skill-card-span-2 { grid-column: span 2 !important; }
+          .skill-card-span-1 { grid-column: span 1 !important; }
+        }
+        @media (max-width: 560px) {
+          .skills-bento-grid { grid-template-columns: 1fr !important; }
+          .skill-card-span-2, .skill-card-span-1 { grid-column: span 1 !important; }
+        }
+      `}} />
+    </>
   );
 }
