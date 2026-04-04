@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
 import { gsap } from "gsap";
 
 export default function LenisProvider({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
-
   useEffect(() => {
-    // Respect prefers-reduced-motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
@@ -17,10 +14,10 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
       wheelMultiplier: 1.2,
       touchMultiplier: 2,
       smoothWheel: true,
+      infinite: false,
     });
-    lenisRef.current = lenis;
 
-    // Drive Lenis through GSAP ticker so ScrollTrigger scrub stays in sync
+    // Stable reference so ticker.remove actually removes the right function
     const tickerFn = (time: number) => lenis.raf(time * 1000);
     gsap.ticker.add(tickerFn);
     gsap.ticker.lagSmoothing(0);
@@ -28,7 +25,6 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     return () => {
       gsap.ticker.remove(tickerFn);
       lenis.destroy();
-      lenisRef.current = null;
     };
   }, []);
 

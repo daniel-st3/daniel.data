@@ -278,8 +278,9 @@ export default function Hero() {
         >
           {/* Depth layer 0 — availability pill */}
           <motion.div
+            key={mounted ? "pill-on" : "pill-off"}
             suppressHydrationWarning
-            initial={!mounted || reducedMotion ? false : { opacity: 0 }}
+            initial={mounted && !reducedMotion ? { opacity: 0 } : false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0 }}
           >
@@ -293,8 +294,9 @@ export default function Hero() {
 
           {/* Depth layer 1 — headline */}
           <motion.div
+            key={mounted ? "headline-on" : "headline-off"}
             suppressHydrationWarning
-            initial={!mounted || reducedMotion ? false : { opacity: 0, y: 60 }}
+            initial={mounted && !reducedMotion ? { opacity: 0, y: 60 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
           >
@@ -319,8 +321,9 @@ export default function Hero() {
 
           {/* Depth layer 2 — tagline */}
           <motion.div
+            key={mounted ? "tagline-on" : "tagline-off"}
             suppressHydrationWarning
-            initial={!mounted || reducedMotion ? false : { opacity: 0, y: 20 }}
+            initial={mounted && !reducedMotion ? { opacity: 0, y: 20 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           >
@@ -342,8 +345,9 @@ export default function Hero() {
 
           {/* Depth layer 3 — primary CTAs */}
           <motion.div
+            key={mounted ? "ctas-on" : "ctas-off"}
             suppressHydrationWarning
-            initial={!mounted || reducedMotion ? false : { opacity: 0, y: 50 }}
+            initial={mounted && !reducedMotion ? { opacity: 0, y: 50 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
           >
@@ -362,8 +366,9 @@ export default function Hero() {
 
           {/* Depth layer 4 — secondary links */}
           <motion.div
+            key={mounted ? "links-on" : "links-off"}
             suppressHydrationWarning
-            initial={!mounted || reducedMotion ? false : { opacity: 0, y: 30 }}
+            initial={mounted && !reducedMotion ? { opacity: 0, y: 30 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
           >
