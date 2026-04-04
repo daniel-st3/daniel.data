@@ -78,7 +78,7 @@ function StatCard({ stat, active, index }: { stat: StatDef; active: boolean; ind
         border: "1px solid var(--border)",
         padding: "3px",
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
-        opacity: active ? 1 : 0.5,
+        opacity: active ? 1 : 0,
         transform: active ? "translateY(0)" : "translateY(12px)",
         transitionDelay: `${index * 0.1}s`,
         transitionProperty: "transform, opacity, box-shadow",

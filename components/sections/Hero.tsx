@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { loadGSAP } from "@/lib/gsap";
 
 const THESIS_REQUEST_SUBJECT = "Request to read your thesis";
@@ -27,18 +28,16 @@ export default function Hero() {
   const tiltRef      = useRef<HTMLDivElement>(null);
   const scrollIndRef = useRef<HTMLDivElement>(null);
   const depthRefs    = useRef<(HTMLElement | null)[]>([]);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
 
   // ── Scroll parallax + ambient animation ──────────────────────────────────
   useEffect(() => {
     (async () => {
       const { gsap, ScrollTrigger } = await loadGSAP();
-
-      // Entrance
-      gsap.fromTo(
-        contentRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1.3, ease: "power3.out", delay: 0.1 }
-      );
 
       // ── Scroll parallax: reduced yPercent values to avoid layer jumping ──
       // Sky (slowest — stays visible longest)
@@ -276,62 +275,91 @@ export default function Hero() {
           }}
         >
           {/* Depth layer 0 — availability pill */}
-          <div ref={(el) => { depthRefs.current[0] = el; }} style={{ willChange: "transform" }}>
-            <span className="pill">
-              <span className="pill-dot" style={{ background: "var(--accent-light)" }} />
-              Open to remote and in person roles · Bogota · US Citizen
-            </span>
-          </div>
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0 }}
+          >
+            <div ref={(el) => { depthRefs.current[0] = el; }} style={{ willChange: "transform" }}>
+              <span className="pill">
+                <span className="pill-dot" style={{ background: "var(--accent-light)" }} />
+                Open to remote and in person roles · Bogota · US Citizen
+              </span>
+            </div>
+          </motion.div>
 
           {/* Depth layer 1 — headline */}
-          <div ref={(el) => { depthRefs.current[1] = el; }} style={{ marginTop: "1.5rem", willChange: "transform" }}>
-            {["Business &", "Data Analyst."].map((line) => (
-              <div key={line} style={{ lineHeight: 1.0, overflow: "hidden" }}>
-                <span style={{
-                  display: "block",
-                  fontSize: "clamp(3rem, 9vw, 7.4rem)",
-                  fontWeight: 600,
-                  letterSpacing: "-0.066em",
-                  color: "#fff8f0",
-                  lineHeight: 1.0,
-                  textShadow: "0 2px 48px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.35)",
-                }}>
-                  {line}
-                </span>
-              </div>
-            ))}
-          </div>
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          >
+            <div ref={(el) => { depthRefs.current[1] = el; }} style={{ marginTop: "1.5rem", willChange: "transform" }}>
+              {["Business &", "Data Analyst."].map((line) => (
+                <div key={line} style={{ lineHeight: 1.0, overflow: "hidden" }}>
+                  <span style={{
+                    display: "block",
+                    fontSize: "clamp(3rem, 9vw, 7.4rem)",
+                    fontWeight: 600,
+                    letterSpacing: "-0.066em",
+                    color: "#fff8f0",
+                    lineHeight: 1.0,
+                    textShadow: "0 2px 48px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.35)",
+                  }}>
+                    {line}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Depth layer 2 — tagline */}
-          <div ref={(el) => { depthRefs.current[2] = el; }} style={{ marginTop: "1.4rem", willChange: "transform" }}>
-            <p style={{
-              fontSize: "clamp(0.95rem, 2vw, 1.13rem)",
-              color: "rgba(255,245,232,0.82)",
-              lineHeight: 1.72,
-              maxWidth: "44ch",
-              letterSpacing: "-0.008em",
-              textShadow: "0 2px 20px rgba(0,0,0,0.55)",
-              margin: 0,
-            }}>
-              Turning signal into decision. AI-powered analytics and data workflows
-              that move businesses forward.
-            </p>
-          </div>
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
+            <div ref={(el) => { depthRefs.current[2] = el; }} style={{ marginTop: "1.4rem", willChange: "transform" }}>
+              <p style={{
+                fontSize: "clamp(0.95rem, 2vw, 1.13rem)",
+                color: "rgba(255,245,232,0.82)",
+                lineHeight: 1.72,
+                maxWidth: "44ch",
+                letterSpacing: "-0.008em",
+                textShadow: "0 2px 20px rgba(0,0,0,0.55)",
+                margin: 0,
+              }}>
+                Turning signal into decision. AI-powered analytics and data workflows
+                that move businesses forward.
+              </p>
+            </div>
+          </motion.div>
 
           {/* Depth layer 3 — primary CTAs */}
-          <div
-            ref={(el) => { depthRefs.current[3] = el; }}
-            style={{ display: "flex", gap: "0.75rem", marginTop: "2.5rem", flexWrap: "wrap", justifyContent: "center", willChange: "transform" }}
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
           >
-            <a href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "0.8rem 1.7rem", fontSize: "0.9rem" }}>
-              LinkedIn
-            </a>
-            <a href="https://github.com/daniel-st3" target="_blank" rel="noopener noreferrer" className="btn-ghost-dark" style={{ padding: "0.8rem 1.7rem", fontSize: "0.9rem" }}>
-              GitHub
-            </a>
-          </div>
+            <div
+              ref={(el) => { depthRefs.current[3] = el; }}
+              style={{ display: "flex", gap: "0.75rem", marginTop: "2.5rem", flexWrap: "wrap", justifyContent: "center", willChange: "transform" }}
+            >
+              <a href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "0.8rem 1.7rem", fontSize: "0.9rem" }}>
+                LinkedIn
+              </a>
+              <a href="https://github.com/daniel-st3" target="_blank" rel="noopener noreferrer" className="btn-ghost-dark" style={{ padding: "0.8rem 1.7rem", fontSize: "0.9rem" }}>
+                GitHub
+              </a>
+            </div>
+          </motion.div>
 
           {/* Depth layer 4 — secondary links */}
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
+          >
           <div
             ref={(el) => { depthRefs.current[4] = el; }}
             style={{ display: "flex", gap: "1.8rem", rowGap: "0.6rem", flexWrap: "wrap", justifyContent: "center", marginTop: "1.1rem", willChange: "transform" }}
@@ -353,6 +381,7 @@ export default function Hero() {
               </a>
             ))}
           </div>
+          </motion.div>
         </div>
       </div>
 

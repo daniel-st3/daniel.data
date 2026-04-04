@@ -274,6 +274,7 @@ export default function Experience() {
       <div
         ref={trackRef}
         className="exp-track"
+        data-lenis-prevent
         style={{
           display: "flex",
           gap: "1.25rem",

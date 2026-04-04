@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import LenisProvider from "@/components/providers/LenisProvider";
 import "./globals.css";
 
 const siteUrl = "https://danielst-data.vercel.app";
@@ -58,7 +59,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <LenisProvider>
+          {children}
+        </LenisProvider>
         {showVercelAnalytics ? <Analytics /> : null}
         {showVercelAnalytics ? <SpeedInsights /> : null}
       </body>
