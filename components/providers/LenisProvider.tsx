@@ -12,8 +12,10 @@ export default function LenisProvider({ children }: { children: React.ReactNode 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => 1 - Math.pow(1 - t, 3),
+      duration: 0.8,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      wheelMultiplier: 1.2,
+      touchMultiplier: 2,
       smoothWheel: true,
     });
     lenisRef.current = lenis;

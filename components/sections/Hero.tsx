@@ -28,9 +28,11 @@ export default function Hero() {
   const tiltRef      = useRef<HTMLDivElement>(null);
   const scrollIndRef = useRef<HTMLDivElement>(null);
   const depthRefs    = useRef<(HTMLElement | null)[]>([]);
+  const [mounted, setMounted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
@@ -276,7 +278,8 @@ export default function Hero() {
         >
           {/* Depth layer 0 — availability pill */}
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0 }}
+            suppressHydrationWarning
+            initial={!mounted || reducedMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0 }}
           >
@@ -290,7 +293,8 @@ export default function Hero() {
 
           {/* Depth layer 1 — headline */}
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 60 }}
+            suppressHydrationWarning
+            initial={!mounted || reducedMotion ? false : { opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
           >
@@ -315,7 +319,8 @@ export default function Hero() {
 
           {/* Depth layer 2 — tagline */}
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+            suppressHydrationWarning
+            initial={!mounted || reducedMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           >
@@ -337,7 +342,8 @@ export default function Hero() {
 
           {/* Depth layer 3 — primary CTAs */}
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 50 }}
+            suppressHydrationWarning
+            initial={!mounted || reducedMotion ? false : { opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
           >
@@ -356,7 +362,8 @@ export default function Hero() {
 
           {/* Depth layer 4 — secondary links */}
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 30 }}
+            suppressHydrationWarning
+            initial={!mounted || reducedMotion ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
           >
