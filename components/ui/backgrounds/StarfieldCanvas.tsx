@@ -46,6 +46,7 @@ export default function StarfieldCanvas() {
 
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(1);
+      renderer.domElement.style.pointerEvents = "none";
       mount.appendChild(renderer.domElement);
 
       // ── Scroll velocity tracking (internal, no React re-renders) ──

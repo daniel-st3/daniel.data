@@ -292,32 +292,37 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Depth layer 1 — headline */}
-          <motion.div
-            key={mounted ? "headline-on" : "headline-off"}
-            suppressHydrationWarning
-            initial={mounted && !reducedMotion ? { opacity: 0, y: 60 } : false}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          >
-            <div ref={(el) => { depthRefs.current[1] = el; }} style={{ marginTop: "1.5rem", willChange: "transform" }}>
-              {["Business &", "Data Analyst."].map((line) => (
-                <div key={line} style={{ lineHeight: 1.0, overflow: "hidden" }}>
-                  <span style={{
-                    display: "block",
-                    fontSize: "clamp(3rem, 9vw, 7.4rem)",
-                    fontWeight: 600,
-                    letterSpacing: "-0.066em",
-                    color: "#fff8f0",
-                    lineHeight: 1.0,
-                    textShadow: "0 2px 48px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.35)",
-                  }}>
-                    {line}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
+          {/* Depth layer 1 — headline (word-by-word stagger) */}
+          <div ref={(el) => { depthRefs.current[1] = el; }} style={{ marginTop: "1.5rem", willChange: "transform" }}>
+            {([["Business", "&"], ["Data", "Analyst."]] as string[][]).map((words, lineIdx) => (
+              <div key={lineIdx} style={{ lineHeight: 1.0 }}>
+                {words.map((word, wordIdx) => (
+                  <motion.span
+                    key={`${lineIdx}-${wordIdx}`}
+                    suppressHydrationWarning
+                    initial={mounted && !reducedMotion ? { opacity: 0, y: 40 } : false}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.9,
+                      delay: 0.2 + (lineIdx * 2 + wordIdx) * 0.08,
+                      ease: "easeOut",
+                    }}
+                    style={{
+                      display: "inline-block",
+                      fontSize: "clamp(3rem, 9vw, 7.4rem)",
+                      fontWeight: 600,
+                      letterSpacing: "-0.066em",
+                      color: "#fff8f0",
+                      lineHeight: 1.0,
+                      textShadow: "0 2px 48px rgba(0,0,0,0.6), 0 0 80px rgba(0,0,0,0.35)",
+                    }}
+                  >
+                    {word}{wordIdx < words.length - 1 ? "\u00a0" : ""}
+                  </motion.span>
+                ))}
+              </div>
+            ))}
+          </div>
 
           {/* Depth layer 2 — tagline */}
           <motion.div

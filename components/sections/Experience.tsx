@@ -244,7 +244,7 @@ export default function Experience() {
       if (cards) {
         gsap.fromTo(
           cards,
-          { opacity: 0, x: 40 },
+          { opacity: 0, x: 100 },
           {
             opacity: 1, x: 0, duration: 0.7, stagger: 0.1, ease: "power3.out",
             scrollTrigger: { trigger: trackRef.current, start: "top 84%", toggleActions: "play none none reverse" },

@@ -200,13 +200,16 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headRef = useRef<HTMLDivElement>(null);
+  const headRef    = useRef<HTMLDivElement>(null);
+  const row1Ref    = useRef<HTMLDivElement>(null);
+  const row2Ref    = useRef<HTMLDivElement>(null);
 
   useCinematicReveal(sectionRef, { yOffset: 45, rotateX: 2, scale: 0.97 });
 
   useEffect(() => {
     (async () => {
       const { gsap, ScrollTrigger } = await loadGSAP();
+
       gsap.fromTo(
         headRef.current,
         { opacity: 0, y: 24 },
@@ -218,6 +221,21 @@ export default function Projects() {
           scrollTrigger: { trigger: headRef.current, start: "top 85%", toggleActions: "play none none reverse" },
         }
       );
+
+      // Row viewport-entry: fade + slide + slight scale (mirrors card enter spec)
+      [row1Ref.current, row2Ref.current].forEach((el, i) => {
+        if (!el) return;
+        gsap.fromTo(
+          el,
+          { opacity: 0, y: 60, scale: 0.97 },
+          {
+            opacity: 1, y: 0, scale: 1,
+            duration: 0.8, ease: "power3.out", delay: i * 0.12,
+            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none reverse" },
+          }
+        );
+      });
+
       ScrollTrigger.refresh();
     })();
   }, []);
@@ -276,10 +294,12 @@ export default function Projects() {
       </div>
 
       {/* Row 1: scroll left */}
-      <InfiniteRow items={ROW_1} direction="left" speed={30} />
+      <div ref={row1Ref}>
+        <InfiniteRow items={ROW_1} direction="left" speed={30} />
+      </div>
 
       {/* Row 2: scroll right */}
-      <div style={{ marginTop: "0.75rem" }}>
+      <div ref={row2Ref} style={{ marginTop: "0.75rem" }}>
         <InfiniteRow items={ROW_2} direction="right" speed={25} />
       </div>
 
