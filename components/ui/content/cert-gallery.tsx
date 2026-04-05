@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent, MutableRefObject, TouchEvent as ReactTouchEvent, WheelEvent as ReactWheelEvent } from "react";
 
 const LINKEDIN_CERTS_URL = "https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/details/certifications/";
 
@@ -49,44 +50,32 @@ const ROW3 = CERTS.slice(ROW_SIZE * 2);
 
 interface CertCardProps {
   cert: CertItem;
-  rowIdx: number;
+  expanded: boolean;
+  onActivate: () => void;
+  suppressClickRef: MutableRefObject<boolean>;
 }
 
-function CertCard({ cert, rowIdx }: CertCardProps) {
-  const [expanded, setExpanded] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
+function CertCard({ cert, expanded, onActivate, suppressClickRef }: CertCardProps) {
   const [imageError, setImageError] = useState(false);
   const isPdf = cert.file.toLowerCase().endsWith(".pdf");
   const openText = isPdf ? "open certificate PDF" : "view on LinkedIn";
   const openBadgeText = isPdf ? "Open PDF ↗" : "LinkedIn ↗";
 
-  // Auto-collapse after 2s if user doesn't click a second time
-  useEffect(() => {
-    if (!expanded) return;
-    const t = setTimeout(() => {
-      setExpanded(false);
-      setClickCount(0);
-    }, 2000);
-    return () => clearTimeout(t);
-  }, [expanded]);
-
-  const handleClick = () => {
-    const next = clickCount + 1;
-    setClickCount(next);
-    if (next === 1) {
-      setExpanded(true);
-    } else {
-      setExpanded(false);
-      setClickCount(0);
-      const targetUrl = isPdf ? certSrc(cert.file) : LINKEDIN_CERTS_URL;
-      window.open(targetUrl, "_blank", "noopener");
-    }
-  };
-
   return (
     <div
-      onClick={handleClick}
+      draggable={false}
+      onDragStart={(event) => {
+        event.preventDefault();
+      }}
+      onClickCapture={(event) => {
+        if (suppressClickRef.current) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }}
+      onClick={onActivate}
       title={expanded ? `Click again to ${openText}` : "Click to expand"}
+      className={!expanded ? "cert-card-collapsed" : undefined}
       style={{
         flexShrink: 0,
         width: expanded ? 360 : 200,
@@ -98,12 +87,17 @@ function CertCard({ cert, rowIdx }: CertCardProps) {
         transition: "width 0.4s cubic-bezier(0.22,1,0.36,1), height 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease",
         boxShadow: expanded ? "0 8px 40px rgba(195,111,61,0.24)" : "0 2px 12px rgba(0,0,0,0.15)",
         border: expanded ? "1px solid rgba(195,111,61,0.34)" : "1px solid var(--border)",
+        userSelect: "none",
       }}
     >
       {!isPdf && !imageError ? (
         <img
           src={certSrc(cert.file)}
           alt={cert.label}
+          draggable={false}
+          onDragStart={(event) => {
+            event.preventDefault();
+          }}
           style={{
             width: "100%",
             height: "100%",
@@ -192,32 +186,319 @@ interface CertRowProps {
 }
 
 function CertRow({ certs, direction, rowIdx }: CertRowProps) {
-  const doubled = [...certs, ...certs, ...certs];
+  const tripled = [...certs, ...certs, ...certs];
   const speed = 25 + rowIdx * 5;
-  const animName = `cert-scroll-${rowIdx}`;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const totalWidthRef = useRef(0);
+  const posRef = useRef(0);
+  const velRef = useRef(0);
+  const draggingRef = useRef(false);
+  const movedRef = useRef(false);
+  const suppressClickRef = useRef(false);
+  const pausedRef = useRef(false);
+  const lastXRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const detachDragRef = useRef<() => void>(() => {});
+  const resumeAutoTimeoutRef = useRef<number | null>(null);
+  const [armedFile, setArmedFile] = useState<string | null>(null);
+
+  const wrapPosition = (nextPos: number, width = totalWidthRef.current) => {
+    if (width <= 0) return nextPos;
+    if (nextPos >= width * 2) return nextPos - width;
+    if (nextPos <= 0) return nextPos + width;
+    return nextPos;
+  };
+
+  const scheduleAutoResume = () => {
+    if (resumeAutoTimeoutRef.current !== null) {
+      window.clearTimeout(resumeAutoTimeoutRef.current);
+    }
+    resumeAutoTimeoutRef.current = window.setTimeout(() => {
+      if (!draggingRef.current) {
+        pausedRef.current = false;
+      }
+    }, 900);
+  };
+
+  useEffect(() => {
+    if (!armedFile) return;
+    const timeout = window.setTimeout(() => {
+      setArmedFile(null);
+    }, 2000);
+    return () => window.clearTimeout(timeout);
+  }, [armedFile]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const track = trackRef.current;
+    if (!container || !track) return;
+
+    const measure = () => {
+      const firstCard = track.children[0] as HTMLElement | undefined;
+      const secondCopyFirstCard = track.children[certs.length] as HTMLElement | undefined;
+      if (!firstCard || !secondCopyFirstCard) return;
+
+      const totalWidth = secondCopyFirstCard.offsetLeft - firstCard.offsetLeft;
+      if (totalWidth <= 0) return;
+
+      const previousWidth = totalWidthRef.current;
+      const currentPos = posRef.current || container.scrollLeft || totalWidth;
+      totalWidthRef.current = totalWidth;
+
+      if (previousWidth > 0) {
+        const relativeOffset = currentPos - previousWidth;
+        const nextPos = wrapPosition(totalWidth + relativeOffset, totalWidth);
+        posRef.current = nextPos;
+        container.scrollLeft = nextPos;
+      } else {
+        container.scrollLeft = totalWidth;
+        posRef.current = totalWidth;
+      }
+    };
+
+    measure();
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(track);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measure);
+      if (resumeAutoTimeoutRef.current !== null) {
+        window.clearTimeout(resumeAutoTimeoutRef.current);
+      }
+    };
+  }, [certs, armedFile]);
+
+  useEffect(() => {
+    const autoStep = (direction === "left" ? 1 : -1) * (speed / 60);
+
+    const tick = () => {
+      const container = containerRef.current;
+      const totalWidth = totalWidthRef.current;
+
+      if (container && totalWidth > 0) {
+        if (!draggingRef.current && !pausedRef.current) {
+          if (Math.abs(velRef.current) > 0.1) {
+            velRef.current *= 0.93;
+            posRef.current = wrapPosition(posRef.current + velRef.current);
+          } else {
+            velRef.current = 0;
+            posRef.current = wrapPosition(posRef.current + autoStep);
+          }
+          container.scrollLeft = posRef.current;
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [direction, speed]);
+
+  useEffect(() => {
+    return () => {
+      detachDragRef.current();
+    };
+  }, []);
+
+  const onMouseDown = (event: ReactMouseEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container || totalWidthRef.current <= 0) return;
+
+    event.preventDefault();
+    detachDragRef.current();
+    draggingRef.current = true;
+    movedRef.current = false;
+    pausedRef.current = true;
+    lastXRef.current = event.clientX;
+    lastTimeRef.current = performance.now();
+    velRef.current = 0;
+    container.style.cursor = "grabbing";
+
+    const onMove = (moveEvent: MouseEvent) => {
+      const now = performance.now();
+      const dt = Math.max(now - lastTimeRef.current, 1);
+      const dx = lastXRef.current - moveEvent.clientX;
+      velRef.current = (dx / dt) * 16;
+      lastTimeRef.current = now;
+      lastXRef.current = moveEvent.clientX;
+      if (Math.abs(dx) > 0.5) {
+        movedRef.current = true;
+      }
+      posRef.current = wrapPosition(posRef.current + dx);
+      container.scrollLeft = posRef.current;
+    };
+
+    const onUp = () => {
+      draggingRef.current = false;
+      suppressClickRef.current = movedRef.current;
+      container.style.cursor = "grab";
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+      detachDragRef.current = () => {};
+      scheduleAutoResume();
+      window.setTimeout(() => {
+        suppressClickRef.current = false;
+      }, 0);
+    };
+
+    detachDragRef.current = () => {
+      draggingRef.current = false;
+      container.style.cursor = "grab";
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+      detachDragRef.current = () => {};
+      scheduleAutoResume();
+    };
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  };
+
+  const onTouchStart = (event: ReactTouchEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container || totalWidthRef.current <= 0) return;
+
+    detachDragRef.current();
+    draggingRef.current = true;
+    movedRef.current = false;
+    pausedRef.current = true;
+    lastXRef.current = event.touches[0].clientX;
+    lastTimeRef.current = performance.now();
+    velRef.current = 0;
+
+    const onMove = (moveEvent: TouchEvent) => {
+      const touch = moveEvent.touches[0];
+      if (!touch) return;
+
+      const now = performance.now();
+      const dt = Math.max(now - lastTimeRef.current, 1);
+      const dx = lastXRef.current - touch.clientX;
+      velRef.current = (dx / dt) * 16;
+      lastTimeRef.current = now;
+      lastXRef.current = touch.clientX;
+      if (Math.abs(dx) > 0.5) {
+        movedRef.current = true;
+      }
+      moveEvent.preventDefault();
+      posRef.current = wrapPosition(posRef.current + dx);
+      container.scrollLeft = posRef.current;
+    };
+
+    const onEnd = () => {
+      draggingRef.current = false;
+      suppressClickRef.current = movedRef.current;
+      window.removeEventListener("touchmove", onMove);
+      window.removeEventListener("touchend", onEnd);
+      detachDragRef.current = () => {};
+      scheduleAutoResume();
+      window.setTimeout(() => {
+        suppressClickRef.current = false;
+      }, 0);
+    };
+
+    detachDragRef.current = () => {
+      draggingRef.current = false;
+      window.removeEventListener("touchmove", onMove);
+      window.removeEventListener("touchend", onEnd);
+      detachDragRef.current = () => {};
+      scheduleAutoResume();
+    };
+
+    window.addEventListener("touchmove", onMove, { passive: false });
+    window.addEventListener("touchend", onEnd);
+  };
+
+  const onWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container || totalWidthRef.current <= 0) return;
+
+    const delta = Math.abs(event.deltaX) > 0 ? event.deltaX : event.shiftKey ? event.deltaY : 0;
+    if (delta === 0) return;
+
+    event.preventDefault();
+    pausedRef.current = true;
+    velRef.current = 0;
+    posRef.current = wrapPosition(posRef.current + delta);
+    container.scrollLeft = posRef.current;
+    scheduleAutoResume();
+  };
+
+  const onScroll = () => {
+    const container = containerRef.current;
+    if (!container || totalWidthRef.current <= 0 || draggingRef.current) return;
+
+    const nextPos = wrapPosition(container.scrollLeft);
+    if (nextPos !== container.scrollLeft) {
+      container.scrollLeft = nextPos;
+    }
+    posRef.current = nextPos;
+  };
+
+  const handleActivate = (cert: CertItem) => {
+    if (armedFile === cert.file) {
+      setArmedFile(null);
+      const targetUrl = cert.file.toLowerCase().endsWith(".pdf") ? certSrc(cert.file) : LINKEDIN_CERTS_URL;
+      window.open(targetUrl, "_blank", "noopener");
+      return;
+    }
+
+    setArmedFile(cert.file);
+  };
 
   return (
-    <div style={{ overflow: "hidden", width: "100%" }}>
-      <style>{`
-        @keyframes ${animName} {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-${100 / 3}%); }
+    <div
+      ref={containerRef}
+      className="cert-row"
+      style={{
+        overflowX: "auto",
+        overflowY: "hidden",
+        width: "100%",
+        cursor: "grab",
+        userSelect: "none",
+        scrollbarWidth: "none",
+        WebkitOverflowScrolling: "touch",
+        overscrollBehaviorX: "contain",
+        touchAction: "pan-y",
+      }}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
+      onWheel={onWheel}
+      onScroll={onScroll}
+      onMouseEnter={() => {
+        pausedRef.current = true;
+      }}
+      onMouseLeave={() => {
+        if (!draggingRef.current) {
+          pausedRef.current = false;
         }
-      `}</style>
+      }}
+    >
       <div
+        ref={trackRef}
         style={{
           display: "flex",
           gap: "1rem",
           width: "max-content",
-          animation: `${animName} ${speed}s linear infinite`,
-          animationDirection: direction === "right" ? "reverse" : "normal",
           paddingRight: "1rem",
         }}
-        onMouseEnter={(e) => ((e.currentTarget as HTMLDivElement).style.animationPlayState = "paused")}
-        onMouseLeave={(e) => ((e.currentTarget as HTMLDivElement).style.animationPlayState = "running")}
       >
-        {doubled.map((cert, i) => (
-          <CertCard key={`${cert.file}-${i}`} cert={cert} rowIdx={rowIdx} />
+        {tripled.map((cert, i) => (
+          <CertCard
+            key={`${cert.file}-${i}`}
+            cert={cert}
+            expanded={armedFile === cert.file}
+            onActivate={() => handleActivate(cert)}
+            suppressClickRef={suppressClickRef}
+          />
         ))}
       </div>
     </div>
@@ -227,6 +508,11 @@ function CertRow({ certs, direction, rowIdx }: CertRowProps) {
 export default function CertGallery() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <style>{`
+        .cert-row::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
       <CertRow certs={ROW1} direction="left" rowIdx={0} />
       <CertRow certs={ROW2} direction="right" rowIdx={1} />
       <CertRow certs={ROW3} direction="left" rowIdx={2} />
