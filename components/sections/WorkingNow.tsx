@@ -82,20 +82,56 @@ export default function WorkingNow() {
       style={{
         position: "relative",
         zIndex: 1,
-        background: "linear-gradient(160deg, #1a1410 0%, #0f0c0a 50%, #111010 100%)",
+        background: "#0d0b08",
         overflow: "hidden",
       }}
     >
-      <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}>
-        <RetroGrid className="opacity-10" angle={68} />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "radial-gradient(ellipse at 50% 10%, rgba(195,111,61,0.12) 0%, transparent 55%)",
-          }}
-        />
+      {/* Animated background */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="wn-bg-mesh" />
+        <div className="wn-orb-1" />
+        <div className="wn-orb-2" />
+        <RetroGrid className="opacity-5" angle={68} />
       </div>
+      <style>{`
+        @keyframes wn-mesh {
+          0%   { background-position: 0% 0%;    }
+          33%  { background-position: 100% 50%; }
+          66%  { background-position: 50% 100%; }
+          100% { background-position: 0% 0%;    }
+        }
+        @keyframes wn-orb1 {
+          0%, 100% { transform: translate(0,0) scale(1);      opacity: 0.6; }
+          50%       { transform: translate(5%,8%) scale(1.15); opacity: 1;   }
+        }
+        @keyframes wn-orb2 {
+          0%, 100% { transform: translate(0,0) scale(1);       opacity: 0.4; }
+          50%       { transform: translate(-7%,-9%) scale(1.1); opacity: 0.7; }
+        }
+        .wn-bg-mesh {
+          position: absolute; inset: 0;
+          background: linear-gradient(125deg, #1e1008 0%, #0d0b08 20%, #1a0e06 42%, #0b0909 65%, #170e07 83%, #0d0b08 100%);
+          background-size: 500% 500%;
+          animation: wn-mesh 22s ease infinite;
+        }
+        .wn-orb-1 {
+          position: absolute;
+          width: 65vw; height: 65vh;
+          top: -15%; left: 50%;
+          transform: translateX(-50%);
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(195,111,61,0.28) 0%, rgba(138,74,45,0.12) 40%, transparent 68%);
+          animation: wn-orb1 12s ease-in-out infinite;
+        }
+        .wn-orb-2 {
+          position: absolute;
+          width: 50vw; height: 50vh;
+          bottom: -10%; right: -5%;
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(111,123,100,0.18) 0%, rgba(80,95,70,0.08) 45%, transparent 70%);
+          animation: wn-orb2 16s ease-in-out infinite;
+        }
+      `}</style>
 
       <div className="container-site" style={{ position: "relative", zIndex: 2 }}>
         <div ref={headRef} style={{ marginBottom: "2rem", textAlign: "center" }}>

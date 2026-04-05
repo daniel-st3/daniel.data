@@ -101,93 +101,136 @@ const ROW_3: ProjectItem[] = [
   },
 ];
 
-function InfiniteRow({ items, direction = "left", speed = 35 }: { items: ProjectItem[]; direction?: "left" | "right"; speed?: number }) {
-  const trackRef = useRef<HTMLDivElement>(null);
+function InfiniteRow({
+  items,
+  direction = "left",
+  speed = 35,
+}: {
+  items: ProjectItem[];
+  direction?: "left" | "right";
+  speed?: number;
+}) {
+  const trackRef     = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const posRef = useRef(0);
-  const pausedRef = useRef(false);
-  const isDragging = useRef(false);
-  const startXRef = useRef(0);
-  const startPosRef = useRef(0);
+  const posRef       = useRef(0);
+  const velRef       = useRef(0);        // drag momentum velocity
+  const isDragging   = useRef(false);
+  const startXRef    = useRef(0);
+  const startPosRef  = useRef(0);
+  const lastXRef     = useRef(0);
+  const lastTRef     = useRef(0);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
     let animId: number;
-    const cardWidth = 360 + 20;
+    const cardWidth  = 360 + 20;
     const totalWidth = cardWidth * items.length;
-    const dir = direction === "left" ? -1 : 1;
+    const autoDir    = direction === "left" ? -1 : 1;
 
+    // Right-direction rows start offset so content fills from right
     if (direction === "right") posRef.current = -totalWidth;
 
+    const wrap = () => {
+      if (posRef.current <= -totalWidth) posRef.current += totalWidth;
+      if (posRef.current >= 0)           posRef.current -= totalWidth;
+    };
+
     const animate = () => {
-      if (!pausedRef.current && !isDragging.current) {
-        posRef.current += (speed / 60) * dir;
-        if (direction === "left" && posRef.current <= -totalWidth) posRef.current += totalWidth;
-        if (direction === "right" && posRef.current >= 0) posRef.current -= totalWidth;
+      if (!isDragging.current) {
+        if (Math.abs(velRef.current) > 0.3) {
+          // Momentum decay after drag release
+          posRef.current += velRef.current;
+          velRef.current *= 0.93;
+          wrap();
+        } else {
+          velRef.current = 0;
+          // Normal auto-scroll
+          posRef.current += (speed / 60) * autoDir;
+          wrap();
+        }
       }
       track.style.transform = `translateX(${posRef.current}px)`;
       animId = requestAnimationFrame(animate);
     };
 
-    const onEnter = () => { pausedRef.current = true; };
-    const onLeave = () => { if (!isDragging.current) pausedRef.current = false; };
-
-    track.addEventListener("mouseenter", onEnter);
-    track.addEventListener("mouseleave", onLeave);
     animId = requestAnimationFrame(animate);
-
-    return () => {
-      cancelAnimationFrame(animId);
-      track.removeEventListener("mouseenter", onEnter);
-      track.removeEventListener("mouseleave", onLeave);
-    };
+    return () => cancelAnimationFrame(animId);
   }, [items, direction, speed]);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+  // ── Mouse drag ──────────────────────────────────────────────
+  const attachMouseDrag = (clientX: number) => {
     const container = containerRef.current;
-    if (!container) return;
     isDragging.current = true;
-    pausedRef.current = true;
-    startXRef.current = e.pageX;
+    startXRef.current  = clientX;
     startPosRef.current = posRef.current;
-    container.style.cursor = "grabbing";
+    lastXRef.current   = clientX;
+    lastTRef.current   = performance.now();
+    velRef.current     = 0;
+    if (container) container.style.cursor = "grabbing";
 
     const onMove = (ev: MouseEvent) => {
-      const walk = (ev.pageX - startXRef.current) * 1.5;
-      posRef.current = startPosRef.current + walk;
+      const now  = performance.now();
+      const dt   = Math.max(now - lastTRef.current, 1);
+      const dx   = ev.clientX - lastXRef.current;
+      velRef.current    = (dx / dt) * 16;   // px per frame (~60fps)
+      lastXRef.current  = ev.clientX;
+      lastTRef.current  = now;
+      posRef.current    = startPosRef.current + (ev.clientX - startXRef.current) * 1.4;
     };
 
     const onUp = () => {
       isDragging.current = false;
-      pausedRef.current = false;
       if (container) container.style.cursor = "grab";
       window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
+      window.removeEventListener("mouseup",   onUp);
     };
 
     window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
+    window.addEventListener("mouseup",   onUp);
   };
 
-  // Double the items for seamless loop
+  // ── Touch drag ──────────────────────────────────────────────
+  const attachTouchDrag = (clientX: number) => {
+    isDragging.current  = true;
+    startXRef.current   = clientX;
+    startPosRef.current = posRef.current;
+    lastXRef.current    = clientX;
+    lastTRef.current    = performance.now();
+    velRef.current      = 0;
+
+    const onMove = (ev: TouchEvent) => {
+      const x   = ev.touches[0].clientX;
+      const now = performance.now();
+      const dt  = Math.max(now - lastTRef.current, 1);
+      velRef.current    = ((x - lastXRef.current) / dt) * 16;
+      lastXRef.current  = x;
+      lastTRef.current  = now;
+      posRef.current    = startPosRef.current + (x - startXRef.current) * 1.4;
+    };
+
+    const onEnd = () => {
+      isDragging.current = false;
+      window.removeEventListener("touchmove", onMove);
+      window.removeEventListener("touchend",  onEnd);
+    };
+
+    window.addEventListener("touchmove", onMove, { passive: true });
+    window.addEventListener("touchend",  onEnd);
+  };
+
   const doubled = [...items, ...items];
 
   return (
     <div
       ref={containerRef}
       style={{ overflow: "hidden", width: "100%", padding: "0.5rem 0", cursor: "grab" }}
-      onMouseDown={handleMouseDown}
+      onMouseDown={(e) => attachMouseDrag(e.clientX)}
+      onTouchStart={(e) => attachTouchDrag(e.touches[0].clientX)}
     >
       <div
         ref={trackRef}
-        style={{
-          display: "flex",
-          gap: "20px",
-          width: "fit-content",
-          willChange: "transform",
-          userSelect: "none",
-        }}
+        style={{ display: "flex", gap: "20px", width: "fit-content", willChange: "transform", userSelect: "none" }}
       >
         {doubled.map((item, idx) => (
           <a
@@ -229,7 +272,9 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
                 background: "linear-gradient(to bottom, rgba(3,7,18,0) 25%, rgba(3,7,18,0.5) 60%, rgba(3,7,18,0.92) 100%)",
               }} />
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.5rem", color: "#fff" }}>
-                <div style={{ fontSize: "1.05rem", fontWeight: 600, letterSpacing: "-0.02em", marginBottom: "0.4rem", lineHeight: 1.3 }}>{item.title}</div>
+                <div style={{ fontSize: "1.05rem", fontWeight: 600, letterSpacing: "-0.02em", marginBottom: "0.4rem", lineHeight: 1.3 }}>
+                  {item.title}
+                </div>
                 <div style={{
                   fontSize: "0.78rem",
                   color: "rgba(255,255,255,0.72)",
@@ -238,7 +283,9 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: "vertical" as const,
                   overflow: "hidden",
-                }}>{item.description}</div>
+                }}>
+                  {item.description}
+                </div>
                 <div style={{ display: "flex", alignItems: "center", marginTop: "0.75rem", fontSize: "0.75rem", color: "rgba(255,255,255,0.85)", fontWeight: 500 }}>
                   View more <ArrowRight style={{ marginLeft: 6, width: 14, height: 14 }} />
                 </div>
@@ -268,10 +315,7 @@ export default function Projects() {
         headRef.current,
         { opacity: 0, y: 24 },
         {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
+          opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
           scrollTrigger: { trigger: headRef.current, start: "top 92%", toggleActions: "play none none none" },
         }
       );
@@ -318,14 +362,7 @@ export default function Projects() {
           }}
         >
           <div>
-            <h2
-              style={{
-                fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
-                fontWeight: 500,
-                letterSpacing: "-0.04em",
-                color: "var(--fg)",
-              }}
-            >
+            <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 500, letterSpacing: "-0.04em", color: "var(--fg)" }}>
               Projects
             </h2>
             <p style={{ fontSize: "0.9rem", color: "var(--fg-muted)", marginTop: "0.5rem", maxWidth: "48ch", lineHeight: 1.6 }}>
@@ -346,17 +383,12 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Row 1: scroll left */}
       <div ref={row1Ref}>
         <InfiniteRow items={ROW_1} direction="left" speed={30} />
       </div>
-
-      {/* Row 2: scroll right */}
       <div ref={row2Ref} style={{ marginTop: "0.75rem" }}>
         <InfiniteRow items={ROW_2} direction="right" speed={25} />
       </div>
-
-      {/* Row 3: scroll left */}
       <div ref={row3Ref} style={{ marginTop: "0.75rem" }}>
         <InfiniteRow items={ROW_3} direction="left" speed={28} />
       </div>
@@ -370,9 +402,7 @@ export default function Projects() {
           transform: scale(1.08) !important;
         }
         @media (max-width: 640px) {
-          .project-card {
-            width: 300px !important;
-          }
+          .project-card { width: 300px !important; }
         }
       `}</style>
     </section>

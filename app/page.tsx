@@ -75,8 +75,8 @@ export default function Home() {
           position: "relative",
         }}>
           <About />
-          <Projects />
           <WorkingNow />
+          <Projects />
           <ThesisDownloads />
           <Experience />
           <Skills />

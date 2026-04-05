@@ -63,8 +63,65 @@ export default function Contact() {
       ref={sectionRef}
       id="contact"
       className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, overflow: "hidden", background: "linear-gradient(160deg, #1a1410 0%, #0f0c0a 50%, #111010 100%)", paddingBottom: "2.5rem" }}
+      style={{ position: "relative", zIndex: 1, overflow: "hidden", background: "#0d0b08", paddingBottom: "2.5rem" }}
     >
+      {/* Animated background */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="ct-bg-mesh" />
+        <div className="ct-orb-1" />
+        <div className="ct-orb-2" />
+        <div className="ct-orb-3" />
+      </div>
+      <style>{`
+        @keyframes ct-mesh {
+          0%   { background-position: 0% 0%;    }
+          33%  { background-position: 100% 50%; }
+          66%  { background-position: 50% 100%; }
+          100% { background-position: 0% 0%;    }
+        }
+        @keyframes ct-orb1 {
+          0%, 100% { transform: translate(0,0) scale(1);       opacity: 0.65; }
+          50%       { transform: translate(-6%,9%) scale(1.18); opacity: 1;    }
+        }
+        @keyframes ct-orb2 {
+          0%, 100% { transform: translate(0,0) scale(1);        opacity: 0.4; }
+          50%       { transform: translate(8%,-10%) scale(1.12); opacity: 0.75; }
+        }
+        @keyframes ct-orb3 {
+          0%, 100% { transform: translate(0,0) scale(1);         opacity: 0.25; }
+          50%       { transform: translate(-10%,-5%) scale(1.05); opacity: 0.5;  }
+        }
+        .ct-bg-mesh {
+          position: absolute; inset: 0;
+          background: linear-gradient(125deg, #1e1208 0%, #0d0b08 22%, #180e06 45%, #0a0808 68%, #1a1007 88%, #0d0b08 100%);
+          background-size: 500% 500%;
+          animation: ct-mesh 20s ease infinite;
+        }
+        .ct-orb-1 {
+          position: absolute;
+          width: 60vw; height: 60vh;
+          top: -20%; right: -10%;
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(195,111,61,0.25) 0%, rgba(138,74,45,0.1) 40%, transparent 68%);
+          animation: ct-orb1 13s ease-in-out infinite;
+        }
+        .ct-orb-2 {
+          position: absolute;
+          width: 50vw; height: 55vh;
+          bottom: -10%; left: -5%;
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(107,83,55,0.2) 0%, rgba(75,55,35,0.08) 45%, transparent 70%);
+          animation: ct-orb2 17s ease-in-out infinite;
+        }
+        .ct-orb-3 {
+          position: absolute;
+          width: 40vw; height: 40vh;
+          top: 40%; left: 30%;
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(111,123,100,0.12) 0%, transparent 65%);
+          animation: ct-orb3 21s ease-in-out infinite;
+        }
+      `}</style>
       <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
 
         <div ref={headRef} style={{ marginBottom: "3rem" }}>

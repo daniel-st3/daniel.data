@@ -264,9 +264,54 @@ export default function About() {
       ref={sectionRef}
       id="about"
       className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, background: "linear-gradient(160deg, #1a1410 0%, #0f0c0a 50%, #111010 100%)", paddingTop: "5rem" }}
+      style={{ position: "relative", zIndex: 1, background: "#0e0b09", paddingTop: "5rem" }}
     >
-      <div className="container-site">
+      {/* Animated background layer */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="about-bg-mesh" />
+        <div className="about-orb-1" />
+        <div className="about-orb-2" />
+      </div>
+      <style>{`
+        @keyframes about-mesh {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes about-orb1 {
+          0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.55; }
+          40%       { transform: translate(-6%, 10%) scale(1.12); opacity: 0.9; }
+          70%       { transform: translate(4%, -6%) scale(0.95);  opacity: 0.65; }
+        }
+        @keyframes about-orb2 {
+          0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.35; }
+          45%       { transform: translate(8%, -12%) scale(1.18); opacity: 0.7; }
+          75%       { transform: translate(-5%, 8%) scale(0.9);   opacity: 0.45; }
+        }
+        .about-bg-mesh {
+          position: absolute; inset: 0;
+          background: linear-gradient(135deg, #1c1008 0%, #0e0b09 25%, #1a0f06 50%, #0b0908 75%, #1e1209 100%);
+          background-size: 400% 400%;
+          animation: about-mesh 20s ease infinite;
+        }
+        .about-orb-1 {
+          position: absolute;
+          width: 70vw; height: 60vh;
+          top: -10%; right: -10%;
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(195,111,61,0.22) 0%, rgba(138,74,45,0.1) 45%, transparent 70%);
+          animation: about-orb1 14s ease-in-out infinite;
+        }
+        .about-orb-2 {
+          position: absolute;
+          width: 55vw; height: 55vh;
+          bottom: -5%; left: -8%;
+          border-radius: 50%;
+          background: radial-gradient(ellipse at center, rgba(107,83,55,0.18) 0%, rgba(80,55,35,0.08) 45%, transparent 70%);
+          animation: about-orb2 18s ease-in-out infinite;
+        }
+      `}</style>
+      <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
         {/* Section heading */}
         <div style={{ marginBottom: "3rem" }}>
           <span style={{ fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>
