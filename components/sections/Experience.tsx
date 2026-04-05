@@ -258,12 +258,14 @@ export default function Experience() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="experience" className="section-pad section-dark" style={{ position: "relative", zIndex: 1, background: "#0c0a07", overflow: "hidden", paddingTop: "5rem", paddingBottom: "2rem" }}>
+    <section ref={sectionRef} id="experience" className="section-pad section-dark" style={{ position: "relative", zIndex: 1, background: "#0d0b08", overflow: "hidden", paddingTop: "5rem", paddingBottom: "2rem" }}>
       {/* Animated background */}
       <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="dark-blend-top" />
         <div className="exp-bg-mesh" />
         <div className="exp-orb-1" />
         <div className="exp-orb-2" />
+        <div className="dark-blend-bottom" />
       </div>
       <style>{`
         @keyframes exp-mesh {

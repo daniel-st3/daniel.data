@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useState } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { PlayCircle } from "lucide-react";
 
 interface Particle {
@@ -21,15 +21,6 @@ export default function FloatingCTA() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animIdRef = useRef<number>(0);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const onScroll = () => {
-      setVisible(window.scrollY < window.innerHeight * 1.0);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Big sparkle burst on hover
   const spawnParticles = useCallback(() => {
@@ -257,7 +248,7 @@ export default function FloatingCTA() {
         }
       `}} />
 
-      <div style={{ position: "fixed", right: "1.5rem", bottom: "calc(28vh - 35px)", zIndex: 979, pointerEvents: "none", opacity: visible ? 1 : 0, transition: "opacity 0.3s ease" }}>
+      <div style={{ position: "fixed", right: "1.5rem", bottom: "calc(28vh - 35px)", zIndex: 979, pointerEvents: "none" }}>
         <canvas
           ref={canvasRef}
           style={{ width: `${CANVAS_SIZE}px`, height: `${CANVAS_SIZE}px` }}
@@ -271,7 +262,6 @@ export default function FloatingCTA() {
         className="floating-cta"
         aria-label="Check my assets on GitHub"
         onMouseEnter={handleMouseEnter}
-        style={{ opacity: visible ? 1 : 0, visibility: visible ? "visible" : "hidden", pointerEvents: visible ? "auto" : "none", transition: "opacity 0.3s ease, visibility 0.3s ease" }}
       >
         <span className="cta-icon">{">"}</span>
         Check my assets
@@ -283,7 +273,6 @@ export default function FloatingCTA() {
         rel="noopener noreferrer"
         className="floating-thesis"
         aria-label="Watch Master's thesis defense on YouTube"
-        style={{ opacity: visible ? 1 : 0, visibility: visible ? "visible" : "hidden", pointerEvents: visible ? "auto" : "none", transition: "opacity 0.3s ease, visibility 0.3s ease" }}
       >
         <PlayCircle size={24} strokeWidth={1.6} className="thesis-icon" />
         <span className="thesis-label">

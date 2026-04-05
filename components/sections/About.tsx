@@ -264,13 +264,15 @@ export default function About() {
       ref={sectionRef}
       id="about"
       className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, background: "#0e0b09", paddingTop: "5rem" }}
+      style={{ position: "relative", zIndex: 1, background: "#0d0b08", paddingTop: "5rem" }}
     >
       {/* Animated background layer */}
       <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="dark-blend-top" />
         <div className="about-bg-mesh" />
         <div className="about-orb-1" />
         <div className="about-orb-2" />
+        <div className="dark-blend-bottom" />
       </div>
       <style>{`
         @keyframes about-mesh {

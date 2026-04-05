@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { MouseEvent as ReactMouseEvent, TouchEvent as ReactTouchEvent, WheelEvent as ReactWheelEvent } from "react";
 import { loadGSAP } from "@/lib/gsap";
 import { useCinematicReveal } from "@/lib/useCinematicReveal";
 import { ArrowRight } from "lucide-react";
@@ -116,11 +117,25 @@ function InfiniteRow({
   const posRef = useRef(0);
   const velRef = useRef(0);
   const draggingRef = useRef(false);
+  const movedRef = useRef(false);
+  const suppressClickRef = useRef(false);
   const pausedRef = useRef(false);
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   const rafRef = useRef<number | null>(null);
   const detachDragRef = useRef<() => void>(() => {});
+  const resumeAutoTimeoutRef = useRef<number | null>(null);
+
+  const scheduleAutoResume = () => {
+    if (resumeAutoTimeoutRef.current !== null) {
+      window.clearTimeout(resumeAutoTimeoutRef.current);
+    }
+    resumeAutoTimeoutRef.current = window.setTimeout(() => {
+      if (!draggingRef.current) {
+        pausedRef.current = false;
+      }
+    }, 900);
+  };
 
   const wrapPosition = (nextPos: number) => {
     const totalWidth = totalWidthRef.current;
@@ -156,6 +171,9 @@ function InfiniteRow({
     return () => {
       resizeObserver.disconnect();
       window.removeEventListener("resize", measure);
+      if (resumeAutoTimeoutRef.current !== null) {
+        window.clearTimeout(resumeAutoTimeoutRef.current);
+      }
     };
   }, [items]);
 
@@ -196,13 +214,15 @@ function InfiniteRow({
     };
   }, []);
 
-  const onMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+  const onMouseDown = (event: ReactMouseEvent<HTMLDivElement>) => {
     const container = containerRef.current;
     if (!container || totalWidthRef.current <= 0) return;
 
     event.preventDefault();
     detachDragRef.current();
     draggingRef.current = true;
+    movedRef.current = false;
+    pausedRef.current = true;
     lastXRef.current = event.clientX;
     lastTimeRef.current = performance.now();
     velRef.current = 0;
@@ -215,16 +235,24 @@ function InfiniteRow({
       velRef.current = (dx / dt) * 16;
       lastTimeRef.current = now;
       lastXRef.current = moveEvent.clientX;
+      if (Math.abs(dx) > 0.5) {
+        movedRef.current = true;
+      }
       posRef.current = wrapPosition(posRef.current + dx);
       container.scrollLeft = posRef.current;
     };
 
     const onUp = () => {
       draggingRef.current = false;
+      suppressClickRef.current = movedRef.current;
       container.style.cursor = "grab";
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
       detachDragRef.current = () => {};
+      scheduleAutoResume();
+      window.setTimeout(() => {
+        suppressClickRef.current = false;
+      }, 0);
     };
 
     detachDragRef.current = () => {
@@ -233,18 +261,21 @@ function InfiniteRow({
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
       detachDragRef.current = () => {};
+      scheduleAutoResume();
     };
 
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
   };
 
-  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+  const onTouchStart = (event: ReactTouchEvent<HTMLDivElement>) => {
     const container = containerRef.current;
     if (!container || totalWidthRef.current <= 0) return;
 
     detachDragRef.current();
     draggingRef.current = true;
+    movedRef.current = false;
+    pausedRef.current = true;
     lastXRef.current = event.touches[0].clientX;
     lastTimeRef.current = performance.now();
     velRef.current = 0;
@@ -259,15 +290,24 @@ function InfiniteRow({
       velRef.current = (dx / dt) * 16;
       lastTimeRef.current = now;
       lastXRef.current = touch.clientX;
+      if (Math.abs(dx) > 0.5) {
+        movedRef.current = true;
+      }
+      moveEvent.preventDefault();
       posRef.current = wrapPosition(posRef.current + dx);
       container.scrollLeft = posRef.current;
     };
 
     const onEnd = () => {
       draggingRef.current = false;
+      suppressClickRef.current = movedRef.current;
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("touchend", onEnd);
       detachDragRef.current = () => {};
+      scheduleAutoResume();
+      window.setTimeout(() => {
+        suppressClickRef.current = false;
+      }, 0);
     };
 
     detachDragRef.current = () => {
@@ -275,10 +315,37 @@ function InfiniteRow({
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("touchend", onEnd);
       detachDragRef.current = () => {};
+      scheduleAutoResume();
     };
 
-    window.addEventListener("touchmove", onMove, { passive: true });
+    window.addEventListener("touchmove", onMove, { passive: false });
     window.addEventListener("touchend", onEnd);
+  };
+
+  const onWheel = (event: ReactWheelEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container || totalWidthRef.current <= 0) return;
+
+    const delta = Math.abs(event.deltaX) > 0 ? event.deltaX : event.shiftKey ? event.deltaY : 0;
+    if (delta === 0) return;
+
+    event.preventDefault();
+    pausedRef.current = true;
+    velRef.current = 0;
+    posRef.current = wrapPosition(posRef.current + delta);
+    container.scrollLeft = posRef.current;
+    scheduleAutoResume();
+  };
+
+  const onScroll = () => {
+    const container = containerRef.current;
+    if (!container || totalWidthRef.current <= 0 || draggingRef.current) return;
+
+    const nextPos = wrapPosition(container.scrollLeft);
+    if (nextPos !== container.scrollLeft) {
+      container.scrollLeft = nextPos;
+    }
+    posRef.current = nextPos;
   };
 
   // Three copies: drag left or right always has content visible
@@ -287,17 +354,31 @@ function InfiniteRow({
   return (
     <div
       ref={containerRef}
+      className="project-row"
       style={{
-        overflowX: "hidden",
+        overflowX: "auto",
         overflowY: "hidden",
         width: "100%",
         padding: "0.5rem 0",
         cursor: "grab",
         userSelect: "none",
+        scrollbarWidth: "none",
+        WebkitOverflowScrolling: "touch",
+        overscrollBehaviorX: "contain",
         touchAction: "pan-y",
       }}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
+      onWheel={onWheel}
+      onScroll={onScroll}
+      onMouseEnter={() => {
+        pausedRef.current = true;
+      }}
+      onMouseLeave={() => {
+        if (!draggingRef.current) {
+          pausedRef.current = false;
+        }
+      }}
     >
       <div
         ref={trackRef}
@@ -311,6 +392,12 @@ function InfiniteRow({
             rel="noopener noreferrer"
             className="project-card"
             draggable={false}
+            onClickCapture={(event) => {
+              if (suppressClickRef.current) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+            }}
             style={{
               display: "block",
               width: 360,
@@ -465,6 +552,9 @@ export default function Projects() {
       </div>
 
       <style>{`
+        .project-row::-webkit-scrollbar {
+          display: none;
+        }
         .project-card:hover {
           transform: translateY(-8px) scale(1.02) !important;
           box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;

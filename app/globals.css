@@ -171,6 +171,36 @@ h6 {
   background: #111;
 }
 
+.dark-blend-top,
+.dark-blend-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+.dark-blend-top {
+  top: 0;
+  height: 110px;
+  background: linear-gradient(
+    180deg,
+    rgba(245, 236, 221, 0.12) 0%,
+    rgba(245, 236, 221, 0.05) 38%,
+    rgba(245, 236, 221, 0) 100%
+  );
+}
+
+.dark-blend-bottom {
+  bottom: 0;
+  height: 130px;
+  background: linear-gradient(
+    180deg,
+    rgba(245, 236, 221, 0) 0%,
+    rgba(245, 236, 221, 0.05) 62%,
+    rgba(245, 236, 221, 0.14) 100%
+  );
+}
+
 .section-dark .section-label {
   color: rgba(255, 255, 255, 0.45);
 }

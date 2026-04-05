@@ -67,10 +67,12 @@ export default function Contact() {
     >
       {/* Animated background */}
       <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="dark-blend-top" />
         <div className="ct-bg-mesh" />
         <div className="ct-orb-1" />
         <div className="ct-orb-2" />
         <div className="ct-orb-3" />
+        <div className="dark-blend-bottom" />
       </div>
       <style>{`
         @keyframes ct-mesh {

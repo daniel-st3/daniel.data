@@ -88,10 +88,12 @@ export default function WorkingNow() {
     >
       {/* Animated background */}
       <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
+        <div className="dark-blend-top" />
         <div className="wn-bg-mesh" />
         <div className="wn-orb-1" />
         <div className="wn-orb-2" />
         <RetroGrid className="opacity-5" angle={68} />
+        <div className="dark-blend-bottom" />
       </div>
       <style>{`
         @keyframes wn-mesh {
