@@ -505,6 +505,8 @@ export default function Projects() {
         zIndex: 1,
         overflow: "hidden",
         background: "linear-gradient(160deg, #faf6f0 0%, #f3ede4 50%, #faf6f0 100%)",
+        backgroundColor: "#f5ede0",
+        paddingBottom: "2.5rem",
       }}
     >
       <div className="container-site">

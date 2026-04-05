@@ -78,11 +78,11 @@ export default function WorkingNow() {
     <section
       ref={sectionRef}
       id="working-now"
-      className="section-pad section-dark"
+      className="section-pad section-dark section-fade-to-cream"
       style={{
         position: "relative",
         zIndex: 1,
-        background: "#0d0b08",
+        background: "#1a1008",
         overflow: "hidden",
       }}
     >
@@ -102,54 +102,52 @@ export default function WorkingNow() {
           66%  { background-position: 50% 100%; }
           100% { background-position: 0% 0%;    }
         }
-        @keyframes wn-orb1 {
+        @keyframes wn-orb-1-move {
           0%, 100% { transform: translateX(-50%) translateY(0%) scale(1); }
           50%      { transform: translateX(-50%) translateY(8%) scale(1.18); }
         }
-        @keyframes wn-orb2 {
+        @keyframes wn-orb-2-move {
           0%, 100% { transform: translate(0px, 0px) scale(1); }
           50%       { transform: translate(-6%, -8%) scale(1.12); }
         }
         .wn-bg-mesh {
           position: absolute; inset: 0;
           background: linear-gradient(125deg,
-            #1a1008 0%,
-            #241406 26%,
+            #2a1a08 0%,
+            #1f1205 24%,
             #0f0c0a 54%,
-            #1c1005 80%,
-            #1a1008 100%);
+            #241608 82%,
+            #2a1a08 100%);
           background-size: 400% 400%;
           animation: wn-mesh 22s ease infinite;
         }
         .wn-orb-1 {
           position: absolute;
-          width: 70vw; height: 70vh;
+          width: max(560px, 56vw);
+          height: max(560px, 56vw);
           top: -20%; left: 50%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.64) 0%,
-            rgba(160,82,30,0.32) 36%,
-            rgba(116,68,24,0.16) 60%,
-            transparent 76%);
-          filter: blur(55px);
-          animation: wn-orb1 11s ease-in-out infinite;
+          background: radial-gradient(circle,
+            rgba(210,120,40,0.6) 0%,
+            transparent 70%);
+          filter: blur(80px);
+          animation: wn-orb-1-move 11s ease-in-out infinite;
         }
         .wn-orb-2 {
           position: absolute;
-          width: 55vw; height: 55vh;
+          width: max(500px, 44vw);
+          height: max(500px, 44vw);
           bottom: -12%; right: -6%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(139,90,43,0.54) 0%,
-            rgba(100,60,20,0.22) 40%,
-            rgba(70,42,16,0.1) 62%,
-            transparent 74%);
-          filter: blur(55px);
-          animation: wn-orb2 15s ease-in-out infinite;
+          background: radial-gradient(circle,
+            rgba(160,80,20,0.4) 0%,
+            transparent 70%);
+          filter: blur(80px);
+          animation: wn-orb-2-move 15s ease-in-out infinite;
         }
       `}</style>
 
-      <div className="container-site" style={{ position: "relative", zIndex: 2 }}>
+      <div className="container-site" style={{ position: "relative", zIndex: 3 }}>
         <div ref={headRef} style={{ marginBottom: "2rem", textAlign: "center" }}>
           <p className="section-label" style={{ marginBottom: "0.75rem", color: "rgba(255,255,255,0.45)" }}>
             Current Focus

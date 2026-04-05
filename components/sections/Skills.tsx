@@ -45,11 +45,12 @@ export default function Skills() {
     <section
       ref={sectionRef}
       id="skills"
+      className="section-fade-to-dark"
       style={{
         position: "relative",
         zIndex: 1,
         background: "linear-gradient(160deg, #faf6f0 0%, #f3ede4 50%, #faf6f0 100%)",
-        backgroundColor: "#f5ecdd",
+        backgroundColor: "#f5ede0",
       }}
     >
       {/* Subtle warm radial glow in background — doesn't overpower */}
@@ -63,7 +64,7 @@ export default function Skills() {
         `,
       }} />
 
-      <div className="container-site" style={{ position: "relative", zIndex: 2, paddingTop: "5rem", paddingBottom: "2rem" }}>
+      <div className="container-site" style={{ position: "relative", zIndex: 3, paddingTop: "5rem", paddingBottom: "2rem" }}>
 
         {/* ── Header ── */}
         <div ref={headRef} style={{ marginBottom: "3.5rem" }}>
@@ -83,12 +84,6 @@ export default function Skills() {
             </p>
           </div>
 
-          {/* Decorative rule with dot */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1.5rem" }}>
-            <div style={{ height: "1px", flex: 1, background: "var(--border)" }} />
-            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--accent)", flexShrink: 0 }} />
-            <div style={{ height: "1px", flex: 1, background: "var(--border)" }} />
-          </div>
         </div>
 
         {/* ── Bento skill grid ── */}
@@ -119,7 +114,7 @@ export default function Skills() {
       </div>
 
       {/* ── Cert gallery — full viewport width so the infinite scroll looks edge-to-edge ── */}
-      <div ref={certRef} style={{ paddingBottom: "2rem" }}>
+      <div ref={certRef} style={{ position: "relative", zIndex: 3, paddingBottom: "2rem" }}>
         <CertGallery />
       </div>
     </section>

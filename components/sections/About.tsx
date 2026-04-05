@@ -263,8 +263,8 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, background: "#0d0b08", paddingTop: "5rem" }}
+      className="section-pad section-dark section-fade-to-dark"
+      style={{ position: "relative", zIndex: 1, background: "#1a1008", paddingTop: "5rem" }}
     >
       {/* Animated background layer */}
       <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
@@ -293,42 +293,40 @@ export default function About() {
         .about-bg-mesh {
           position: absolute; inset: 0;
           background: linear-gradient(135deg,
-            #1a1008 0%,
-            #241406 28%,
-            #0f0c0a 54%,
-            #1c1005 78%,
-            #1a1008 100%);
+            #2a1a08 0%,
+            #1f1205 28%,
+            #0f0c0a 56%,
+            #241608 82%,
+            #2a1a08 100%);
           background-size: 400% 400%;
           animation: about-mesh 22s ease infinite;
         }
         .about-orb-1 {
           position: absolute;
-          width: 75vw; height: 65vh;
-          top: -15%; right: -12%;
+          width: max(540px, 54vw);
+          height: max(540px, 54vw);
+          top: -18%; right: -10%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.62) 0%,
-            rgba(160,82,30,0.3) 36%,
-            rgba(114,68,26,0.15) 60%,
-            transparent 76%);
-          filter: blur(55px);
+          background: radial-gradient(circle,
+            rgba(210,120,40,0.6) 0%,
+            transparent 70%);
+          filter: blur(80px);
           animation: about-orb1 13s ease-in-out infinite;
         }
         .about-orb-2 {
           position: absolute;
-          width: 60vw; height: 55vh;
-          bottom: -10%; left: -8%;
+          width: max(500px, 46vw);
+          height: max(500px, 46vw);
+          bottom: -12%; left: -10%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(139,90,43,0.56) 0%,
-            rgba(100,60,20,0.2) 40%,
-            rgba(72,44,16,0.1) 62%,
-            transparent 74%);
-          filter: blur(55px);
+          background: radial-gradient(circle,
+            rgba(160,80,20,0.4) 0%,
+            transparent 70%);
+          filter: blur(80px);
           animation: about-orb2 17s ease-in-out infinite;
         }
       `}</style>
-      <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
+      <div className="container-site" style={{ position: "relative", zIndex: 3 }}>
         {/* Section heading */}
         <div style={{ marginBottom: "3rem" }}>
           <span style={{ fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>

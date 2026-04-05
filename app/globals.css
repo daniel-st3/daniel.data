@@ -41,6 +41,8 @@ html {
   --input: 35 34% 82%;
   --ring: 23 53% 50%;
   --radius: 0.8rem;
+  --section-cream: #f5ede0;
+  --section-dark: #1a1008;
 }
 
 /* ─── Base reset ─────────────────────────────────────────────── */
@@ -168,36 +170,50 @@ h6 {
 
 /* Dark section base */
 .section-dark {
-  background: #111;
+  background: var(--section-dark);
+}
+
+section {
+  border-top: none !important;
+  border-bottom: none !important;
 }
 
 .dark-blend-top,
 .dark-blend-bottom {
-  position: absolute;
-  left: 0;
-  right: 0;
-  pointer-events: none;
+  display: none;
 }
 
-.dark-blend-top {
-  top: 0;
-  height: 110px;
+.section-fade-to-cream,
+.section-fade-to-dark {
+  position: relative;
+  isolation: isolate;
+}
+
+.section-fade-to-cream::after,
+.section-fade-to-dark::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.section-fade-to-cream::after {
   background: linear-gradient(
-    180deg,
-    rgba(245, 236, 221, 0.12) 0%,
-    rgba(245, 236, 221, 0.05) 38%,
-    rgba(245, 236, 221, 0) 100%
+    to bottom,
+    transparent,
+    var(--section-cream)
   );
 }
 
-.dark-blend-bottom {
-  bottom: 0;
-  height: 130px;
+.section-fade-to-dark::after {
   background: linear-gradient(
-    180deg,
-    rgba(245, 236, 221, 0) 0%,
-    rgba(245, 236, 221, 0.05) 62%,
-    rgba(245, 236, 221, 0.14) 100%
+    to bottom,
+    transparent,
+    var(--section-dark)
   );
 }
 
@@ -214,9 +230,7 @@ h6 {
 }
 
 .divider {
-  height: 1px;
-  background: var(--border);
-  width: 100%;
+  display: none;
 }
 
 /* ─── Cinematic scroll support ───────────────────────────────── */

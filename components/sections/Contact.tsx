@@ -62,8 +62,8 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, overflow: "hidden", background: "#0d0b08", paddingBottom: "2.5rem" }}
+      className="section-pad section-dark section-fade-to-cream"
+      style={{ position: "relative", zIndex: 1, overflow: "hidden", background: "#1a1008", paddingBottom: "2.5rem" }}
     >
       {/* Animated background */}
       <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
@@ -96,55 +96,52 @@ export default function Contact() {
         .ct-bg-mesh {
           position: absolute; inset: 0;
           background: linear-gradient(125deg,
-            #1a1008 0%,
-            #241406 26%,
+            #2a1a08 0%,
+            #1f1205 24%,
             #0f0c0a 54%,
-            #1c1005 80%,
-            #1a1008 100%);
+            #241608 82%,
+            #2a1a08 100%);
           background-size: 400% 400%;
           animation: ct-mesh 24s ease infinite;
         }
         .ct-orb-1 {
           position: absolute;
-          width: 65vw; height: 65vh;
-          top: -22%; right: -12%;
+          width: max(560px, 52vw);
+          height: max(560px, 52vw);
+          top: -22%; right: -10%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.62) 0%,
-            rgba(160,82,30,0.3) 36%,
-            rgba(114,68,26,0.15) 60%,
-            transparent 76%);
-          filter: blur(55px);
+          background: radial-gradient(circle,
+            rgba(210,120,40,0.6) 0%,
+            transparent 70%);
+          filter: blur(80px);
           animation: ct-orb1 12s ease-in-out infinite;
         }
         .ct-orb-2 {
           position: absolute;
-          width: 55vw; height: 60vh;
-          bottom: -12%; left: -6%;
+          width: max(520px, 46vw);
+          height: max(520px, 46vw);
+          bottom: -12%; left: -8%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(139,90,43,0.56) 0%,
-            rgba(100,60,20,0.22) 40%,
-            rgba(70,42,16,0.1) 62%,
-            transparent 74%);
-          filter: blur(55px);
+          background: radial-gradient(circle,
+            rgba(160,80,20,0.4) 0%,
+            transparent 70%);
+          filter: blur(80px);
           animation: ct-orb2 16s ease-in-out infinite;
         }
         .ct-orb-3 {
           position: absolute;
-          width: 45vw; height: 45vh;
-          top: 35%; left: 28%;
+          width: max(500px, 40vw);
+          height: max(500px, 40vw);
+          top: 34%; left: 26%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.5) 0%,
-            rgba(139,90,43,0.22) 42%,
-            rgba(88,52,20,0.1) 64%,
-            transparent 74%);
-          filter: blur(55px);
+          background: radial-gradient(circle,
+            rgba(180,100,30,0.35) 0%,
+            transparent 70%);
+          filter: blur(80px);
           animation: ct-orb3 20s ease-in-out infinite;
         }
       `}</style>
-      <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
+      <div className="container-site" style={{ position: "relative", zIndex: 3 }}>
 
         <div ref={headRef} style={{ marginBottom: "3rem" }}>
           <p className="section-label" style={{ marginBottom: "1rem", color: "rgba(255,255,255,0.45)" }}>Get in touch</p>
@@ -360,20 +357,20 @@ export default function Contact() {
           <div style={{
             padding: "1.25rem",
             borderRadius: "1rem",
-            background: "var(--bg-card)",
-            border: "1px solid var(--border)",
-            transition: "border-color 0.2s ease",
+            background: "rgba(255,255,255,0.06)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            transition: "border-color 0.2s ease, transform 0.2s ease",
           }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent-sage)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.transform = "translateY(0)"; }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.5rem" }}>
-              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent-sage)", animation: "pulse-dot 2s ease-in-out infinite" }} />
-              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent-sage)" }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(255,255,255,0.55)", animation: "pulse-dot 2s ease-in-out infinite" }} />
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)" }}>
                 Available Now
               </span>
             </div>
-            <p style={{ fontSize: "0.82rem", color: "var(--fg-muted)", lineHeight: 1.5 }}>
+            <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.5 }}>
               Available immediately for new opportunities. Full time or contract.
             </p>
           </div>
@@ -381,20 +378,20 @@ export default function Contact() {
           <div style={{
             padding: "1.25rem",
             borderRadius: "1rem",
-            background: "var(--bg-card)",
-            border: "1px solid var(--border)",
-            transition: "border-color 0.2s ease",
+            background: "rgba(255,255,255,0.06)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            transition: "border-color 0.2s ease, transform 0.2s ease",
           }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.transform = "translateY(0)"; }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.5rem" }}>
-              <Globe size={12} style={{ color: "var(--accent)" }} />
-              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent)" }}>
+              <Globe size={12} style={{ color: "rgba(255,255,255,0.55)" }} />
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)" }}>
                 Time Zones
               </span>
             </div>
-            <p style={{ fontSize: "0.82rem", color: "var(--fg-muted)", lineHeight: 1.5 }}>
+            <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.5 }}>
               Comfortable working across EST, CST, CET, and GMT+1. Fluent in EN, ES, FR.
             </p>
           </div>
@@ -402,20 +399,20 @@ export default function Contact() {
           <div style={{
             padding: "1.25rem",
             borderRadius: "1rem",
-            background: "var(--bg-card)",
-            border: "1px solid var(--border)",
-            transition: "border-color 0.2s ease",
+            background: "rgba(255,255,255,0.06)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            transition: "border-color 0.2s ease, transform 0.2s ease",
           }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent-rose)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.transform = "translateY(0)"; }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.5rem" }}>
-              <Sparkles size={12} style={{ color: "var(--accent-rose)" }} />
-              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--accent-rose)" }}>
+              <Sparkles size={12} style={{ color: "rgba(255,255,255,0.55)" }} />
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)" }}>
                 Open To
               </span>
             </div>
-            <p style={{ fontSize: "0.82rem", color: "var(--fg-muted)", lineHeight: 1.5 }}>
+            <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.5 }}>
               Data analytics, AI/ML engineering, business intelligence, and B2B operations roles.
             </p>
           </div>

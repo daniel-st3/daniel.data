@@ -258,7 +258,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="experience" className="section-pad section-dark" style={{ position: "relative", zIndex: 1, background: "#0d0b08", overflow: "hidden", paddingTop: "5rem", paddingBottom: "2rem" }}>
+    <section ref={sectionRef} id="experience" className="section-pad section-dark section-fade-to-cream" style={{ position: "relative", zIndex: 1, background: "#1a1008", overflow: "hidden", paddingTop: "5rem", paddingBottom: "2rem" }}>
       {/* Animated background */}
       <div aria-hidden style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none" }}>
         <div className="dark-blend-top" />
@@ -286,42 +286,40 @@ export default function Experience() {
         .exp-bg-mesh {
           position: absolute; inset: 0;
           background: linear-gradient(135deg,
-            #1a1008 0%,
-            #241406 28%,
-            #0f0c0a 54%,
-            #1c1005 80%,
-            #1a1008 100%);
+            #2a1a08 0%,
+            #1f1205 28%,
+            #0f0c0a 56%,
+            #241608 82%,
+            #2a1a08 100%);
           background-size: 400% 400%;
           animation: exp-mesh 23s ease infinite;
         }
         .exp-orb-1 {
           position: absolute;
-          width: 60vw; height: 75vh;
-          top: -20%; left: -8%;
+          width: max(540px, 52vw);
+          height: max(540px, 52vw);
+          top: -18%; left: -10%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.6) 0%,
-            rgba(160,82,30,0.3) 38%,
-            rgba(112,66,25,0.15) 60%,
-            transparent 74%);
-          filter: blur(55px);
+          background: radial-gradient(circle,
+            rgba(210,120,40,0.6) 0%,
+            transparent 70%);
+          filter: blur(80px);
           animation: exp-orb1 14s ease-in-out infinite;
         }
         .exp-orb-2 {
           position: absolute;
-          width: 65vw; height: 60vh;
-          bottom: -18%; right: -10%;
+          width: max(520px, 48vw);
+          height: max(520px, 48vw);
+          bottom: -16%; right: -8%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center,
-            rgba(139,90,43,0.54) 0%,
-            rgba(100,60,20,0.22) 42%,
-            rgba(70,42,16,0.1) 64%,
-            transparent 74%);
-          filter: blur(55px);
+          background: radial-gradient(circle,
+            rgba(180,100,30,0.35) 0%,
+            transparent 70%);
+          filter: blur(80px);
           animation: exp-orb2 18s ease-in-out infinite;
         }
       `}</style>
-      <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
+      <div className="container-site" style={{ position: "relative", zIndex: 3 }}>
         <div ref={headRef} style={{ marginBottom: "2rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
           <div>
             <p className="section-label" style={{ marginBottom: "0.5rem", color: "rgba(255,255,255,0.45)" }}>Career Path</p>
@@ -338,6 +336,8 @@ export default function Experience() {
         ref={trackRef}
         className="exp-track"
         style={{
+          position: "relative",
+          zIndex: 3,
           display: "flex",
           gap: "1.25rem",
           overflowX: "auto",

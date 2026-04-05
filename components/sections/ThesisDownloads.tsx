@@ -82,14 +82,16 @@ export default function ThesisDownloads() {
     <section
       ref={sectionRef}
       id="thesis"
-      className="section-pad"
+      className="section-pad section-fade-to-dark"
       style={{
         position: "relative",
         zIndex: 1,
         background: "linear-gradient(160deg, #faf6f0 0%, #f3ede4 50%, #faf6f0 100%)",
+        backgroundColor: "#f5ede0",
+        paddingTop: "3.5rem",
       }}
     >
-      <div className="container-site" style={{ position: "relative", zIndex: 2 }}>
+      <div className="container-site" style={{ position: "relative", zIndex: 3 }}>
         <div ref={headRef} style={{ marginBottom: "3rem" }}>
           <p className="section-label" style={{ marginBottom: "0.75rem" }}>
             Academic Research
