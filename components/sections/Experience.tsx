@@ -236,7 +236,7 @@ export default function Experience() {
         { opacity: 0, y: 24 },
         {
           opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: headRef.current, start: "top 86%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: headRef.current, start: "top 95%", toggleActions: "play none none none" },
         }
       );
 
@@ -247,7 +247,7 @@ export default function Experience() {
           { opacity: 0, x: 100 },
           {
             opacity: 1, x: 0, duration: 0.7, stagger: 0.1, ease: "power3.out",
-            scrollTrigger: { trigger: trackRef.current, start: "top 84%", toggleActions: "play none none reverse" },
+            scrollTrigger: { trigger: trackRef.current, start: "top 95%", toggleActions: "play none none none" },
           }
         );
       }
@@ -257,7 +257,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="experience" className="section-pad section-dark" style={{ position: "relative", zIndex: 1, background: "#111", overflow: "hidden", paddingBottom: "2rem" }}>
+    <section ref={sectionRef} id="experience" className="section-pad section-dark" style={{ position: "relative", zIndex: 1, background: "linear-gradient(160deg, #1a1410 0%, #0f0c0a 50%, #111010 100%)", overflow: "hidden", paddingTop: "5rem", paddingBottom: "2rem" }}>
       <div className="container-site">
         <div ref={headRef} style={{ marginBottom: "2rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
           <div>
@@ -282,6 +282,8 @@ export default function Experience() {
           overflowY: "visible",
           scrollSnapType: "x mandatory",
           paddingBottom: "1.5rem",
+          paddingLeft: "max(2rem, calc((100vw - 1100px) / 2 + 2rem))",
+          paddingRight: "max(2rem, calc((100vw - 1100px) / 2 + 2rem))",
           scrollbarWidth: "none",
           WebkitOverflowScrolling: "touch",
           cursor: "grab",
@@ -297,13 +299,9 @@ export default function Experience() {
           window.addEventListener("mouseup", onUp);
         }}
       >
-        {/* Leading spacer — aligns first card with section title */}
-        <div className="exp-leading-spacer" />
         {TIMELINE.map((entry, i) => (
           <EntryCard key={`${entry.year}-${i}`} entry={entry} />
         ))}
-        {/* Trailing spacer so last card doesn't sit at edge */}
-        <div className="exp-leading-spacer" />
       </div>
 
     </section>

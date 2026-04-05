@@ -31,7 +31,7 @@ export default function Contact() {
         { opacity: 0, y: 40 },
         {
           opacity: 1, y: 0, duration: 1, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", toggleActions: "play none none none" },
         }
       );
 
@@ -40,7 +40,7 @@ export default function Contact() {
         { opacity: 0, y: 24, scale: 0.97 },
         {
           opacity: 1, y: 0, scale: 1, duration: 0.9, delay: 0.25, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", toggleActions: "play none none none" },
         }
       );
 
@@ -63,7 +63,7 @@ export default function Contact() {
       ref={sectionRef}
       id="contact"
       className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, overflow: "hidden", background: "#0a0a0a", paddingBottom: "2.5rem" }}
+      style={{ position: "relative", zIndex: 1, overflow: "hidden", background: "linear-gradient(160deg, #1a1410 0%, #0f0c0a 50%, #111010 100%)", paddingBottom: "2.5rem" }}
     >
       <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
 

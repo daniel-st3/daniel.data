@@ -61,7 +61,7 @@ export default function ThesisDownloads() {
         { opacity: 0, y: 28 },
         {
           opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 80%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 92%", toggleActions: "play none none none" },
         }
       );
 
@@ -70,7 +70,7 @@ export default function ThesisDownloads() {
         { opacity: 0, y: 36, scale: 0.97 },
         {
           opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.18, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 75%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 90%", toggleActions: "play none none none" },
         }
       );
 
@@ -86,7 +86,7 @@ export default function ThesisDownloads() {
       style={{
         position: "relative",
         zIndex: 1,
-        background: "var(--bg)",
+        background: "linear-gradient(160deg, #faf6f0 0%, #f3ede4 50%, #faf6f0 100%)",
       }}
     >
       <div className="container-site" style={{ position: "relative", zIndex: 2 }}>

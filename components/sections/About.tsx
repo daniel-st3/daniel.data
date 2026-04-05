@@ -235,7 +235,7 @@ export default function About() {
         { opacity: 0, x: -32, rotateX: 4 },
         {
           opacity: 1, x: 0, rotateX: 0, duration: 1, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 82%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 92%", toggleActions: "play none none none" },
         }
       );
 
@@ -244,7 +244,7 @@ export default function About() {
         { opacity: 0, x: 32, scale: 0.95, rotateY: -6 },
         {
           opacity: 1, x: 0, scale: 1, rotateY: 0, duration: 1, delay: 0.15, ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 82%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: sectionRef.current, start: "top 92%", toggleActions: "play none none none" },
         }
       );
 
@@ -264,7 +264,7 @@ export default function About() {
       ref={sectionRef}
       id="about"
       className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, background: "#111", paddingTop: "3rem" }}
+      style={{ position: "relative", zIndex: 1, background: "linear-gradient(160deg, #1a1410 0%, #0f0c0a 50%, #111010 100%)", paddingTop: "5rem" }}
     >
       <div className="container-site">
         {/* Section heading */}

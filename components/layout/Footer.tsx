@@ -4,7 +4,7 @@ import { FooterSection } from "@/components/ui/footer-section";
 
 export default function Footer() {
   return (
-    <footer style={{ position: "relative", zIndex: 1, background: "var(--bg)" }}>
+    <footer style={{ position: "relative", zIndex: 1, background: "linear-gradient(160deg, #faf6f0 0%, #f3ede4 50%, #faf6f0 100%)" }}>
       {/* Social & Links header */}
       <div className="container-site" style={{ paddingTop: "3rem", paddingBottom: "1.5rem" }}>
         <p className="section-label" style={{ marginBottom: "0.4rem" }}>Find me</p>

@@ -247,8 +247,8 @@ export default function SkillBlobs() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: gridRef.current,
-            start: "top 84%",
-            toggleActions: "play none none reverse",
+            start: "top 95%",
+            toggleActions: "play none none none",
           },
         }
       );

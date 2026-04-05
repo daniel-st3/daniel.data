@@ -48,7 +48,7 @@ export default function Skills() {
       style={{
         position: "relative",
         zIndex: 1,
-        background: "var(--bg)",
+        background: "linear-gradient(160deg, #faf6f0 0%, #f3ede4 50%, #faf6f0 100%)",
         backgroundColor: "#f5ecdd",
       }}
     >
@@ -63,7 +63,7 @@ export default function Skills() {
         `,
       }} />
 
-      <div className="container-site" style={{ position: "relative", zIndex: 2, paddingTop: "5rem", paddingBottom: "4rem" }}>
+      <div className="container-site" style={{ position: "relative", zIndex: 2, paddingTop: "5rem", paddingBottom: "2rem" }}>
 
         {/* ── Header ── */}
         <div ref={headRef} style={{ marginBottom: "3.5rem" }}>
@@ -119,7 +119,7 @@ export default function Skills() {
       </div>
 
       {/* ── Cert gallery — full viewport width so the infinite scroll looks edge-to-edge ── */}
-      <div ref={certRef} style={{ paddingBottom: "4rem" }}>
+      <div ref={certRef} style={{ paddingBottom: "2rem" }}>
         <CertGallery />
       </div>
     </section>

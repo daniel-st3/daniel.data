@@ -24,6 +24,13 @@ const ROW_1: ProjectItem[] = [
     image: "/images/gradient-desktop-bg.jpeg",
   },
   {
+    id: "veeduria",
+    title: "VeedurIA",
+    description: "AI-powered civic oversight platform for Colombia. Leverages large language models to analyze public contracting data, detect anomalies, and surface transparency insights for citizens and watchdog organizations.",
+    href: "https://github.com/daniel-st3/veedurIA",
+    image: IMG("Colombian Flah.jpeg"),
+  },
+  {
     id: "nlp-thesis",
     title: "Predictive NLP Financial Pipeline",
     description: "End to end ML pipeline quantifying political bias in financial news. Retail Reddit sentiment outperforms professional news by 50x as a short term price predictor.",
@@ -54,6 +61,13 @@ const ROW_1: ProjectItem[] = [
 ];
 
 const ROW_2: ProjectItem[] = [
+  {
+    id: "poly-what",
+    title: "Poly-What",
+    description: "Multilingual AI assistant that detects language, responds in kind, and routes queries through specialized knowledge pipelines — built for cross-border operations and international teams.",
+    href: "https://github.com/daniel-st3/poly-what",
+    image: IMG("_ (4).jpeg"),
+  },
   {
     id: "reconciliation",
     title: "B2B Reconciliation Automation",
@@ -86,32 +100,34 @@ const ROW_2: ProjectItem[] = [
 
 function InfiniteRow({ items, direction = "left", speed = 35 }: { items: ProjectItem[]; direction?: "left" | "right"; speed?: number }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const posRef = useRef(0);
+  const pausedRef = useRef(false);
+  const isDragging = useRef(false);
+  const startXRef = useRef(0);
+  const startPosRef = useRef(0);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
     let animId: number;
-    let pos = 0;
-    const cardWidth = 360 + 20; // card + gap
+    const cardWidth = 360 + 20;
     const totalWidth = cardWidth * items.length;
     const dir = direction === "left" ? -1 : 1;
-    let paused = false;
+
+    if (direction === "right") posRef.current = -totalWidth;
 
     const animate = () => {
-      if (!paused) {
-        pos += (speed / 60) * dir;
-        if (direction === "left" && pos <= -totalWidth) pos += totalWidth;
-        if (direction === "right" && pos >= 0) pos -= totalWidth;
+      if (!pausedRef.current && !isDragging.current) {
+        posRef.current += (speed / 60) * dir;
+        if (direction === "left" && posRef.current <= -totalWidth) posRef.current += totalWidth;
+        if (direction === "right" && posRef.current >= 0) posRef.current -= totalWidth;
       }
-      track.style.transform = `translateX(${pos}px)`;
+      track.style.transform = `translateX(${posRef.current}px)`;
       animId = requestAnimationFrame(animate);
     };
 
-    // Start with offset for right direction
-    if (direction === "right") pos = -totalWidth;
-
-    const onEnter = () => { paused = true; };
-    const onLeave = () => { paused = false; };
+    const onEnter = () => { pausedRef.current = true; };
+    const onLeave = () => { if (!isDragging.current) pausedRef.current = false; };
 
     track.addEventListener("mouseenter", onEnter);
     track.addEventListener("mouseleave", onLeave);
@@ -124,11 +140,47 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
     };
   }, [items, direction, speed]);
 
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    isDragging.current = true;
+    pausedRef.current = true;
+    startXRef.current = e.pageX;
+    startPosRef.current = posRef.current;
+    e.currentTarget.style.cursor = "grabbing";
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const walk = (e.pageX - startXRef.current) * 1.5;
+    posRef.current = startPosRef.current + walk;
+  };
+
+  const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    pausedRef.current = false;
+    e.currentTarget.style.cursor = "grab";
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDragging.current) {
+      isDragging.current = false;
+      pausedRef.current = false;
+    }
+    e.currentTarget.style.cursor = "grab";
+  };
+
   // Double the items for seamless loop
   const doubled = [...items, ...items];
 
   return (
-    <div style={{ overflow: "hidden", width: "100%", padding: "0.5rem 0" }}>
+    <div
+      style={{ overflow: "hidden", width: "100%", padding: "0.5rem 0", cursor: "grab" }}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+    >
       <div
         ref={trackRef}
         style={{
@@ -136,6 +188,7 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
           gap: "20px",
           width: "fit-content",
           willChange: "transform",
+          userSelect: "none",
         }}
       >
         {doubled.map((item, idx) => (
@@ -145,6 +198,7 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
             target="_blank"
             rel="noopener noreferrer"
             className="project-card"
+            draggable={false}
             style={{
               display: "block",
               width: 360,
@@ -161,6 +215,7 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
                 src={item.image}
                 alt={item.title}
                 loading="lazy"
+                draggable={false}
                 style={{
                   position: "absolute",
                   width: "100%",
@@ -204,7 +259,7 @@ export default function Projects() {
   const row1Ref    = useRef<HTMLDivElement>(null);
   const row2Ref    = useRef<HTMLDivElement>(null);
 
-  useCinematicReveal(sectionRef, { yOffset: 45, rotateX: 2, scale: 0.97 });
+  useCinematicReveal(sectionRef, { yOffset: 45, rotateX: 2, scale: 0.97, start: "top bottom" });
 
   useEffect(() => {
     (async () => {
@@ -218,11 +273,10 @@ export default function Projects() {
           y: 0,
           duration: 0.8,
           ease: "power3.out",
-          scrollTrigger: { trigger: headRef.current, start: "top 85%", toggleActions: "play none none reverse" },
+          scrollTrigger: { trigger: headRef.current, start: "top 92%", toggleActions: "play none none none" },
         }
       );
 
-      // Row viewport-entry: fade + slide + slight scale (mirrors card enter spec)
       [row1Ref.current, row2Ref.current].forEach((el, i) => {
         if (!el) return;
         gsap.fromTo(
@@ -231,7 +285,7 @@ export default function Projects() {
           {
             opacity: 1, y: 0, scale: 1,
             duration: 0.8, ease: "power3.out", delay: i * 0.12,
-            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none reverse" },
+            scrollTrigger: { trigger: el, start: "top 95%", toggleActions: "play none none none" },
           }
         );
       });
@@ -249,7 +303,7 @@ export default function Projects() {
         position: "relative",
         zIndex: 1,
         overflow: "hidden",
-        background: "linear-gradient(to bottom, rgba(255,246,233,0.58) 0%, rgba(245,236,221,0) 16%, transparent 100%)",
+        background: "linear-gradient(160deg, #faf6f0 0%, #f3ede4 50%, #faf6f0 100%)",
       }}
     >
       <div className="container-site">
