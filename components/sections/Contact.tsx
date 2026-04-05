@@ -94,14 +94,13 @@ export default function Contact() {
         .ct-bg-mesh {
           position: absolute; inset: 0;
           background: linear-gradient(125deg,
-            #261405 0%,
-            #0d0b08 20%,
-            #201006 40%,
-            #0a0808 62%,
-            #221208 82%,
-            #0d0b08 100%);
-          background-size: 500% 500%;
-          animation: ct-mesh 19s ease infinite;
+            #1a1008 0%,
+            #241406 26%,
+            #0f0c0a 54%,
+            #1c1005 80%,
+            #1a1008 100%);
+          background-size: 400% 400%;
+          animation: ct-mesh 24s ease infinite;
         }
         .ct-orb-1 {
           position: absolute;
@@ -109,11 +108,11 @@ export default function Contact() {
           top: -22%; right: -12%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.58) 0%,
-            rgba(172,88,40,0.3) 35%,
-            rgba(138,74,45,0.1) 58%,
-            transparent 72%);
-          filter: blur(52px);
+            rgba(195,111,61,0.62) 0%,
+            rgba(160,82,30,0.3) 36%,
+            rgba(114,68,26,0.15) 60%,
+            transparent 76%);
+          filter: blur(55px);
           animation: ct-orb1 12s ease-in-out infinite;
         }
         .ct-orb-2 {
@@ -122,10 +121,11 @@ export default function Contact() {
           bottom: -12%; left: -6%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(184,136,110,0.48) 0%,
-            rgba(130,90,60,0.22) 40%,
-            transparent 68%);
-          filter: blur(58px);
+            rgba(139,90,43,0.56) 0%,
+            rgba(100,60,20,0.22) 40%,
+            rgba(70,42,16,0.1) 62%,
+            transparent 74%);
+          filter: blur(55px);
           animation: ct-orb2 16s ease-in-out infinite;
         }
         .ct-orb-3 {
@@ -134,10 +134,11 @@ export default function Contact() {
           top: 35%; left: 28%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(111,123,100,0.35) 0%,
-            rgba(85,100,75,0.12) 45%,
-            transparent 68%);
-          filter: blur(65px);
+            rgba(195,111,61,0.5) 0%,
+            rgba(139,90,43,0.22) 42%,
+            rgba(88,52,20,0.1) 64%,
+            transparent 74%);
+          filter: blur(55px);
           animation: ct-orb3 20s ease-in-out infinite;
         }
       `}</style>

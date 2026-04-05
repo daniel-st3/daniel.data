@@ -291,14 +291,13 @@ export default function About() {
         .about-bg-mesh {
           position: absolute; inset: 0;
           background: linear-gradient(135deg,
-            #2a1506 0%,
-            #0e0b09 20%,
-            #251204 40%,
-            #0c0a08 60%,
-            #1f1007 80%,
-            #0e0b09 100%);
+            #1a1008 0%,
+            #241406 28%,
+            #0f0c0a 54%,
+            #1c1005 78%,
+            #1a1008 100%);
           background-size: 400% 400%;
-          animation: about-mesh 18s ease infinite;
+          animation: about-mesh 22s ease infinite;
         }
         .about-orb-1 {
           position: absolute;
@@ -306,10 +305,10 @@ export default function About() {
           top: -15%; right: -12%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.55) 0%,
-            rgba(180,90,40,0.3) 35%,
-            rgba(138,74,45,0.1) 60%,
-            transparent 75%);
+            rgba(195,111,61,0.62) 0%,
+            rgba(160,82,30,0.3) 36%,
+            rgba(114,68,26,0.15) 60%,
+            transparent 76%);
           filter: blur(55px);
           animation: about-orb1 13s ease-in-out infinite;
         }
@@ -319,10 +318,11 @@ export default function About() {
           bottom: -10%; left: -8%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(184,136,110,0.45) 0%,
-            rgba(140,95,65,0.22) 40%,
-            transparent 68%);
-          filter: blur(60px);
+            rgba(139,90,43,0.56) 0%,
+            rgba(100,60,20,0.2) 40%,
+            rgba(72,44,16,0.1) 62%,
+            transparent 74%);
+          filter: blur(55px);
           animation: about-orb2 17s ease-in-out infinite;
         }
       `}</style>

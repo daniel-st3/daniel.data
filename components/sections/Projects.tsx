@@ -110,111 +110,175 @@ function InfiniteRow({
   direction?: "left" | "right";
   speed?: number;
 }) {
-  const trackRef     = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const posRef       = useRef(0);
-  const velRef       = useRef(0);        // drag momentum velocity
-  const isDragging   = useRef(false);
-  const startXRef    = useRef(0);
-  const startPosRef  = useRef(0);
-  const lastXRef     = useRef(0);
-  const lastTRef     = useRef(0);
+  const totalWidthRef = useRef(0);
+  const posRef = useRef(0);
+  const velRef = useRef(0);
+  const draggingRef = useRef(false);
+  const pausedRef = useRef(false);
+  const lastXRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const detachDragRef = useRef<() => void>(() => {});
+
+  const wrapPosition = (nextPos: number) => {
+    const totalWidth = totalWidthRef.current;
+    if (totalWidth <= 0) return nextPos;
+    if (nextPos >= totalWidth * 2) return nextPos - totalWidth;
+    if (nextPos <= 0) return nextPos + totalWidth;
+    return nextPos;
+  };
 
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    let animId: number;
-    const cardWidth  = 360 + 20;
-    const totalWidth = cardWidth * items.length; // width of ONE copy
-    const autoDir    = direction === "left" ? -1 : 1;
-
-    // Start in the middle copy so dragging in either direction shows content
-    posRef.current = -totalWidth;
-
-    const wrap = () => {
-      // Allow two copies of travel in each direction from center
-      if (posRef.current <= -totalWidth * 2) posRef.current += totalWidth;
-      if (posRef.current >= 0)              posRef.current -= totalWidth;
-    };
-
-    const animate = () => {
-      if (!isDragging.current) {
-        if (Math.abs(velRef.current) > 0.3) {
-          posRef.current += velRef.current;
-          velRef.current *= 0.93;
-        } else {
-          velRef.current = 0;
-          posRef.current += (speed / 60) * autoDir;
-        }
-        wrap();
-      }
-      track.style.transform = `translateX(${posRef.current}px)`;
-      animId = requestAnimationFrame(animate);
-    };
-
-    animId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animId);
-  }, [items, direction, speed]);
-
-  // ── Mouse drag ──────────────────────────────────────────────
-  const attachMouseDrag = (clientX: number) => {
     const container = containerRef.current;
-    isDragging.current = true;
-    startXRef.current  = clientX;
-    startPosRef.current = posRef.current;
-    lastXRef.current   = clientX;
-    lastTRef.current   = performance.now();
-    velRef.current     = 0;
-    if (container) container.style.cursor = "grabbing";
+    const track = trackRef.current;
+    if (!container || !track) return;
 
-    const onMove = (ev: MouseEvent) => {
-      const now  = performance.now();
-      const dt   = Math.max(now - lastTRef.current, 1);
-      const dx   = ev.clientX - lastXRef.current;
-      velRef.current    = (dx / dt) * 16;   // px per frame (~60fps)
-      lastXRef.current  = ev.clientX;
-      lastTRef.current  = now;
-      posRef.current    = startPosRef.current + (ev.clientX - startXRef.current) * 1.4;
+    const measure = () => {
+      const firstCard = track.children[0] as HTMLElement | undefined;
+      const secondCopyFirstCard = track.children[items.length] as HTMLElement | undefined;
+      if (!firstCard || !secondCopyFirstCard) return;
+
+      const totalWidth = secondCopyFirstCard.offsetLeft - firstCard.offsetLeft;
+      if (totalWidth <= 0) return;
+
+      totalWidthRef.current = totalWidth;
+      container.scrollLeft = totalWidth;
+      posRef.current = totalWidth;
+    };
+
+    measure();
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(track);
+    window.addEventListener("resize", measure);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [items]);
+
+  useEffect(() => {
+    const autoStep = (direction === "left" ? 1 : -1) * (speed / 60);
+
+    const tick = () => {
+      const container = containerRef.current;
+      const totalWidth = totalWidthRef.current;
+
+      if (container && totalWidth > 0) {
+        if (!draggingRef.current && !pausedRef.current) {
+          if (Math.abs(velRef.current) > 0.1) {
+            velRef.current *= 0.93;
+            posRef.current = wrapPosition(posRef.current + velRef.current);
+          } else {
+            velRef.current = 0;
+            posRef.current = wrapPosition(posRef.current + autoStep);
+          }
+          container.scrollLeft = posRef.current;
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, [direction, speed]);
+
+  useEffect(() => {
+    return () => {
+      detachDragRef.current();
+    };
+  }, []);
+
+  const onMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container || totalWidthRef.current <= 0) return;
+
+    event.preventDefault();
+    detachDragRef.current();
+    draggingRef.current = true;
+    lastXRef.current = event.clientX;
+    lastTimeRef.current = performance.now();
+    velRef.current = 0;
+    container.style.cursor = "grabbing";
+
+    const onMove = (moveEvent: MouseEvent) => {
+      const now = performance.now();
+      const dt = Math.max(now - lastTimeRef.current, 1);
+      const dx = lastXRef.current - moveEvent.clientX;
+      velRef.current = (dx / dt) * 16;
+      lastTimeRef.current = now;
+      lastXRef.current = moveEvent.clientX;
+      posRef.current = wrapPosition(posRef.current + dx);
+      container.scrollLeft = posRef.current;
     };
 
     const onUp = () => {
-      isDragging.current = false;
-      if (container) container.style.cursor = "grab";
+      draggingRef.current = false;
+      container.style.cursor = "grab";
       window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup",   onUp);
+      window.removeEventListener("mouseup", onUp);
+      detachDragRef.current = () => {};
+    };
+
+    detachDragRef.current = () => {
+      draggingRef.current = false;
+      container.style.cursor = "grab";
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+      detachDragRef.current = () => {};
     };
 
     window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup",   onUp);
+    window.addEventListener("mouseup", onUp);
   };
 
-  // ── Touch drag ──────────────────────────────────────────────
-  const attachTouchDrag = (clientX: number) => {
-    isDragging.current  = true;
-    startXRef.current   = clientX;
-    startPosRef.current = posRef.current;
-    lastXRef.current    = clientX;
-    lastTRef.current    = performance.now();
-    velRef.current      = 0;
+  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container || totalWidthRef.current <= 0) return;
 
-    const onMove = (ev: TouchEvent) => {
-      const x   = ev.touches[0].clientX;
+    detachDragRef.current();
+    draggingRef.current = true;
+    lastXRef.current = event.touches[0].clientX;
+    lastTimeRef.current = performance.now();
+    velRef.current = 0;
+
+    const onMove = (moveEvent: TouchEvent) => {
+      const touch = moveEvent.touches[0];
+      if (!touch) return;
+
       const now = performance.now();
-      const dt  = Math.max(now - lastTRef.current, 1);
-      velRef.current    = ((x - lastXRef.current) / dt) * 16;
-      lastXRef.current  = x;
-      lastTRef.current  = now;
-      posRef.current    = startPosRef.current + (x - startXRef.current) * 1.4;
+      const dt = Math.max(now - lastTimeRef.current, 1);
+      const dx = lastXRef.current - touch.clientX;
+      velRef.current = (dx / dt) * 16;
+      lastTimeRef.current = now;
+      lastXRef.current = touch.clientX;
+      posRef.current = wrapPosition(posRef.current + dx);
+      container.scrollLeft = posRef.current;
     };
 
     const onEnd = () => {
-      isDragging.current = false;
+      draggingRef.current = false;
       window.removeEventListener("touchmove", onMove);
-      window.removeEventListener("touchend",  onEnd);
+      window.removeEventListener("touchend", onEnd);
+      detachDragRef.current = () => {};
+    };
+
+    detachDragRef.current = () => {
+      draggingRef.current = false;
+      window.removeEventListener("touchmove", onMove);
+      window.removeEventListener("touchend", onEnd);
+      detachDragRef.current = () => {};
     };
 
     window.addEventListener("touchmove", onMove, { passive: true });
-    window.addEventListener("touchend",  onEnd);
+    window.addEventListener("touchend", onEnd);
   };
 
   // Three copies: drag left or right always has content visible
@@ -223,13 +287,21 @@ function InfiniteRow({
   return (
     <div
       ref={containerRef}
-      style={{ overflow: "hidden", width: "100%", padding: "0.5rem 0", cursor: "grab" }}
-      onMouseDown={(e) => { e.preventDefault(); attachMouseDrag(e.clientX); }}
-      onTouchStart={(e) => attachTouchDrag(e.touches[0].clientX)}
+      style={{
+        overflowX: "hidden",
+        overflowY: "hidden",
+        width: "100%",
+        padding: "0.5rem 0",
+        cursor: "grab",
+        userSelect: "none",
+        touchAction: "pan-y",
+      }}
+      onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
     >
       <div
         ref={trackRef}
-        style={{ display: "flex", gap: "20px", width: "fit-content", willChange: "transform", userSelect: "none" }}
+        style={{ display: "flex", gap: "20px", width: "max-content", userSelect: "none" }}
       >
         {tripled.map((item, idx) => (
           <a

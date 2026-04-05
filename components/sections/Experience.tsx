@@ -284,14 +284,13 @@ export default function Experience() {
         .exp-bg-mesh {
           position: absolute; inset: 0;
           background: linear-gradient(135deg,
-            #241206 0%,
-            #0c0a07 18%,
-            #1e1007 38%,
-            #090807 58%,
-            #221105 80%,
-            #0c0a07 100%);
+            #1a1008 0%,
+            #241406 28%,
+            #0f0c0a 54%,
+            #1c1005 80%,
+            #1a1008 100%);
           background-size: 400% 400%;
-          animation: exp-mesh 22s ease infinite;
+          animation: exp-mesh 23s ease infinite;
         }
         .exp-orb-1 {
           position: absolute;
@@ -299,10 +298,10 @@ export default function Experience() {
           top: -20%; left: -8%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.5) 0%,
-            rgba(165,88,42,0.26) 38%,
-            rgba(138,74,45,0.1) 58%,
-            transparent 72%);
+            rgba(195,111,61,0.6) 0%,
+            rgba(160,82,30,0.3) 38%,
+            rgba(112,66,25,0.15) 60%,
+            transparent 74%);
           filter: blur(55px);
           animation: exp-orb1 14s ease-in-out infinite;
         }
@@ -312,10 +311,11 @@ export default function Experience() {
           bottom: -18%; right: -10%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(184,136,110,0.42) 0%,
-            rgba(130,90,60,0.18) 42%,
-            transparent 68%);
-          filter: blur(60px);
+            rgba(139,90,43,0.54) 0%,
+            rgba(100,60,20,0.22) 42%,
+            rgba(70,42,16,0.1) 64%,
+            transparent 74%);
+          filter: blur(55px);
           animation: exp-orb2 18s ease-in-out infinite;
         }
       `}</style>
@@ -359,11 +359,11 @@ export default function Experience() {
         }}
       >
         {/* Spacer aligns first card with the "E" in the heading above */}
-        <div style={{ flexShrink: 0, width: "max(2rem, calc((100vw - 1100px) / 2 + 2rem))" }} />
+        <div style={{ flexShrink: 0, width: "max(1.25rem, calc((100vw - 1100px) / 2 + 2rem))" }} />
         {TIMELINE.map((entry, i) => (
           <EntryCard key={`${entry.year}-${i}`} entry={entry} />
         ))}
-        <div style={{ flexShrink: 0, width: "max(2rem, calc((100vw - 1100px) / 2 + 2rem))" }} />
+        <div style={{ flexShrink: 0, width: "max(1.25rem, calc((100vw - 1100px) / 2 + 2rem))" }} />
       </div>
 
     </section>

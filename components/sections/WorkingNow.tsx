@@ -101,8 +101,8 @@ export default function WorkingNow() {
           100% { background-position: 0% 0%;    }
         }
         @keyframes wn-orb1 {
-          0%, 100% { transform: translate(-50%, 0px) scale(1); }
-          50%       { transform: translate(-50%, 8%) scale(1.18); }
+          0%, 100% { transform: translateX(-50%) translateY(0%) scale(1); }
+          50%      { transform: translateX(-50%) translateY(8%) scale(1.18); }
         }
         @keyframes wn-orb2 {
           0%, 100% { transform: translate(0px, 0px) scale(1); }
@@ -111,14 +111,13 @@ export default function WorkingNow() {
         .wn-bg-mesh {
           position: absolute; inset: 0;
           background: linear-gradient(125deg,
-            #281405 0%,
-            #0d0b08 18%,
-            #221105 38%,
-            #0b0909 58%,
-            #1e1106 78%,
-            #0d0b08 100%);
-          background-size: 500% 500%;
-          animation: wn-mesh 20s ease infinite;
+            #1a1008 0%,
+            #241406 26%,
+            #0f0c0a 54%,
+            #1c1005 80%,
+            #1a1008 100%);
+          background-size: 400% 400%;
+          animation: wn-mesh 22s ease infinite;
         }
         .wn-orb-1 {
           position: absolute;
@@ -126,11 +125,11 @@ export default function WorkingNow() {
           top: -20%; left: 50%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(195,111,61,0.6) 0%,
-            rgba(175,85,38,0.32) 35%,
-            rgba(138,74,45,0.12) 58%,
-            transparent 72%);
-          filter: blur(50px);
+            rgba(195,111,61,0.64) 0%,
+            rgba(160,82,30,0.32) 36%,
+            rgba(116,68,24,0.16) 60%,
+            transparent 76%);
+          filter: blur(55px);
           animation: wn-orb1 11s ease-in-out infinite;
         }
         .wn-orb-2 {
@@ -139,9 +138,10 @@ export default function WorkingNow() {
           bottom: -12%; right: -6%;
           border-radius: 50%;
           background: radial-gradient(ellipse at center,
-            rgba(111,123,100,0.45) 0%,
-            rgba(85,100,75,0.2) 40%,
-            transparent 68%);
+            rgba(139,90,43,0.54) 0%,
+            rgba(100,60,20,0.22) 40%,
+            rgba(70,42,16,0.1) 62%,
+            transparent 74%);
           filter: blur(55px);
           animation: wn-orb2 15s ease-in-out infinite;
         }
