@@ -50,7 +50,7 @@ const ROW_2: ProjectItem[] = [
   {
     id: "poly-what",
     title: "Poly-What",
-    description: "Multilingual AI assistant that detects language, responds in kind, and routes queries through specialized knowledge pipelines — built for cross-border operations and international teams.",
+    description: "Prediction market trading and research repo for Polymarket, with live paper-trading bots, backtesting tools, analytics workflows, and strategy postmortems.",
     href: "https://github.com/daniel-st3/poly-what",
     image: IMG("_ (4).jpeg"),
   },
@@ -125,30 +125,28 @@ function InfiniteRow({
     if (!track) return;
     let animId: number;
     const cardWidth  = 360 + 20;
-    const totalWidth = cardWidth * items.length;
+    const totalWidth = cardWidth * items.length; // width of ONE copy
     const autoDir    = direction === "left" ? -1 : 1;
 
-    // Right-direction rows start offset so content fills from right
-    if (direction === "right") posRef.current = -totalWidth;
+    // Start in the middle copy so dragging in either direction shows content
+    posRef.current = -totalWidth;
 
     const wrap = () => {
-      if (posRef.current <= -totalWidth) posRef.current += totalWidth;
-      if (posRef.current >= 0)           posRef.current -= totalWidth;
+      // Allow two copies of travel in each direction from center
+      if (posRef.current <= -totalWidth * 2) posRef.current += totalWidth;
+      if (posRef.current >= 0)              posRef.current -= totalWidth;
     };
 
     const animate = () => {
       if (!isDragging.current) {
         if (Math.abs(velRef.current) > 0.3) {
-          // Momentum decay after drag release
           posRef.current += velRef.current;
           velRef.current *= 0.93;
-          wrap();
         } else {
           velRef.current = 0;
-          // Normal auto-scroll
           posRef.current += (speed / 60) * autoDir;
-          wrap();
         }
+        wrap();
       }
       track.style.transform = `translateX(${posRef.current}px)`;
       animId = requestAnimationFrame(animate);
@@ -219,7 +217,8 @@ function InfiniteRow({
     window.addEventListener("touchend",  onEnd);
   };
 
-  const doubled = [...items, ...items];
+  // Three copies: drag left or right always has content visible
+  const tripled = [...items, ...items, ...items];
 
   return (
     <div
@@ -232,7 +231,7 @@ function InfiniteRow({
         ref={trackRef}
         style={{ display: "flex", gap: "20px", width: "fit-content", willChange: "transform", userSelect: "none" }}
       >
-        {doubled.map((item, idx) => (
+        {tripled.map((item, idx) => (
           <a
             key={`${item.id}-${idx}`}
             href={item.href}

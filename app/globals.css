@@ -169,7 +169,6 @@ h6 {
 /* Dark section base */
 .section-dark {
   background: #111;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .section-dark .section-label {
@@ -199,10 +198,9 @@ h6 {
   -webkit-backface-visibility: hidden;
 }
 
-/* Smooth section background bleed for seamless transitions */
+/* Seamless section stacking */
 .section-pad+.section-pad {
-  margin-top: -1px;
-  /* collapse micro-gaps between sections */
+  margin-top: 0;
 }
 
 .container-site {

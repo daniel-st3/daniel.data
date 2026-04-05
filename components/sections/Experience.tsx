@@ -343,8 +343,6 @@ export default function Experience() {
           overflowY: "visible",
           scrollSnapType: "x mandatory",
           paddingBottom: "1.5rem",
-          paddingLeft: "max(1.25rem, calc((100vw - 1100px) / 2 + 2rem))",
-          paddingRight: "max(1.25rem, calc((100vw - 1100px) / 2 + 2rem))",
           scrollbarWidth: "none",
           WebkitOverflowScrolling: "touch",
           cursor: "grab",
@@ -360,9 +358,12 @@ export default function Experience() {
           window.addEventListener("mouseup", onUp);
         }}
       >
+        {/* Spacer aligns first card with the "E" in the heading above */}
+        <div style={{ flexShrink: 0, width: "max(2rem, calc((100vw - 1100px) / 2 + 2rem))" }} />
         {TIMELINE.map((entry, i) => (
           <EntryCard key={`${entry.year}-${i}`} entry={entry} />
         ))}
+        <div style={{ flexShrink: 0, width: "max(2rem, calc((100vw - 1100px) / 2 + 2rem))" }} />
       </div>
 
     </section>
