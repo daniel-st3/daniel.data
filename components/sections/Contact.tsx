@@ -63,15 +63,15 @@ export default function Contact() {
       ref={sectionRef}
       id="contact"
       className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, overflow: "hidden", background: "#0a0a0a", minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center" }}
+      style={{ position: "relative", zIndex: 1, overflow: "hidden", background: "#0a0a0a" }}
     >
       <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
 
         <div ref={headRef} style={{ marginBottom: "3rem" }}>
           <p className="section-label" style={{ marginBottom: "1rem", color: "rgba(255,255,255,0.45)" }}>Get in touch</p>
           <div style={{ display: "flex", gap: "2.5rem", flexWrap: "wrap", alignItems: "center", marginBottom: "2rem" }}>
-            <MagneticText text="CONNECT" hoverText="HIRE ME" className="text-white" />
-            <MagneticText text="LETS BUILD" hoverText="TODAY" className="text-white/50" />
+            <MagneticText text="CONNECT" hoverText="HIRE ME" className="text-white/[0.12]" />
+            <MagneticText text="LETS BUILD" hoverText="TODAY" className="text-white/[0.12]" />
           </div>
         </div>
 

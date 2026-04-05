@@ -68,10 +68,6 @@ export default function WorkingNow() {
         zIndex: 1,
         background: "#0f0f0f",
         overflow: "hidden",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
       }}
     >
       <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}>

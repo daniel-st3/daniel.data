@@ -257,7 +257,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="experience" className="section-pad section-dark" style={{ position: "relative", zIndex: 1, background: "#111", overflow: "hidden", minHeight: "100vh" }}>
+    <section ref={sectionRef} id="experience" className="section-pad section-dark" style={{ position: "relative", zIndex: 1, background: "#111", overflow: "hidden" }}>
       <div className="container-site">
         <div ref={headRef} style={{ marginBottom: "2rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
           <div>

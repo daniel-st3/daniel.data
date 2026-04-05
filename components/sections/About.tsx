@@ -265,20 +265,15 @@ export default function About() {
       className="section-pad section-dark"
       style={{ position: "relative", zIndex: 1, background: "#111" }}
     >
-      {/* Sticky scroll wrapper — CSS only, no JS */}
-      <div className="about-sticky-outer" style={{ minHeight: "250vh" }}>
-      <div className="about-sticky-inner" style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
-      <div style={{ width: "100%", paddingBlock: "2rem" }}>
       <div className="container-site">
-        {/* Big display heading */}
-        <div style={{ marginBottom: "2.5rem" }}>
-          <p className="section-label" style={{ marginBottom: "1rem" }}>About</p>
-          <div style={{ fontSize: "clamp(2.5rem, 8vw, 8rem)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 1, marginBottom: "1.5rem" }}>
-            <MagneticText text="ANALYST" hoverText="STRATEGIST" className="text-white" />
-          </div>
-          <div style={{ fontSize: "clamp(1.5rem, 4vw, 4rem)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1 }}>
-            <MagneticText text="ENGINEER" hoverText="AUTOMATOR" className="text-white/50" />
-          </div>
+        {/* Section heading */}
+        <div style={{ marginBottom: "3rem" }}>
+          <span style={{ fontSize: "12px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>
+            WHO I AM
+          </span>
+          <h2 style={{ fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 700, color: "#fff", letterSpacing: "-0.02em", marginTop: "8px", lineHeight: 1.05 }}>
+            Daniel Rodriguez
+          </h2>
         </div>
 
         {/* Two-column layout */}
@@ -401,9 +396,6 @@ export default function About() {
           {STATS.slice(5).map((s, i) => <StatCard key={s.label} stat={s} active={statsActive} index={i + 5} />)}
         </div>
       </div>{/* /container-site */}
-      </div>{/* /paddingBlock wrapper */}
-      </div>{/* /about-sticky-inner */}
-      </div>{/* /about-sticky-outer */}
 
       <style>{`
         @media (max-width: 768px) {
