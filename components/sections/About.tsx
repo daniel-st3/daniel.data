@@ -76,6 +76,7 @@ function StatCard({ stat, active, index }: { stat: StatDef; active: boolean; ind
         position: "relative",
         borderRadius: "1.15rem",
         border: "1px solid var(--border)",
+        background: "var(--bg-subtle)",
         padding: "3px",
         transition: "transform 0.25s ease, box-shadow 0.25s ease",
         opacity: active ? 1 : 0,
@@ -185,8 +186,8 @@ export default function About() {
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsActive, setStatsActive] = useState(false);
 
-  // Cinematic 3D scroll reveal
-  useCinematicReveal(sectionRef, { yOffset: 40, rotateX: 2.5, scale: 0.98 });
+  // Cinematic 3D scroll reveal — start early so section isn't invisible when first visible
+  useCinematicReveal(sectionRef, { yOffset: 40, rotateX: 2.5, scale: 0.98, start: "top bottom" });
 
   // Cursor tilt on photo
   useEffect(() => {
@@ -218,7 +219,7 @@ export default function About() {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setStatsActive(true); obs.disconnect(); } },
-      { threshold: 0.3 }
+      { threshold: 0.05 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -263,7 +264,7 @@ export default function About() {
       ref={sectionRef}
       id="about"
       className="section-pad section-dark"
-      style={{ position: "relative", zIndex: 1, background: "#111" }}
+      style={{ position: "relative", zIndex: 1, background: "#111", paddingTop: "3rem" }}
     >
       <div className="container-site">
         {/* Section heading */}

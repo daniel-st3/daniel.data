@@ -25,7 +25,7 @@ export default function FloatingCTA() {
 
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY < window.innerHeight * 1.5);
+      setVisible(window.scrollY < window.innerHeight * 1.0);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -271,7 +271,7 @@ export default function FloatingCTA() {
         className="floating-cta"
         aria-label="Check my assets on GitHub"
         onMouseEnter={handleMouseEnter}
-        style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? "auto" : "none", transition: "opacity 0.3s ease" }}
+        style={{ opacity: visible ? 1 : 0, visibility: visible ? "visible" : "hidden", pointerEvents: visible ? "auto" : "none", transition: "opacity 0.3s ease, visibility 0.3s ease" }}
       >
         <span className="cta-icon">{">"}</span>
         Check my assets
@@ -283,7 +283,7 @@ export default function FloatingCTA() {
         rel="noopener noreferrer"
         className="floating-thesis"
         aria-label="Watch Master's thesis defense on YouTube"
-        style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? "auto" : "none", transition: "opacity 0.3s ease" }}
+        style={{ opacity: visible ? 1 : 0, visibility: visible ? "visible" : "hidden", pointerEvents: visible ? "auto" : "none", transition: "opacity 0.3s ease, visibility 0.3s ease" }}
       >
         <PlayCircle size={24} strokeWidth={1.6} className="thesis-icon" />
         <span className="thesis-label">

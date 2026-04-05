@@ -15,7 +15,7 @@ export default function Skills() {
   const certHeadRef  = useRef<HTMLDivElement>(null);
   const certRef      = useRef<HTMLDivElement>(null);
 
-  useCinematicReveal(sectionRef, { yOffset: 40, rotateX: 2, scale: 0.98 });
+  useCinematicReveal(sectionRef, { yOffset: 40, rotateX: 2, scale: 0.98, start: "top bottom" });
 
   useEffect(() => {
     (async () => {
@@ -49,6 +49,7 @@ export default function Skills() {
         position: "relative",
         zIndex: 1,
         background: "var(--bg)",
+        backgroundColor: "#f5ecdd",
       }}
     >
       {/* Subtle warm radial glow in background — doesn't overpower */}

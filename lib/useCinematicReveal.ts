@@ -15,6 +15,7 @@ export function useCinematicReveal(
         rotateX?: number;
         scale?: number;
         disabled?: boolean;
+        start?: string;
     } = {}
 ) {
     const {
@@ -22,6 +23,7 @@ export function useCinematicReveal(
         rotateX = 3,
         scale = 0.98,
         disabled = false,
+        start = "top 92%",
     } = options;
 
     useEffect(() => {
@@ -54,7 +56,7 @@ export function useCinematicReveal(
                     ease: "power3.out",
                     scrollTrigger: {
                         trigger: section,
-                        start: "top 92%",
+                        start,
                         end: "top 55%",
                         scrub: 0.8,
                         // This makes it work when scrolling back up too
