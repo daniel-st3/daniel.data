@@ -227,6 +227,19 @@ export default function Experience() {
   const trackRef   = useRef<HTMLDivElement>(null);
   const headRef    = useRef<HTMLDivElement>(null);
 
+  // Align first card's left edge with the heading's left edge
+  useEffect(() => {
+    const align = () => {
+      if (!headRef.current || !trackRef.current) return;
+      const left = headRef.current.getBoundingClientRect().left;
+      trackRef.current.style.paddingLeft = `${left}px`;
+      trackRef.current.style.paddingRight = `${left}px`;
+    };
+    align();
+    window.addEventListener("resize", align);
+    return () => window.removeEventListener("resize", align);
+  }, []);
+
   useEffect(() => {
     (async () => {
       const { gsap, ScrollTrigger } = await loadGSAP();
@@ -282,8 +295,6 @@ export default function Experience() {
           overflowY: "visible",
           scrollSnapType: "x mandatory",
           paddingBottom: "1.5rem",
-          paddingLeft: "max(2rem, calc((100vw - 1100px) / 2 + 2rem))",
-          paddingRight: "max(2rem, calc((100vw - 1100px) / 2 + 2rem))",
           scrollbarWidth: "none",
           WebkitOverflowScrolling: "touch",
           cursor: "grab",

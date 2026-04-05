@@ -44,20 +44,6 @@ const ROW_1: ProjectItem[] = [
     href: "https://github.com/daniel-st3/python3-payments_nl_sql_agent",
     image: IMG("Perplexity Blog (1).jpeg"),
   },
-  {
-    id: "fraud",
-    title: "Fraud Detection System",
-    description: "Calibrated RandomForest fraud scorer with behavioral feature engineering and a real time interactive Dash dashboard for transaction monitoring.",
-    href: "https://github.com/daniel-st3/fraud-detection-system",
-    image: IMG("Nowhere.jpeg"),
-  },
-  {
-    id: "growth-center",
-    title: "Personal Growth Command Center",
-    description: "A comprehensive personal growth tracking system with goal setting, habit tracking, and AI powered insights for continuous self improvement.",
-    href: "https://github.com/daniel-st3/personal-growth-command-center",
-    image: IMG("Dreamscape.jpeg"),
-  },
 ];
 
 const ROW_2: ProjectItem[] = [
@@ -89,6 +75,23 @@ const ROW_2: ProjectItem[] = [
     href: "https://github.com/daniel-st3/sql-chicago-data-analysis",
     image: IMG("_ (2).jpeg"),
   },
+];
+
+const ROW_3: ProjectItem[] = [
+  {
+    id: "fraud",
+    title: "Fraud Detection System",
+    description: "Calibrated RandomForest fraud scorer with behavioral feature engineering and a real time interactive Dash dashboard for transaction monitoring.",
+    href: "https://github.com/daniel-st3/fraud-detection-system",
+    image: IMG("Nowhere.jpeg"),
+  },
+  {
+    id: "growth-center",
+    title: "Personal Growth Command Center",
+    description: "A comprehensive personal growth tracking system with goal setting, habit tracking, and AI powered insights for continuous self improvement.",
+    href: "https://github.com/daniel-st3/personal-growth-command-center",
+    image: IMG("Dreamscape.jpeg"),
+  },
   {
     id: "ai-analytics",
     title: "AI Analytics Prompt Playbook",
@@ -100,6 +103,7 @@ const ROW_2: ProjectItem[] = [
 
 function InfiniteRow({ items, direction = "left", speed = 35 }: { items: ProjectItem[]; direction?: "left" | "right"; speed?: number }) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const posRef = useRef(0);
   const pausedRef = useRef(false);
   const isDragging = useRef(false);
@@ -141,33 +145,29 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
   }, [items, direction, speed]);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container) return;
     isDragging.current = true;
     pausedRef.current = true;
     startXRef.current = e.pageX;
     startPosRef.current = posRef.current;
-    e.currentTarget.style.cursor = "grabbing";
-  };
+    container.style.cursor = "grabbing";
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    const walk = (e.pageX - startXRef.current) * 1.5;
-    posRef.current = startPosRef.current + walk;
-  };
+    const onMove = (ev: MouseEvent) => {
+      const walk = (ev.pageX - startXRef.current) * 1.5;
+      posRef.current = startPosRef.current + walk;
+    };
 
-  const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    pausedRef.current = false;
-    e.currentTarget.style.cursor = "grab";
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isDragging.current) {
+    const onUp = () => {
       isDragging.current = false;
       pausedRef.current = false;
-    }
-    e.currentTarget.style.cursor = "grab";
+      if (container) container.style.cursor = "grab";
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
   };
 
   // Double the items for seamless loop
@@ -175,11 +175,9 @@ function InfiniteRow({ items, direction = "left", speed = 35 }: { items: Project
 
   return (
     <div
+      ref={containerRef}
       style={{ overflow: "hidden", width: "100%", padding: "0.5rem 0", cursor: "grab" }}
       onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
     >
       <div
         ref={trackRef}
@@ -258,6 +256,7 @@ export default function Projects() {
   const headRef    = useRef<HTMLDivElement>(null);
   const row1Ref    = useRef<HTMLDivElement>(null);
   const row2Ref    = useRef<HTMLDivElement>(null);
+  const row3Ref    = useRef<HTMLDivElement>(null);
 
   useCinematicReveal(sectionRef, { yOffset: 45, rotateX: 2, scale: 0.97, start: "top bottom" });
 
@@ -277,14 +276,14 @@ export default function Projects() {
         }
       );
 
-      [row1Ref.current, row2Ref.current].forEach((el, i) => {
+      [row1Ref.current, row2Ref.current, row3Ref.current].forEach((el, i) => {
         if (!el) return;
         gsap.fromTo(
           el,
           { opacity: 0, y: 60, scale: 0.97 },
           {
             opacity: 1, y: 0, scale: 1,
-            duration: 0.8, ease: "power3.out", delay: i * 0.12,
+            duration: 0.8, ease: "power3.out", delay: i * 0.1,
             scrollTrigger: { trigger: el, start: "top 95%", toggleActions: "play none none none" },
           }
         );
@@ -355,6 +354,11 @@ export default function Projects() {
       {/* Row 2: scroll right */}
       <div ref={row2Ref} style={{ marginTop: "0.75rem" }}>
         <InfiniteRow items={ROW_2} direction="right" speed={25} />
+      </div>
+
+      {/* Row 3: scroll left */}
+      <div ref={row3Ref} style={{ marginTop: "0.75rem" }}>
+        <InfiniteRow items={ROW_3} direction="left" speed={28} />
       </div>
 
       <style>{`
