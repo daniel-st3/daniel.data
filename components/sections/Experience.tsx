@@ -335,7 +335,6 @@ export default function Experience() {
       <div
         ref={trackRef}
         className="exp-track"
-        data-lenis-prevent
         style={{
           display: "flex",
           gap: "1.25rem",
@@ -359,11 +358,23 @@ export default function Experience() {
         }}
       >
         {/* Spacer aligns first card with the "E" in the heading above */}
-        <div style={{ flexShrink: 0, width: "max(1.25rem, calc((100vw - 1100px) / 2 + 2rem))" }} />
+        <div
+          style={{
+            flexShrink: 0,
+            width: "max(0px, calc((100vw - 1100px) / 2 + 0.75rem))",
+            scrollSnapAlign: "start",
+          }}
+        />
         {TIMELINE.map((entry, i) => (
           <EntryCard key={`${entry.year}-${i}`} entry={entry} />
         ))}
-        <div style={{ flexShrink: 0, width: "max(1.25rem, calc((100vw - 1100px) / 2 + 2rem))" }} />
+        <div
+          style={{
+            flexShrink: 0,
+            width: "max(0px, calc((100vw - 1100px) / 2 + 0.75rem))",
+            scrollSnapAlign: "end",
+          }}
+        />
       </div>
 
     </section>
