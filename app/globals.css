@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ─── Design tokens ─────────────────────────────────────────── */
 :root {
   --bg: #f5ecdd;
