@@ -262,14 +262,23 @@ export default function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="section-pad"
-      style={{ position: "relative", zIndex: 1, background: "var(--bg)" }}
+      className="section-pad section-dark"
+      style={{ position: "relative", zIndex: 1, background: "#111" }}
     >
+      {/* Sticky scroll wrapper — CSS only, no JS */}
+      <div className="about-sticky-outer" style={{ minHeight: "250vh" }}>
+      <div className="about-sticky-inner" style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
+      <div style={{ width: "100%", paddingBlock: "2rem" }}>
       <div className="container-site">
-        {/* Interactive heading */}
-        <div style={{ marginBottom: "2.5rem", display: "flex", gap: "2rem", flexWrap: "wrap", alignItems: "center" }}>
-          <MagneticText text="ANALYST" hoverText="STRATEGIST" className="text-[var(--fg)]" />
-          <MagneticText text="ENGINEER" hoverText="AUTOMATOR" className="text-[var(--fg-muted)]" />
+        {/* Big display heading */}
+        <div style={{ marginBottom: "2.5rem" }}>
+          <p className="section-label" style={{ marginBottom: "1rem" }}>About</p>
+          <div style={{ fontSize: "clamp(2.5rem, 8vw, 8rem)", fontWeight: 600, letterSpacing: "-0.04em", lineHeight: 1, marginBottom: "1.5rem" }}>
+            <MagneticText text="ANALYST" hoverText="STRATEGIST" className="text-white" />
+          </div>
+          <div style={{ fontSize: "clamp(1.5rem, 4vw, 4rem)", fontWeight: 500, letterSpacing: "-0.03em", lineHeight: 1 }}>
+            <MagneticText text="ENGINEER" hoverText="AUTOMATOR" className="text-white/50" />
+          </div>
         </div>
 
         {/* Two-column layout */}
@@ -391,7 +400,10 @@ export default function About() {
         >
           {STATS.slice(5).map((s, i) => <StatCard key={s.label} stat={s} active={statsActive} index={i + 5} />)}
         </div>
-      </div>
+      </div>{/* /container-site */}
+      </div>{/* /paddingBlock wrapper */}
+      </div>{/* /about-sticky-inner */}
+      </div>{/* /about-sticky-outer */}
 
       <style>{`
         @media (max-width: 768px) {

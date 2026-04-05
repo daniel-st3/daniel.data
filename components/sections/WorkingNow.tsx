@@ -62,40 +62,41 @@ export default function WorkingNow() {
     <section
       ref={sectionRef}
       id="working-now"
-      className="section-pad"
+      className="section-pad section-dark"
       style={{
         position: "relative",
         zIndex: 1,
-        background: "linear-gradient(to bottom, rgba(217,165,107,0.24) 0%, rgba(245,236,221,0.9) 40%, var(--bg) 100%)",
+        background: "#0f0f0f",
         overflow: "hidden",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
       }}
     >
       <div style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}>
-        <RetroGrid className="opacity-30" angle={68} />
+        <RetroGrid className="opacity-10" angle={68} />
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: `
-              radial-gradient(ellipse at 50% 10%, rgba(217,165,107,0.24) 0%, transparent 55%),
-              linear-gradient(to bottom, rgba(255,247,236,0.34), transparent 65%)
-            `,
+            background: "radial-gradient(ellipse at 50% 10%, rgba(195,111,61,0.12) 0%, transparent 55%)",
           }}
         />
       </div>
 
       <div className="container-site" style={{ position: "relative", zIndex: 2 }}>
         <div ref={headRef} style={{ marginBottom: "2rem", textAlign: "center" }}>
-          <p className="section-label" style={{ marginBottom: "0.75rem" }}>
+          <p className="section-label" style={{ marginBottom: "0.75rem", color: "rgba(255,255,255,0.45)" }}>
             Current Focus
           </p>
           <h2
             style={{
-              fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
-              fontWeight: 500,
+              fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
+              fontWeight: 600,
               letterSpacing: "-0.04em",
-              color: "var(--fg)",
-              lineHeight: 1.1,
+              color: "#fff",
+              lineHeight: 1.0,
             }}
           >
             Flagship Build
@@ -103,7 +104,7 @@ export default function WorkingNow() {
           <p
             style={{
               fontSize: "0.95rem",
-              color: "var(--fg-muted)",
+              color: "rgba(255,255,255,0.55)",
               marginTop: "0.65rem",
               maxWidth: "62ch",
               marginInline: "auto",

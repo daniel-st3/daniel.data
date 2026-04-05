@@ -162,8 +162,18 @@ h6 {
 
 /* ─── Section utilities ──────────────────────────────────────── */
 .section-pad {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 7.5rem;
+  padding-bottom: 7.5rem;
+}
+
+/* Dark section base */
+.section-dark {
+  background: #111;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section-dark .section-label {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .section-label {
@@ -366,8 +376,15 @@ h6 {
 
 @media (max-width: 768px) {
   .section-pad {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  .about-sticky-outer { min-height: auto !important; }
+  .about-sticky-inner {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+    align-items: flex-start !important;
   }
 
   .hero-grid {
@@ -428,8 +445,8 @@ h6 {
   }
 
   .section-pad {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 
   .skill-group {

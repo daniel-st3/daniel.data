@@ -257,16 +257,16 @@ export default function Experience() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="experience" className="section-pad" style={{ position: "relative", zIndex: 1, background: "var(--bg)", overflow: "hidden" }}>
+    <section ref={sectionRef} id="experience" className="section-pad section-dark" style={{ position: "relative", zIndex: 1, background: "#111", overflow: "hidden", minHeight: "100vh" }}>
       <div className="container-site">
         <div ref={headRef} style={{ marginBottom: "2rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
           <div>
-            <p className="section-label" style={{ marginBottom: "0.5rem" }}>Career Path</p>
-            <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 500, letterSpacing: "-0.04em", color: "var(--fg)", lineHeight: 1.1 }}>
+            <p className="section-label" style={{ marginBottom: "0.5rem", color: "rgba(255,255,255,0.45)" }}>Career Path</p>
+            <h2 style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)", fontWeight: 600, letterSpacing: "-0.04em", color: "#fff", lineHeight: 1.0 }}>
               Experience & Education
             </h2>
           </div>
-          <p style={{ fontSize: "0.78rem", color: "var(--fg-subtle)" }}>Scroll sideways to explore →</p>
+          <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.35)" }}>Scroll sideways to explore →</p>
         </div>
       </div>
 

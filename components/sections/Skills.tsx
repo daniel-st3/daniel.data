@@ -69,11 +69,11 @@ export default function Skills() {
           <p className="section-label" style={{ marginBottom: "0.65rem" }}>Toolkit</p>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
             <h2 style={{
-              fontSize: "clamp(2.2rem, 5vw, 4rem)",
-              fontWeight: 500,
+              fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
+              fontWeight: 600,
               letterSpacing: "-0.05em",
               color: "var(--fg)",
-              lineHeight: 1.05,
+              lineHeight: 1.0,
             }}>
               Skills & Tools
             </h2>
@@ -101,11 +101,11 @@ export default function Skills() {
             <div>
               <p className="section-label" style={{ marginBottom: "0.5rem" }}>Credentials</p>
               <h2 style={{
-                fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
-                fontWeight: 500,
+                fontSize: "clamp(2rem, 4vw, 3.5rem)",
+                fontWeight: 600,
                 letterSpacing: "-0.04em",
                 color: "var(--fg)",
-                lineHeight: 1.1,
+                lineHeight: 1.0,
               }}>
                 Certifications
               </h2>
