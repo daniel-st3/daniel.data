@@ -227,26 +227,6 @@ export default function Experience() {
   const trackRef   = useRef<HTMLDivElement>(null);
   const headRef    = useRef<HTMLDivElement>(null);
 
-  // Align first card's left edge with the "E" in "Experience & Education"
-  useEffect(() => {
-    const align = () => {
-      if (!headRef.current || !trackRef.current) return;
-      const left = headRef.current.getBoundingClientRect().left;
-      if (left > 0) {
-        trackRef.current.style.paddingLeft  = `${left}px`;
-        trackRef.current.style.paddingRight = `${left}px`;
-      }
-    };
-    // Run after paint so layout is fully resolved
-    const raf = requestAnimationFrame(() => {
-      setTimeout(align, 50);
-    });
-    window.addEventListener("resize", align);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", align);
-    };
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -292,36 +272,51 @@ export default function Experience() {
           100% { background-position: 0% 50%;   }
         }
         @keyframes exp-orb1 {
-          0%, 100% { transform: translate(0,0) scale(1);        opacity: 0.5; }
-          45%       { transform: translate(-8%,6%) scale(1.2);   opacity: 0.85; }
-          75%       { transform: translate(5%,-5%) scale(0.92);  opacity: 0.6; }
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          45%       { transform: translate(-7%, 6%) scale(1.22); }
+          75%       { transform: translate(5%, -4%) scale(0.9); }
         }
         @keyframes exp-orb2 {
-          0%, 100% { transform: translate(0,0) scale(1);        opacity: 0.3; }
-          40%       { transform: translate(10%,-8%) scale(1.15); opacity: 0.65; }
-          80%       { transform: translate(-4%,10%) scale(0.9);  opacity: 0.4; }
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          40%       { transform: translate(8%, -7%) scale(1.18); }
+          80%       { transform: translate(-4%, 9%) scale(0.88); }
         }
         .exp-bg-mesh {
           position: absolute; inset: 0;
-          background: linear-gradient(135deg, #1a0f06 0%, #0c0a07 20%, #1c1108 42%, #090807 65%, #180d05 85%, #0c0a07 100%);
+          background: linear-gradient(135deg,
+            #241206 0%,
+            #0c0a07 18%,
+            #1e1007 38%,
+            #090807 58%,
+            #221105 80%,
+            #0c0a07 100%);
           background-size: 400% 400%;
-          animation: exp-mesh 24s ease infinite;
+          animation: exp-mesh 22s ease infinite;
         }
         .exp-orb-1 {
           position: absolute;
-          width: 55vw; height: 70vh;
-          top: -20%; left: -5%;
+          width: 60vw; height: 75vh;
+          top: -20%; left: -8%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(195,111,61,0.2) 0%, rgba(138,74,45,0.08) 45%, transparent 70%);
-          animation: exp-orb1 15s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(195,111,61,0.5) 0%,
+            rgba(165,88,42,0.26) 38%,
+            rgba(138,74,45,0.1) 58%,
+            transparent 72%);
+          filter: blur(55px);
+          animation: exp-orb1 14s ease-in-out infinite;
         }
         .exp-orb-2 {
           position: absolute;
-          width: 60vw; height: 55vh;
-          bottom: -15%; right: -8%;
+          width: 65vw; height: 60vh;
+          bottom: -18%; right: -10%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(184,136,110,0.15) 0%, rgba(120,85,55,0.06) 45%, transparent 70%);
-          animation: exp-orb2 19s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(184,136,110,0.42) 0%,
+            rgba(130,90,60,0.18) 42%,
+            transparent 68%);
+          filter: blur(60px);
+          animation: exp-orb2 18s ease-in-out infinite;
         }
       `}</style>
       <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
@@ -348,6 +343,8 @@ export default function Experience() {
           overflowY: "visible",
           scrollSnapType: "x mandatory",
           paddingBottom: "1.5rem",
+          paddingLeft: "max(1.25rem, calc((100vw - 1100px) / 2 + 2rem))",
+          paddingRight: "max(1.25rem, calc((100vw - 1100px) / 2 + 2rem))",
           scrollbarWidth: "none",
           WebkitOverflowScrolling: "touch",
           cursor: "grab",

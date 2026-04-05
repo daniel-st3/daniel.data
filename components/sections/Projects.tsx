@@ -225,7 +225,7 @@ function InfiniteRow({
     <div
       ref={containerRef}
       style={{ overflow: "hidden", width: "100%", padding: "0.5rem 0", cursor: "grab" }}
-      onMouseDown={(e) => attachMouseDrag(e.clientX)}
+      onMouseDown={(e) => { e.preventDefault(); attachMouseDrag(e.clientX); }}
       onTouchStart={(e) => attachTouchDrag(e.touches[0].clientX)}
     >
       <div

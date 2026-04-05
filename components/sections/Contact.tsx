@@ -80,46 +80,65 @@ export default function Contact() {
           100% { background-position: 0% 0%;    }
         }
         @keyframes ct-orb1 {
-          0%, 100% { transform: translate(0,0) scale(1);       opacity: 0.65; }
-          50%       { transform: translate(-6%,9%) scale(1.18); opacity: 1;    }
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          50%       { transform: translate(-5%, 8%) scale(1.2); }
         }
         @keyframes ct-orb2 {
-          0%, 100% { transform: translate(0,0) scale(1);        opacity: 0.4; }
-          50%       { transform: translate(8%,-10%) scale(1.12); opacity: 0.75; }
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          50%       { transform: translate(7%, -9%) scale(1.15); }
         }
         @keyframes ct-orb3 {
-          0%, 100% { transform: translate(0,0) scale(1);         opacity: 0.25; }
-          50%       { transform: translate(-10%,-5%) scale(1.05); opacity: 0.5;  }
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          50%       { transform: translate(-8%, -4%) scale(1.08); }
         }
         .ct-bg-mesh {
           position: absolute; inset: 0;
-          background: linear-gradient(125deg, #1e1208 0%, #0d0b08 22%, #180e06 45%, #0a0808 68%, #1a1007 88%, #0d0b08 100%);
+          background: linear-gradient(125deg,
+            #261405 0%,
+            #0d0b08 20%,
+            #201006 40%,
+            #0a0808 62%,
+            #221208 82%,
+            #0d0b08 100%);
           background-size: 500% 500%;
-          animation: ct-mesh 20s ease infinite;
+          animation: ct-mesh 19s ease infinite;
         }
         .ct-orb-1 {
           position: absolute;
-          width: 60vw; height: 60vh;
-          top: -20%; right: -10%;
+          width: 65vw; height: 65vh;
+          top: -22%; right: -12%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(195,111,61,0.25) 0%, rgba(138,74,45,0.1) 40%, transparent 68%);
-          animation: ct-orb1 13s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(195,111,61,0.58) 0%,
+            rgba(172,88,40,0.3) 35%,
+            rgba(138,74,45,0.1) 58%,
+            transparent 72%);
+          filter: blur(52px);
+          animation: ct-orb1 12s ease-in-out infinite;
         }
         .ct-orb-2 {
           position: absolute;
-          width: 50vw; height: 55vh;
-          bottom: -10%; left: -5%;
+          width: 55vw; height: 60vh;
+          bottom: -12%; left: -6%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(107,83,55,0.2) 0%, rgba(75,55,35,0.08) 45%, transparent 70%);
-          animation: ct-orb2 17s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(184,136,110,0.48) 0%,
+            rgba(130,90,60,0.22) 40%,
+            transparent 68%);
+          filter: blur(58px);
+          animation: ct-orb2 16s ease-in-out infinite;
         }
         .ct-orb-3 {
           position: absolute;
-          width: 40vw; height: 40vh;
-          top: 40%; left: 30%;
+          width: 45vw; height: 45vh;
+          top: 35%; left: 28%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(111,123,100,0.12) 0%, transparent 65%);
-          animation: ct-orb3 21s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(111,123,100,0.35) 0%,
+            rgba(85,100,75,0.12) 45%,
+            transparent 68%);
+          filter: blur(65px);
+          animation: ct-orb3 20s ease-in-out infinite;
         }
       `}</style>
       <div className="container-site" style={{ position: "relative", zIndex: 1 }}>

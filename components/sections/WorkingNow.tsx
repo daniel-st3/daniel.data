@@ -101,35 +101,49 @@ export default function WorkingNow() {
           100% { background-position: 0% 0%;    }
         }
         @keyframes wn-orb1 {
-          0%, 100% { transform: translate(0,0) scale(1);      opacity: 0.6; }
-          50%       { transform: translate(5%,8%) scale(1.15); opacity: 1;   }
+          0%, 100% { transform: translate(-50%, 0px) scale(1); }
+          50%       { transform: translate(-50%, 8%) scale(1.18); }
         }
         @keyframes wn-orb2 {
-          0%, 100% { transform: translate(0,0) scale(1);       opacity: 0.4; }
-          50%       { transform: translate(-7%,-9%) scale(1.1); opacity: 0.7; }
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          50%       { transform: translate(-6%, -8%) scale(1.12); }
         }
         .wn-bg-mesh {
           position: absolute; inset: 0;
-          background: linear-gradient(125deg, #1e1008 0%, #0d0b08 20%, #1a0e06 42%, #0b0909 65%, #170e07 83%, #0d0b08 100%);
+          background: linear-gradient(125deg,
+            #281405 0%,
+            #0d0b08 18%,
+            #221105 38%,
+            #0b0909 58%,
+            #1e1106 78%,
+            #0d0b08 100%);
           background-size: 500% 500%;
-          animation: wn-mesh 22s ease infinite;
+          animation: wn-mesh 20s ease infinite;
         }
         .wn-orb-1 {
           position: absolute;
-          width: 65vw; height: 65vh;
-          top: -15%; left: 50%;
-          transform: translateX(-50%);
+          width: 70vw; height: 70vh;
+          top: -20%; left: 50%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(195,111,61,0.28) 0%, rgba(138,74,45,0.12) 40%, transparent 68%);
-          animation: wn-orb1 12s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(195,111,61,0.6) 0%,
+            rgba(175,85,38,0.32) 35%,
+            rgba(138,74,45,0.12) 58%,
+            transparent 72%);
+          filter: blur(50px);
+          animation: wn-orb1 11s ease-in-out infinite;
         }
         .wn-orb-2 {
           position: absolute;
-          width: 50vw; height: 50vh;
-          bottom: -10%; right: -5%;
+          width: 55vw; height: 55vh;
+          bottom: -12%; right: -6%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(111,123,100,0.18) 0%, rgba(80,95,70,0.08) 45%, transparent 70%);
-          animation: wn-orb2 16s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(111,123,100,0.45) 0%,
+            rgba(85,100,75,0.2) 40%,
+            transparent 68%);
+          filter: blur(55px);
+          animation: wn-orb2 15s ease-in-out infinite;
         }
       `}</style>
 

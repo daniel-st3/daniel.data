@@ -279,36 +279,51 @@ export default function About() {
           100% { background-position: 0% 50%; }
         }
         @keyframes about-orb1 {
-          0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.55; }
-          40%       { transform: translate(-6%, 10%) scale(1.12); opacity: 0.9; }
-          70%       { transform: translate(4%, -6%) scale(0.95);  opacity: 0.65; }
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          40%       { transform: translate(-5%, 8%) scale(1.15); }
+          70%       { transform: translate(4%, -5%) scale(0.92); }
         }
         @keyframes about-orb2 {
-          0%, 100% { transform: translate(0, 0) scale(1);   opacity: 0.35; }
-          45%       { transform: translate(8%, -12%) scale(1.18); opacity: 0.7; }
-          75%       { transform: translate(-5%, 8%) scale(0.9);   opacity: 0.45; }
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          45%       { transform: translate(7%, -10%) scale(1.2); }
+          75%       { transform: translate(-4%, 7%) scale(0.88); }
         }
         .about-bg-mesh {
           position: absolute; inset: 0;
-          background: linear-gradient(135deg, #1c1008 0%, #0e0b09 25%, #1a0f06 50%, #0b0908 75%, #1e1209 100%);
+          background: linear-gradient(135deg,
+            #2a1506 0%,
+            #0e0b09 20%,
+            #251204 40%,
+            #0c0a08 60%,
+            #1f1007 80%,
+            #0e0b09 100%);
           background-size: 400% 400%;
-          animation: about-mesh 20s ease infinite;
+          animation: about-mesh 18s ease infinite;
         }
         .about-orb-1 {
           position: absolute;
-          width: 70vw; height: 60vh;
-          top: -10%; right: -10%;
+          width: 75vw; height: 65vh;
+          top: -15%; right: -12%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(195,111,61,0.22) 0%, rgba(138,74,45,0.1) 45%, transparent 70%);
-          animation: about-orb1 14s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(195,111,61,0.55) 0%,
+            rgba(180,90,40,0.3) 35%,
+            rgba(138,74,45,0.1) 60%,
+            transparent 75%);
+          filter: blur(55px);
+          animation: about-orb1 13s ease-in-out infinite;
         }
         .about-orb-2 {
           position: absolute;
-          width: 55vw; height: 55vh;
-          bottom: -5%; left: -8%;
+          width: 60vw; height: 55vh;
+          bottom: -10%; left: -8%;
           border-radius: 50%;
-          background: radial-gradient(ellipse at center, rgba(107,83,55,0.18) 0%, rgba(80,55,35,0.08) 45%, transparent 70%);
-          animation: about-orb2 18s ease-in-out infinite;
+          background: radial-gradient(ellipse at center,
+            rgba(184,136,110,0.45) 0%,
+            rgba(140,95,65,0.22) 40%,
+            transparent 68%);
+          filter: blur(60px);
+          animation: about-orb2 17s ease-in-out infinite;
         }
       `}</style>
       <div className="container-site" style={{ position: "relative", zIndex: 1 }}>
