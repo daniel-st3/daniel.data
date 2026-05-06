@@ -23,3 +23,7 @@ Thumbs.db
 .idea
 
 .next_stale_*/
+
+# Local-only preview videos — transcoded mp4s are kept; raw .mov originals are not.
+public/videos/*.mov
+public/videos/*.MOV
