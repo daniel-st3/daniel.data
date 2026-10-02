@@ -1,0 +1,193 @@
+[
+  {
+    "id": "anthropic-mcp-advanced",
+    "name": "Model Context Protocol: Advanced Topics",
+    "issuer": "Anthropic",
+    "type": "Course completion",
+    "group": "Applied AI / GenAI",
+    "completedAt": "2026-02-24",
+    "artifact": "/certifications/Model Context Protocol Advanced Topics by Anthropic.png",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "anthropic-claude-code",
+    "name": "Claude Code in Action",
+    "issuer": "Anthropic",
+    "type": "Course completion",
+    "group": "Applied AI / GenAI",
+    "completedAt": "2026-02-24",
+    "artifact": "/certifications/Claude Code in Action by Anthropic.png",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "google-advanced-analytics",
+    "name": "Google Advanced Data Analytics",
+    "issuer": "Google",
+    "type": "Professional certificate",
+    "group": "ML / Data",
+    "completedAt": "2024-12-20",
+    "artifact": "/certifications/Google Advanced Data Analytics Specialization  Google.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "google-bi",
+    "name": "Google Business Intelligence",
+    "issuer": "Google",
+    "type": "Professional certificate",
+    "group": "Analytics / BI",
+    "completedAt": "2024-12-30",
+    "artifact": "/certifications/Google Business Intelligence Specialization  Google.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "google-cloud-nlp",
+    "name": "Natural Language Processing on Google Cloud",
+    "issuer": "Google Cloud",
+    "type": "Course completion",
+    "group": "ML / Data",
+    "completedAt": "2024-12-22",
+    "artifact": "/certifications/Natural Language Processing on Google Cloud  Google Cloud Skills Boost.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "nyif-ml-trading",
+    "name": "Machine Learning for Trading",
+    "issuer": "New York Institute of Finance",
+    "type": "Specialization",
+    "group": "ML / Data",
+    "completedAt": "2024-12-25",
+    "artifact": "/certifications/Machine Learning for Trading Specialization  New York Institute of Finance.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "microsoft-ai-900",
+    "name": "Microsoft Certified: Azure AI Fundamentals",
+    "issuer": "Microsoft",
+    "type": "Vendor certification",
+    "group": "Applied AI / GenAI",
+    "completedAt": "2025-01-31",
+    "artifact": "/certifications/Microsoft Certified- Azure AI Fundamentals AI 900  Microsoft.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "amii-supervised-ml",
+    "name": "Machine Learning Algorithms: Supervised Learning Tip to Tail",
+    "issuer": "Alberta Machine Intelligence Institute",
+    "type": "Course completion",
+    "group": "ML / Data",
+    "completedAt": "2024-12-21",
+    "artifact": "/certifications/Machine Learning Algorithms- Supervised Learning Tip to Tail  Amii (Alberta Machine Intelligence Institute).jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "ibm-ml-python",
+    "name": "Machine Learning with Python",
+    "issuer": "IBM",
+    "type": "Course completion",
+    "group": "ML / Data",
+    "completedAt": "2024-11-01",
+    "artifact": "/certifications/Machine Learning with Python  IBM.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "ibm-python-data",
+    "name": "Python for Data Science, AI & Development",
+    "issuer": "IBM",
+    "type": "Course completion",
+    "group": "ML / Data",
+    "completedAt": "2024-11-03",
+    "artifact": "/certifications/Python for Data Science, AI & Development  IBM.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "ibm-sql-honors",
+    "name": "Databases and SQL for Data Science with Python (with Honors)",
+    "issuer": "IBM",
+    "type": "Course completion",
+    "group": "ML / Data",
+    "completedAt": "2024-10-29",
+    "artifact": "/certifications/Databases and SQL for Data Science with Python (with Honors).jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "tableau-advanced-viz",
+    "name": "Advanced Data Visualization with Tableau",
+    "issuer": "Tableau Learning Partner",
+    "type": "Course completion",
+    "group": "Analytics / BI",
+    "completedAt": "2025-01-02",
+    "artifact": "/certifications/Advanced Data Visualization with Tableau  Tableau.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "google-digital-marketing",
+    "name": "The Fundamentals of Digital Marketing",
+    "issuer": "Google Digital Garage",
+    "type": "Completion certificate",
+    "group": "Business / Other",
+    "completedAt": "2022-05-14",
+    "artifact": "/certifications/Digital Marketing.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "sabana-excel",
+    "name": "Excel avanzado y modelamiento de datos",
+    "issuer": "Universidad de La Sabana",
+    "type": "Course completion",
+    "group": "Analytics / BI",
+    "completedAt": null,
+    "artifact": "/certifications/Advanced Excel and Data Modeling.png",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "udemy-python-total",
+    "name": "Python TOTAL — Programador Avanzado en 16 días",
+    "issuer": "Udemy",
+    "type": "Course completion",
+    "group": "ML / Data",
+    "completedAt": "2024-10-13",
+    "artifact": "/certifications/Total Python Advanced Programming.jpeg",
+    "verificationUrl": null,
+    "evidence": "Completion artifact inspected; not independently reissued by provider."
+  },
+  {
+    "id": "ibm-ai-engineering",
+    "name": "IBM AI Engineering Professional Certificate",
+    "issuer": "IBM",
+    "type": "Professional certificate",
+    "group": "Applied AI / GenAI",
+    "completedAt": "2026-10-01",
+    "courseCount": 13,
+    "artifact": "/certifications/IBM AI Engineering Professional Certificate.pdf",
+    "verificationUrl": "https://coursera.org/verify/professional-cert/BTD10XUYG53O",
+    "evidence": "Official Coursera/IBM completion PDF supplied by Daniel and inspected in full on 2026-10-01; name, completion date, program title, course count and printed verification URL match the record. Provider page availability checked separately.",
+    "thumbnail": "/certifications/ibm-ai-engineering.jpg"
+  },
+  {
+    "id": "ibm-genai-engineering",
+    "name": "IBM Generative AI Engineering Professional Certificate",
+    "issuer": "IBM",
+    "type": "Professional certificate",
+    "group": "Applied AI / GenAI",
+    "completedAt": "2026-09-22",
+    "courseCount": 16,
+    "artifact": "/certifications/IBM Generative AI Engineering Professional Certificate.pdf",
+    "verificationUrl": "https://coursera.org/verify/professional-cert/KIGNOY3CJNXM",
+    "evidence": "Official Coursera/IBM completion PDF supplied by Daniel and inspected in full on 2026-10-01; name, completion date, program title, course count and printed verification URL match the record. Provider page availability checked separately.",
+    "thumbnail": "/certifications/ibm-genai-engineering.jpg"
+  }
+]

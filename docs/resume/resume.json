@@ -1,0 +1,151 @@
+{
+  "reviewRequired": [],
+  "name": "Daniel Rodriguez",
+  "positioning": "Applied AI & Revenue Systems",
+  "currentRole": "Revenue Operations Analyst at Gladly",
+  "contact": "Bogotá, Colombia · danielst.data@gmail.com",
+  "links": [
+    {
+      "label": "Portfolio",
+      "url": "https://danielst-data.vercel.app/"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/daniel-st3"
+    }
+  ],
+  "summary": "Revenue Operations · Applied AI · Business Systems",
+  "experience": [
+    {
+      "organization": "Gladly",
+      "role": "Revenue Operations Analyst",
+      "dates": "May 2026 – Present",
+      "bullets": [
+        "Refined and validated account-prioritization models, documented their logic and communicated tradeoffs to Sales and RevOps stakeholders.",
+        "Developed territory and capacity analysis used by sales leaders to inform account allocation and outbound planning.",
+        "Built and iterated Tableau and Apollo reporting; investigated source data and refresh behavior to improve reporting consistency.",
+        "Assessed enrichment and data-governance requirements, configured Salesforce–Marketo campaign workflows, and supported integration planning and QA across teams."
+      ],
+      "_evidence": [
+        "SC01/03/05/07",
+        "TA01–03",
+        "AN04–06/AP01",
+        "EN02–05/MK02/05/06/08/IN01/DQ03"
+      ]
+    },
+    {
+      "organization": "Back Market · Paris, France",
+      "role": "Strategic Partnerships Management Intern (B2B)",
+      "dates": "Jul–Dec 2025",
+      "bullets": [
+        "Analyzed SQL pricing models and partner dashboards to identify pricing gaps and inform B2B tender discussions.",
+        "Developed reporting workflows and KPI dashboards to support commercial and operational decisions.",
+        "Researched and qualified prospective underwriting partners across European markets.",
+        "Coordinated partner integration across Product, Technology and Business; collaborated with engineering on data workflows."
+      ],
+      "_evidence": "Historical resume supports scope; quantitative impact and sole engineering/leadership claims omitted."
+    },
+    {
+      "organization": "Universidad de La Sabana · Colombia",
+      "dates": "Jan 2023 – Jun 2024",
+      "_evidence": "Official title, dates and overlap confirmed by Daniel on 2026-10-01; qualitative contribution supported by historical resume. Unsupported impact numbers remain omitted.",
+      "role": "Strategic Consulting Lead, Consultorio de Servicio",
+      "bullets": [
+        "Developed SME digitalization roadmaps around business needs and practical adoption of digital tools.",
+        "Designed and led data-literacy workshops for small-business owners, connecting analysis with operational decisions."
+      ]
+    },
+    {
+      "organization": "Universidad de La Sabana · Colombia",
+      "dates": "Jan 2023 – Jun 2024",
+      "_evidence": "Official title, dates and overlap confirmed by Daniel on 2026-10-01; qualitative contribution supported by historical resume. Unsupported impact numbers remain omitted.",
+      "role": "Teaching Assistant – Strategic Marketing & International Financial Markets",
+      "bullets": [
+        "Created analytical teaching materials and interactive dashboards; supported student progress tracking."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Valrun",
+      "descriptor": "Flagship personal project · Economic underwriting for AI-agent work",
+      "url": "https://github.com/daniel-st3/valrun",
+      "bullets": [
+        "Evaluates AI-agent work before execution: known costs, assumptions and unknowns inform deterministic decisions, with provenance, freshness and auditable receipts.",
+        "Originated Valrun and continue to direct the product: define the product thesis, use cases, economic rules and safety boundaries; shape architecture and integrations, review behavior, and iterate implementation with AI development agents.",
+        "Exposes evidence through REST, OpenAPI and read-only MCP interfaces, with explicit boundaries on execution and payments."
+      ]
+    },
+    {
+      "name": "VeedurIA",
+      "descriptor": "Civic data / Colombia",
+      "url": "https://github.com/daniel-st3/veedurIA",
+      "bullets": [
+        "Organizes Colombian procurement and legislative data for review, with explanatory priority signals and official sources; signals do not establish wrongdoing."
+      ],
+      "_evidence": "Current README at 8b375a1f52e4a417f9d831a1f033c3703ade676c. Product description only; specific personal vs AI-agent-assisted contributions await Daniel clarification."
+    }
+  ],
+  "skills": "Business analysis · Workflow design · Implementation & QA · Salesforce · Marketo · Tableau · Snowflake · Apollo · SQL",
+  "education": [
+    {
+      "institution": "KEDGE Business School · Bordeaux, France",
+      "program": "MSc Data Analytics for Business",
+      "dates": "2026",
+      "status": "Awarded",
+      "_academicStatus": "Academically completed / awarded",
+      "_graduationCeremony": "October 2026; ceremony date is not the academic completion date.",
+      "displayStatus": false
+    },
+    {
+      "institution": "Universidad de La Sabana · Chía, Colombia",
+      "program": "Business Administration",
+      "dates": "May 2026",
+      "status": "Awarded / conferred",
+      "_officialTitleSpanish": "Administración de Empresas",
+      "displayStatus": false
+    },
+    {
+      "institution": "Universidad de La Sabana · Chía, Colombia",
+      "program": "International Business Administration",
+      "dates": "May 2026",
+      "status": "Awarded / conferred",
+      "_officialTitleSpanish": "Administración de Negocios Internacionales",
+      "displayStatus": false
+    }
+  ],
+  "research": "Used NLP to analyze bias and sentiment across financial news and Reddit, with comparative models and time-aware validation; best AUC ~0.523 vs 0.500 baseline. 2nd place — “Mon mémoire à KEDGE en 180 secondes”.",
+  "specializationSlots": [
+    {
+      "id": "specialization-1",
+      "title": "",
+      "detail": "",
+      "evidence": "",
+      "enabled": false
+    },
+    {
+      "id": "specialization-2",
+      "title": "",
+      "detail": "",
+      "evidence": "",
+      "enabled": false
+    }
+  ],
+  "_factsConfirmed": "Daniel confirmed the education titles/status/dates, Gladly start and overlapping La Sabana appointments on 2026-10-01.",
+  "researchTitle": "AI-Driven Analysis of Political Bias in Financial Media",
+  "specializations": "Generative AI · AI Engineering · LLMs & Transformers · RAG & LangChain · Deep Learning · Business Intelligence",
+  "_specializationsEvidence": "Focused-study areas supplied by Daniel with confirmed IBM program completions; not employment titles, formal degrees or engineering proficiency claims.",
+  "credentialIds": [
+    "ibm-ai-engineering",
+    "ibm-genai-engineering",
+    "google-bi",
+    "anthropic-mcp-advanced",
+    "microsoft-ai-900",
+    "tableau-advanced-viz",
+    "google-cloud-nlp"
+  ]
+}
