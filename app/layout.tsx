@@ -6,9 +6,9 @@ import "./globals.css";
 const siteUrl = "https://danielst-data.vercel.app";
 
 export const metadata: Metadata = {
-  title: "Daniel Rodriguez | Business and Data Analyst",
+  title: "Daniel Rodriguez | Applied AI & Revenue Systems",
   description:
-    "Business and Data Analyst with international experience in B2B partnerships, AI integrated workflows, and data driven strategy. Based in Bogota and open to remote roles.",
+    "Revenue Operations Analyst at Gladly, working across applied AI and business systems. Explore Valrun, economic underwriting for AI-agent work.",
   metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   creator: "Daniel Rodriguez",
   publisher: "Daniel Rodriguez",
   openGraph: {
-    title: "Daniel Rodriguez | Business and Data Analyst",
+    title: "Daniel Rodriguez | Applied AI & Revenue Systems",
     description:
-      "I build AI integrated analytics systems that turn raw business signals into clear decisions, measurable growth, and practical operating improvements for modern teams.",
+      "Revenue Operations Analyst at Gladly, working across applied AI and business systems. Explore Valrun, economic underwriting for AI-agent work.",
     url: siteUrl,
     siteName: "Daniel Rodriguez Portfolio",
     locale: "en_US",
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daniel Rodriguez | Business and Data Analyst",
+    title: "Daniel Rodriguez | Applied AI & Revenue Systems",
     description:
-      "AI integrated workflows and data driven growth strategies that help teams move from noisy data to confident business decisions.",
+      "Revenue Operations Analyst at Gladly. Applied AI, revenue systems and Valrun: economic underwriting for AI-agent work.",
     images: ["/og-image.png"],
   },
   icons: {

@@ -27,3 +27,11 @@ Thumbs.db
 # Local-only preview videos — transcoded mp4s are kept; raw .mov originals are not.
 public/videos/*.mov
 public/videos/*.MOV
+
+# Private portfolio evidence and internal review notes (never push to this public repo)
+PORTFOLIO_CONTENT_AUDIT.md
+GLADLY_LATTICE_EVIDENCE.md
+LINKEDIN_ALIGNMENT_RECOMMENDATIONS.md
+docs/FINAL_PORTFOLIO_QA.md
+docs/RESTORATION_QA.md
+docs/resume/REVISION_REPORT.md

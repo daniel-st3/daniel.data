@@ -1,0 +1,10 @@
+# Internal research, private evidence and historical source collections are not deployment inputs.
+PORTFOLIO_CONTENT_AUDIT.md
+GLADLY_LATTICE_EVIDENCE.md
+LINKEDIN_ALIGNMENT_RECOMMENDATIONS.md
+docs/
+archive/
+assets/
+scripts/
+data/
+*.tsbuildinfo

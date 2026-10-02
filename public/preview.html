@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Daniel Rodriguez · Business and Data Analyst</title>
+<title>Daniel Rodriguez · Applied AI &amp; Revenue Systems</title>
+<meta name="description" content="Revenue Operations Analyst at Gladly, working across applied AI and business systems. Explore Valrun, economic underwriting for AI-agent work." />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -134,7 +135,7 @@ img, video { display: block; max-width: 100%; }
 
 .hero-name {
   font-family: 'Instrument Serif', serif;
-  font-size: clamp(4.5rem, 13vw, 14rem);
+  font-size: clamp(3rem, 13vw, 14rem);
   letter-spacing: -.05em; line-height: .88;
   font-weight: 400;
 }
@@ -277,8 +278,10 @@ img, video { display: block; max-width: 100%; }
 .wn-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; animation: pulse 2s ease-in-out infinite; }
 .wn-role { font-size: .88rem; font-weight: 600; color: var(--dark); }
 .wn-desc { font-size: .82rem; color: var(--grey); font-weight: 300; line-height: 1.7; }
+.wn-desc + .wn-desc { margin-top: .8rem; }
+#valrun { scroll-margin-top: 90px; }
 .wn-links { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .9rem; }
-.wn-links a { font-size: .68rem; font-weight: 600; color: var(--dark); border: 1px solid var(--border); border-radius: 999px; padding: .28rem .7rem; transition: border-color .2s, color .2s, background .2s; }
+.wn-links a, .wn-links .credential-label { font-size: .68rem; font-weight: 600; color: var(--dark); border: 1px solid var(--border); border-radius: 999px; padding: .28rem .7rem; transition: border-color .2s, color .2s, background .2s; }
 .wn-links a:hover { border-color: var(--blue); color: var(--blue); background: rgba(46,84,254,.06); }
 
 /* ──────────────── PROJECTS ──────────────── */
@@ -458,16 +461,103 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
   .about-stats { grid-template-columns: repeat(2,1fr); }
   .about-tags { grid-template-columns: 1fr; }
   .ft-name { font-size: clamp(3rem,18vw,8rem); }
-  .hero-inner { padding: 3rem 1.25rem 2.5rem; }
-  .hero-foot { left: 1.25rem; right: 1.25rem; }
+  .hero-inner { padding: 3rem 1.25rem 5rem; }
+  #working-now { padding: 6rem 1.25rem; }
+  #working-now .wrap { padding: 0; }
+  .hero-foot { left: 1.25rem; right: 1.25rem; gap: 1rem; }
+  .hero-foot > span:first-child { max-width: 75%; }
   .hero-bg video { height: 132%; object-position: 50% 58%; transform: translateY(-15%) scale(1.05); }
   .interlude-copy { padding: 5rem 1.25rem 4rem; }
   .cert-wall { margin-inline: -1.25rem; }
   .cert-track { padding: 0 1.25rem; }
 }
+/* Targeted editorial composition — retain the existing palette, typography and sections. */
+:focus-visible { outline: 3px solid var(--coral); outline-offset: 5px; }
+.skip-link { position: fixed; top: -100px; left: 1rem; z-index: 1000; padding: .8rem 1rem; background: var(--warm); color: var(--dark); }
+.skip-link:focus { top: 1rem; }
+.motion-toggle { position: fixed; right: 1rem; bottom: 1rem; z-index: 450; border: 1px solid #96908c; background: var(--warm); color: var(--dark); border-radius: 999px; padding: .45rem .75rem; font: 500 .65rem 'DM Sans',sans-serif; cursor: pointer; }
+#hero { height: auto; min-height: max(760px,100svh); }
+.hero-bg video { width: 76%; margin-inline: auto; height: 100%; object-position: 50% 30%; transform: none; }
+.hero-inner { min-height: calc(max(760px,100svh) - var(--hh)); padding-top: 2.5rem; padding-bottom: 5rem; gap: 9rem; }
+.hero-copy { position: relative; isolation: isolate; }
+.hero-copy::before { content: ''; position: absolute; z-index: -1; right: -2.5rem; bottom: -2rem; width: 43%; height: 72%; background: var(--mid); opacity: .92; }
+.hero-name { position: relative; z-index: 2; font-size: clamp(2.55rem,11.6vw,10.8rem); line-height: .98; }
+.hero-name .row { padding-bottom: .12em; margin-bottom: -.1em; }
+.hero-bottom { position: relative; z-index: 3; margin-top: 2rem; gap: 1.5rem 3rem; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); align-items: center; }
+.hero-tagline { color: rgba(250,246,239,.9); font-size: clamp(.95rem,1.2vw,1.08rem); max-width: 51ch; }
+.hero-ctas { gap: .7rem; align-items: center; }
+
+.hero-foot { bottom: 1.5rem; padding-right: 7rem; }
+.about-body { margin-top: 2rem; gap: 1.5rem; }
+.about-tags { display: flex; flex-wrap: wrap; gap: .6rem; }
+.about-tag { display: inline-flex; align-items: center; justify-content: center; min-height: 2.5rem; padding: .55rem .85rem; white-space: normal; overflow: visible; text-overflow: initial; line-height: 1.35; }
+.svc-row { grid-template-columns: 3rem minmax(0,1.2fr) minmax(220px,.85fr); }
+.svc-desc { display: flex; flex-direction: column; text-align: left; opacity: 1; transform: none; gap: .35rem; padding-left: 2rem; border-left: 1px solid var(--border); }
+.svc-desc b { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--dark); font-weight: 500; }
+.svc-desc span { color: #625b55; font-size: .85rem; }.svc-desc small { font-size: .75rem; }
+.current-role-title { font-size: .95rem; font-weight: 600; margin-bottom: 1.5rem; }.wn-kicker { margin-bottom: .7rem; }.wn-cards > .wn-kicker { margin-bottom: 0; }
+.wn-media img { filter: grayscale(1) sepia(.65) brightness(.82); object-position: 50% 50%; }.wn-grid { align-items: start; }
+.proj-desc { display: block; overflow: visible; -webkit-line-clamp: unset; }.proj-card { display:flex; flex-direction:column; }.proj-body { flex:1; display:flex; flex-direction:column; }.proj-foot { margin-top:auto; padding-top:1rem; }.proj-desc { margin-bottom:1rem; }
+.thesis-grid { grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center; }
+.thesis-title { font-size: clamp(2.3rem,4.4vw,4.2rem); line-height: 1.05; }
+.thesis-desc { color: rgba(250,246,239,.73); }.thesis-desc b { color: var(--warm); }
+.award-row { border-radius: 0; border: 0; border-top:1px solid rgba(250,246,239,.2); border-bottom:1px solid rgba(250,246,239,.2); padding:1.3rem 0; background:none; gap:1.3rem; }.award-icon { font-family:'Instrument Serif',serif; font-size:4rem; line-height:1; color:var(--orange); }.award-sub { margin-top:.6rem; color:rgba(250,246,239,.65); }.award-name { line-height:1.5; }
+.thesis-media { aspect-ratio:4/3; border-radius: .5rem; }
+.thesis-poster { width:100%; height:100%; border:0; background:#352d27; color:var(--warm); text-align:left; display:flex; flex-direction:column; justify-content:space-between; padding:clamp(1.2rem,2.2vw,2rem); gap:1rem; cursor:pointer; }
+.poster-kicker { font:500 .6rem 'DM Sans',sans-serif; letter-spacing:.13em; }.poster-title { font:clamp(1.6rem,2.4vw,2.4rem)/1.08 'Instrument Serif',serif; }.poster-title i { color:var(--orange); }.thesis-poster img { width:100%; height:auto; max-height:75px; object-fit:contain; background:var(--warm); }.poster-footer { display:flex; gap:1rem; align-items:center; font:500 .72rem/1.5 'DM Sans',sans-serif; }.poster-footer small { font-size:.6rem; color:#c1b6ab; }.poster-play { display:grid; place-items:center; width:42px; height:42px; flex-shrink:0; border:1px solid var(--orange); border-radius:50%; color:var(--orange); transition:background .2s; }.thesis-poster:hover .poster-play { background:var(--orange); color:var(--dark); }.research-meta { font-size:.64rem; letter-spacing:.06em; color:#b4a99f; margin-top:1rem; }.research-video-link { display:inline-block; margin-top:.7rem; font-size:.75rem; text-decoration:underline; text-underline-offset:4px; }
+.cert-controls { display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin:1.5rem 0; }.cert-controls > span { font-size:.72rem; color:#625b55; }.cert-wall { margin:0; gap:1rem; }.cert-row { padding:.55rem 0; scroll-padding-inline:1rem; }.cert-track { padding:0; gap:1rem; }.cert-card { width:clamp(230px,25vw,320px); height:auto; display:flex; flex-direction:column; background:#fff; }.cert-card img { width:100%; height:clamp(150px,15vw,205px); object-fit:contain; padding:.5rem; background:#fff; }.cert-card::after { display:none; }.cert-title { position:static; padding:.7rem 1rem; background:#eee7de; color:var(--dark); text-shadow:none; font-size:.75rem; flex:1; }.cert-title small { display:block; font-weight:400; font-size:.65rem; margin-top:.3rem; color:#625b55; }.cert-open { opacity:0; transition:opacity .2s; }.cert-card:hover .cert-open,.cert-card:focus-visible .cert-open { opacity:1; }.cert-card:hover { transform:translateY(-3px); }.cert-card:hover img { transform:none; }.specialization-areas { margin-top:2rem; max-width:75ch; font-size:.83rem; line-height:1.8; color:#625b55; }.specialization-areas b { display:block; font-size:.65rem; text-transform:uppercase; letter-spacing:.12em; color:var(--dark); margin-bottom:.5rem; }
+.motion-paused .marquee-track,.motion-paused .avail-dot,.motion-paused .wn-dot,.motion-paused .arrow { animation-play-state:paused; }
+@media(max-width:960px) { .hero-bg video { width:100%; }.hero-bottom { grid-template-columns:1fr; }.hero-copy::before { width:65%; }.hero-inner { gap:10rem; }.about-grid { gap:3rem; }.svc-row { grid-template-columns:2rem minmax(0,1fr); gap:1rem; }.svc-desc { grid-column:2; padding:0; border:0; }.thesis-grid { grid-template-columns:1fr; }.thesis-media { max-width:660px; }.wn-media { height:260px; min-height:0; }.wn-media img { object-fit:cover; }.wn-card { grid-template-columns:1fr; }.wn-content { padding:1rem; } }
+@media(max-width:600px) { .wrap { padding-inline:1.25rem; } #about-pin,#svc-pin,#thesis,#experience,#skills,#contact { padding-inline:1.25rem; } section > .wrap { padding-inline:0; } .hero-inner { padding:2rem 1.25rem 5rem; gap:7rem; }.hero-bg video { height:100%; object-position:50% 25%; transform:none; }.hero-copy::before { right:-1.25rem; bottom:-1.5rem; width:78%; height:70%; }.hero-bottom { margin-top:1.4rem; }.hero-foot { font-size:.55rem; padding-right:5rem; }.hero-foot .scroll-arrow { display:none; }.hero-name { font-size:clamp(2.55rem,11.6vw,4.35rem); }.about-photo { max-height:520px; }.about-tag { font-size:.68rem; }.svc-row { padding:1.3rem 0; }.svc-bigtitle { margin-bottom:2rem; }.thesis-grid { gap:2rem; }.thesis-media { aspect-ratio:1/1; }.poster-title { font-size:1.9rem; }.exp-row { grid-template-columns:62px minmax(0,1fr); gap:1rem; }.certs-strip { margin-top:3rem; }.cert-controls { align-items:flex-start; }.cert-card { width:240px; }.cert-card img { height:165px; }.cert-title { min-height:78px; }.motion-toggle { font-size:.6rem; } }
+@media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }.hero-bg video { transform:none!important; } }
+
+
+/* Keep actions on one calm surface; the square overlaps type, never controls. */
+.hero-copy::before { display:none; }
+.hero-name { isolation:isolate; }
+.hero-name::before { content:''; position:absolute; z-index:-1; right:-2.5rem; top:46%; width:43%; height:76%; background:var(--mid); }
+.hero-bottom { background:rgba(46,41,36,.97); padding:1.2rem 1.5rem; margin-inline:-1.5rem; }
+.certs-label,.certs-sub,.cert-controls>span,.wn-kicker,.wn-note,.wn-desc,.proj-meta,.proj-desc { color:#71675f; }
+.about-eyebrow { color:rgba(250,246,239,.65); }
+@media(max-width:600px) { .hero-bg video { height:70%; object-position:50% 30%; }.hero-name::before { right:-1.25rem; width:65%; }.hero-bottom { padding:1.15rem 1.25rem; margin-inline:-1.25rem; gap:1.4rem; } }
+
+
+/* Editorial composition: translucent geometry belongs to the type, not the actions. */
+.hero-name::before { right:3%; top:38%; width:39%; height:55%; background:rgba(92,73,59,.48); transform:skewY(-7deg); }
+.hero-bottom { background:none; padding:0; margin-inline:0; margin-top:2.5rem; align-items:start; }
+.hero-tagline { text-shadow:0 2px 18px #1a1714; }
+.hero-ctas .btn:not(.hero-primary) { background:transparent; border-color:transparent; padding-inline:.45rem; }
+.hero-ctas { gap:.7rem 1rem; }
+.hero-bg::after { background:linear-gradient(180deg,rgba(26,23,20,.05) 25%,rgba(26,23,20,.3) 60%,#1a1714 100%); }
+.svc-desc { flex-direction:row; flex-wrap:wrap; gap:.5rem .85rem; border:0; padding-left:1rem; transition:none; }
+.svc-keyword { display:inline-block; font-size:.76rem; line-height:1.6; color:#71675f; }
+.svc-keyword:not(:last-child)::after { content:' /'; color:#b3a69b; margin-left:.7rem; }
+.role-context { font-size:.68rem; letter-spacing:.06em; color:#807367; margin-bottom:1.3rem; }
+.current-role-title { font-family:'Instrument Serif',serif; font-size:clamp(1.7rem,2.5vw,2.5rem); line-height:1.15; font-weight:400; }
+.wn-cards { border-left:1px solid #d1c5b8; padding-left:2rem; }
+.wn-cards > .wn-kicker { color:#8c5c3d; }.wn-media img { filter:grayscale(1) sepia(.35); object-position:58% 55%; }
+@media(prefers-reduced-motion:no-preference) {
+ #about-pin { height:100svh; min-height:0; padding-block:5.5rem 2rem; align-items:flex-start; overflow:hidden; }
+ .about-inner { margin-block:0; }
+}
+@media(max-width:960px) {
+ .svc-desc { padding:0; }.wn-cards { padding-left:0; border-left:0; border-top:1px solid #d1c5b8; padding-top:2rem; }
+ .about-grid { grid-template-columns:1fr; gap:2rem; }.about-photo { max-width:440px; margin-inline:auto; }
+}
+@media(max-width:600px) {
+ .hero-name::before { right:0; top:40%; width:46%; height:48%; }
+ .hero-bottom { padding:0; margin-inline:0; margin-top:2rem; }
+ .hero-inner { padding-bottom:6rem; }
+ .about-headline { font-size:clamp(2rem,8vw,2.7rem); }.about-body { gap:1.1rem; margin-top:1.3rem; }
+ .about-bio { font-size:.88rem; line-height:1.65; }.about-eyebrow { margin-bottom:1rem; }
+ .svc-row { gap:.65rem; }.svc-desc { gap:.3rem .65rem; }
+}
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#about-pin">Skip to content</a>
+<button class="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
 
 <!-- ── HEADER ── -->
 <header id="hdr">
@@ -490,7 +580,7 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
 <!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-bg">
-    <video autoplay muted loop playsinline preload="auto" disablepictureinpicture id="hero-video">
+    <video autoplay muted loop playsinline preload="auto" poster="images/hero-poster.jpg" aria-label="Daniel working beside a window" disablepictureinpicture id="hero-video">
       <source src="videos/hero-bg.mp4" type="video/mp4" />
     </video>
     <div class="hero-grain"></div>
@@ -500,33 +590,32 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
       <div></div>
       <div class="hero-meta-r" id="hero-meta-r">
         <span><b>2026</b> Portfolio</span>
-        <span>Business and Data Analyst</span>
+        <span>Revenue Operations Analyst at Gladly</span>
       </div>
     </div>
 
-    <div>
+    <div class="hero-copy">
       <h1 class="hero-name" id="hero-name">
-        <span class="row"><span class="word">Business</span> <span class="word amp">&amp;</span> <span class="word">Data</span></span>
-        <span class="row"><span class="word ital">Analyst.</span></span>
+        <span class="row"><span class="word">Applied AI</span> <span class="word amp">&amp;</span></span>
+        <span class="row"><span class="word ital">Revenue Systems.</span></span>
       </h1>
 
       <div class="hero-bottom" id="hero-bottom">
         <p class="hero-tagline">
-          <b>Daniel Rodriguez.</b> Turning signal into decision. Agentic AI, analytics
-          and B2B strategy for startups and enterprises across Europe and the Americas.
+          <b>Daniel Rodriguez.</b> I turn ambiguous business problems into structured workflows
+          and practical systems—connecting business context, data and AI from requirements through implementation.
         </p>
         <div class="hero-ctas">
-          <a href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/" target="_blank" rel="noopener" class="btn btn-orange">LinkedIn ↗</a>
-          <a href="https://github.com/daniel-st3" target="_blank" rel="noopener" class="btn btn-outline">GitHub ↗</a>
+          <a href="#valrun" class="btn btn-orange hero-primary">Explore Valrun ↓</a>
+          <a href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
           <a href="mailto:danielst.data@gmail.com" class="btn btn-outline">Email me</a>
           <a href="cv/Daniel_Rodriguez.pdf" target="_blank" rel="noopener" class="btn btn-outline">Resume ↓</a>
-          <a href="mailto:danielst.data@gmail.com?subject=Request%20to%20read%20your%20thesis" class="btn btn-outline">Request thesis</a>
         </div>
       </div>
     </div>
   </div>
   <div class="hero-foot">
-    <span>Data · AI · Analytics · B2B Strategy</span>
+    <span>Revenue Operations · Applied AI · Business Systems</span>
     <span class="scroll-arrow">Scroll <span class="arrow"></span></span>
   </div>
 </section>
@@ -535,19 +624,19 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
 <div class="marquee-strip">
   <div class="marquee-track">
     <span class="mq-item">Business Analytics</span>
-    <span class="mq-item">AI Pipelines</span>
-    <span class="mq-item">B2B Strategy</span>
-    <span class="mq-item">NLP and ML</span>
-    <span class="mq-item">Data Engineering</span>
-    <span class="mq-item">Agentic AI</span>
+    <span class="mq-item">Applied AI</span>
+    <span class="mq-item">Revenue Systems</span>
+    <span class="mq-item">Workflow Design</span>
+    <span class="mq-item">Business Systems</span>
+    <span class="mq-item">Automation</span>
     <span class="mq-item">SQL Modeling</span>
     <span class="mq-item">BI Dashboards</span>
     <span class="mq-item">Business Analytics</span>
-    <span class="mq-item">AI Pipelines</span>
-    <span class="mq-item">B2B Strategy</span>
-    <span class="mq-item">NLP and ML</span>
-    <span class="mq-item">Data Engineering</span>
-    <span class="mq-item">Agentic AI</span>
+    <span class="mq-item">Applied AI</span>
+    <span class="mq-item">Revenue Systems</span>
+    <span class="mq-item">Workflow Design</span>
+    <span class="mq-item">Business Systems</span>
+    <span class="mq-item">Automation</span>
     <span class="mq-item">SQL Modeling</span>
     <span class="mq-item">BI Dashboards</span>
   </div>
@@ -566,24 +655,16 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
         </h2>
         <div class="about-body" id="about-body">
           <p class="about-bio">
-            Business and Data Analyst with experience across <b>France and Colombia.</b>
-            Currently a <b>Revenue Operations Analyst at Gladly</b>, supporting campaign operations,
-            Salesforce and Tableau reporting, GTM data quality, and AI enabled workflows.
-            Building <b>agentic AI systems</b> using Claude API, LangGraph and FastAPI,
-            translating complex data into pricing, margin, and growth decisions.
+            My background connects business and analytics across <b>France and Colombia.</b>
+            As a <b>Revenue Operations Analyst at Gladly</b>, I work across revenue systems,
+            reporting and operational workflows. My focus is turning ambiguity into clear requirements,
+            practical solutions and decisions that teams can use.
           </p>
-          <div class="about-stats">
-            <div><div class="about-stat-n" data-target="17">17</div><div class="about-stat-l">Certifications</div></div>
-            <div><div class="about-stat-n" data-target="50" data-suffix="+">50+</div><div class="about-stat-l">SMEs advised</div></div>
-            <div><div class="about-stat-n" data-target="4">4</div><div class="about-stat-l">Languages</div></div>
-          </div>
           <div class="about-tags">
             <span class="about-tag">US Citizen</span>
-            <span class="about-tag">No visa required</span>
+            <span class="about-tag">Business · Data · Systems</span>
             <span class="about-tag">Remote or hybrid</span>
-            <span class="about-tag">Best Thesis · KEDGE 2026</span>
-            <span class="about-tag">Colfuturo Scholar</span>
-            <span class="about-tag">EN · ES · FR · PT</span>
+            <span class="about-tag">EN / ES · Native; FR / PT · B1</span>
           </div>
           <div class="about-ctas">
             <a href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/" target="_blank" rel="noopener" class="btn btn-orange">LinkedIn ↗</a>
@@ -595,7 +676,7 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
       <div>
         <div class="about-photo" id="about-photo">
           <img src="images/daniel-rodriguez.jpeg" alt="Daniel Rodriguez" />
-          <video autoplay muted loop playsinline preload="auto" disablepictureinpicture>
+          <video autoplay muted loop playsinline preload="auto" poster="images/daniel-rodriguez.jpeg" aria-label="Portrait of Daniel" disablepictureinpicture>
             <source src="videos/portrait.mp4" type="video/mp4" />
           </video>
         </div>
@@ -608,27 +689,32 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
 <section id="svc-pin">
   <div class="svc-inner">
     <p class="svc-eyebrow">What I do</p>
-    <h2 class="svc-bigtitle">Services <i>and</i> Capabilities</h2>
+    <h2 class="svc-bigtitle">Areas <i>of</i> Work</h2>
     <ul class="svc-list" id="svc-list">
       <li class="svc-row">
         <span class="svc-n">01</span>
-        <span class="svc-name"><span class="word">AI and Data Pipelines</span></span>
-        <span class="svc-desc">Agentic systems using Claude API, LangGraph and FastAPI for SMEs and startups</span>
+        <span class="svc-name"><span class="word">Applied AI &amp; Automation</span></span>
+        <span class="svc-desc"><span class="svc-keyword">LLMs</span><span class="svc-keyword">AI agents</span><span class="svc-keyword">RAG</span><span class="svc-keyword">Automation</span><span class="svc-keyword">Use-case design</span></span>
       </li>
       <li class="svc-row">
         <span class="svc-n">02</span>
-        <span class="svc-name"><span class="word">Business Intelligence</span></span>
-        <span class="svc-desc">SQL pricing models, Looker dashboards, KPI tracking, reporting automation</span>
+        <span class="svc-name"><span class="word">Revenue &amp; GTM Systems</span></span>
+        <span class="svc-desc"><span class="svc-keyword">Salesforce</span><span class="svc-keyword">Marketo</span><span class="svc-keyword">Apollo</span><span class="svc-keyword">GTM operations</span><span class="svc-keyword">Data quality</span></span>
       </li>
       <li class="svc-row">
         <span class="svc-n">03</span>
-        <span class="svc-name"><span class="word">B2B Partnerships</span></span>
-        <span class="svc-desc">Market mapping, lead qualification, pipeline building, pan European strategy</span>
+        <span class="svc-name"><span class="word">Analytics &amp; Decisions</span></span>
+        <span class="svc-desc"><span class="svc-keyword">Tableau</span><span class="svc-keyword">SQL</span><span class="svc-keyword">Reporting</span><span class="svc-keyword">Decision support</span><span class="svc-keyword">Data reliability</span></span>
       </li>
       <li class="svc-row">
         <span class="svc-n">04</span>
-        <span class="svc-name"><span class="word">Research and ML</span></span>
-        <span class="svc-desc">NLP pipelines, predictive modeling, financial ML, classification systems</span>
+        <span class="svc-name"><span class="word">Workflow &amp; Solution Design</span></span>
+        <span class="svc-desc"><span class="svc-keyword">Requirements</span><span class="svc-keyword">Workflow design</span><span class="svc-keyword">Stakeholder discovery</span><span class="svc-keyword">Business analysis</span><span class="svc-keyword">Validation</span></span>
+      </li>
+      <li class="svc-row">
+        <span class="svc-n">05</span>
+        <span class="svc-name"><span class="word">Integration &amp; Implementation</span></span>
+        <span class="svc-desc"><span class="svc-keyword">Systems integration</span><span class="svc-keyword">QA</span><span class="svc-keyword">Data governance</span><span class="svc-keyword">Cross-functional delivery</span></span>
       </li>
     </ul>
   </div>
@@ -640,45 +726,34 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
     <p class="svc-eyebrow">Currently</p>
     <div class="wn-grid">
       <div>
-        <p class="wn-kicker">Gladly · Revenue Operations Analyst</p>
+        <p class="wn-kicker">Current role</p><p class="role-context">Professional · Revenue Operations</p>
+        <p class="current-role-title">Revenue Operations Analyst at Gladly</p>
         <h2 class="wn-headline" id="wn-headline">
-          Supporting the revenue engine,
-          <i>from Marketo campaigns to <span class="blue">AI-enabled</span> GTM workflows.</i>
+          Revenue systems,
+          <i>from business questions to <span class="blue">validated workflows.</span></i>
         </h2>
         <p class="wn-note">
-          Hands-on RevOps work across Marketo, Salesforce, Tableau, data governance, lifecycle campaigns,
-          and automation. Strategic input, not ticket-taking.
+          My work spans account prioritization, territory and capacity analysis, reporting reliability,
+          and CRM / GTM data quality. I contribute to enrichment and governance, integrations and automation,
+          working across teams from requirements through implementation and QA.
         </p>
       </div>
       <div class="wn-cards" id="wn-cards">
-        <div class="wn-card">
-          <div class="wn-media"><img src="images/hero-landscape.png" alt="Revenue operations dashboard landscape" /></div>
+        <p class="wn-kicker">Latest build</p><p class="role-context">Independent · Personal project</p>
+        <article class="wn-card" id="valrun">
+          <div class="wn-media"><img src="images/valrun-abstract.jpg" alt="Intersecting architectural planes and geometric structures" width="1000" height="760" /></div>
           <div class="wn-content">
-            <div class="wn-card-top"><span class="wn-dot"></span><span class="wn-role">Gladly · Revenue Operations Analyst</span></div>
-            <p class="wn-desc">Owning campaign operations in Marketo, building Salesforce and Tableau reporting infrastructure, improving GTM data quality, and integrating AI into operational workflows.</p>
-          </div>
-        </div>
-        <div class="wn-card">
-          <div class="wn-media"><img src="github_images/Colombian Flah.jpeg" alt="VeedurIA civic AI platform" /></div>
-          <div class="wn-content">
-            <div class="wn-card-top"><span class="wn-dot" style="animation-delay:.5s"></span><span class="wn-role">VeedurIA · Civic AI</span></div>
-            <p class="wn-desc">AI-powered civic oversight for Colombia. It analyzes public contracting data to detect anomalies and surface transparency insights for citizens and watchdogs.</p>
+            <div class="wn-card-top"><span class="wn-dot"></span><span class="wn-role">Valrun · Flagship personal project</span></div>
+            <h3 class="proj-name">Is this work actually worth doing?</h3>
+            <p class="wn-desc">Valrun evaluates the economics of AI-agent work before execution. It maps the capabilities a task needs and checks observed service supply and route evidence. Known costs, explicit assumptions and unknowns stay separate. The result is a deterministic economic decision with source provenance, freshness and an auditable receipt.</p>
+            <p class="wn-desc">REST, OpenAPI and read-only MCP expose the evidence. AI synthesis does not override the economics. Valrun does not autonomously claim jobs, bid, pay, use wallets or execute discovered services.</p>
+            <p class="wn-desc">I originated Valrun and continue to direct it, defining its product thesis, use cases, economic rules and safety boundaries. I shape architecture and integrations, review behavior, and iterate with AI development agents.</p>
             <div class="wn-links">
-              <a href="https://veeduria.vercel.app/" target="_blank" rel="noopener">Live site ↗</a>
-              <a href="https://github.com/daniel-st3/veedurIA" target="_blank" rel="noopener">GitHub ↗</a>
+              <a href="https://signalforge-rose-two.vercel.app/en" target="_blank" rel="noopener">Explore Valrun ↗</a>
+              <a href="https://github.com/daniel-st3/valrun" target="_blank" rel="noopener">Repository ↗</a>
             </div>
           </div>
-        </div>
-        <div class="wn-card">
-          <div class="wn-media"><img src="preview-assets/bg.jpeg" alt="AI CFO Agent financial intelligence preview" /></div>
-          <div class="wn-content">
-            <div class="wn-card-top"><span class="wn-dot" style="animation-delay:1s"></span><span class="wn-role">AI CFO Agent · Open Source</span></div>
-            <p class="wn-desc">Self-hosted financial intelligence with 24 features at $0.003 per run: runway modeling, Monte Carlo survival, fraud detection, KPI scoring, and agentic finance workflows.</p>
-            <div class="wn-links">
-              <a href="https://github.com/daniel-st3/ai-cfo-agent" target="_blank" rel="noopener">GitHub ↗</a>
-            </div>
-          </div>
-        </div>
+        </article>
       </div>
     </div>
   </div>
@@ -698,65 +773,23 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
     </a>
   </div>
 
-  <div class="proj-row-wrap proj-row-gap" id="pr1-wrap">
+  <div class="proj-row-wrap" id="pr1-wrap">
     <div class="proj-row-track" id="pr1">
-      <a href="https://github.com/daniel-st3/ai-cfo-agent" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="preview-assets/bg.jpeg" alt="AI CFO Agent" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">AI / Finance · Open Source</div><div class="proj-name">AI CFO Agent</div><div class="proj-desc">Upload CSV, get a board ready finance cockpit in 30 seconds. 24 features at $0.003 per run.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
+      <a href="https://signalforge-rose-two.vercel.app/en" target="_blank" rel="noopener" class="proj-card" draggable="false">
+        <img src="preview-assets/bg.jpeg" alt="" class="proj-img" draggable="false" />
+        <div class="proj-body"><div class="proj-meta">Flagship · Applied AI</div><div class="proj-name">Valrun</div><div class="proj-desc">Evaluating the economics of AI-agent work before execution.</div><div class="proj-foot"><span class="proj-link">Explore Valrun ↗</span><span class="proj-arr">↗</span></div></div>
       </a>
       <a href="https://veeduria.vercel.app/" target="_blank" rel="noopener" class="proj-card" draggable="false">
         <img src="github_images/Colombian Flah.jpeg" alt="VeedurIA" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">Civic Tech · NLP · Colombia</div><div class="proj-name">VeedurIA</div><div class="proj-desc">AI powered civic oversight for Colombia. Detects anomalies in public contracting data.</div><div class="proj-foot"><span class="proj-link">Live site ↗</span><span class="proj-arr">↗</span></div></div>
-      </a>
-      <a href="https://github.com/daniel-st3/Daniel_Rodriguez_MSc_Thesis_Final" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="github_images/Perplexity Blog.jpeg" alt="Predictive NLP Pipeline" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">ML / NLP · Best Thesis Finalist</div><div class="proj-name">Predictive NLP Financial Pipeline</div><div class="proj-desc">Reddit sentiment outperforms professional financial news 50× as a price predictor.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
-      </a>
-      <a href="https://github.com/daniel-st3/python3-payments_nl_sql_agent" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="github_images/Perplexity Blog (1).jpeg" alt="NL2SQL Analytics Agent" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">AI / Fintech · Claude API</div><div class="proj-name">NL2SQL Analytics Agent</div><div class="proj-desc">Natural language to SQL for B2B fintech. Query in English or Spanish.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
-      </a>
-    </div>
-  </div>
-
-  <div class="proj-row-wrap proj-row-gap" id="pr2-wrap">
-    <div class="proj-row-track" id="pr2">
-      <a href="https://github.com/daniel-st3/poly-what" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="github_images/_ (4).jpeg" alt="Poly-What" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">Prediction Markets · Analytics</div><div class="proj-name">Poly What</div><div class="proj-desc">Prediction market trading for Polymarket. Bots, backtesting, strategy postmortems.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
+        <div class="proj-body"><div class="proj-meta">Civic Tech · Colombia</div><div class="proj-name">VeedurIA</div><div class="proj-desc">Organizes Colombian procurement and legislative data so journalists and citizens can prioritize review, inspect explanatory signals and return to official sources. Signals are not proof of wrongdoing.</div><div class="proj-foot"><span class="proj-link">Live site ↗</span><span class="proj-arr">↗</span></div></div>
       </a>
       <a href="https://github.com/daniel-st3/reconciliation-demo" target="_blank" rel="noopener" class="proj-card" draggable="false">
         <img src="github_images/If it only gets better.jpeg" alt="B2B Reconciliation Automation" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">Automation · ERP / Finance</div><div class="proj-name">B2B Reconciliation Automation</div><div class="proj-desc">Fuzzy matching payments reconciliation. Jaro Winkler, 5 status categories.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
-      </a>
-      <a href="https://github.com/daniel-st3/TikTok-Content-Moderation" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="github_images/Eddy Gonzales Yoga.jpeg" alt="TikTok Content Moderation" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">ML · Content Moderation</div><div class="proj-name">TikTok Content Moderation</div><div class="proj-desc">99%+ recall classifier. Claims vs opinions in TikTok video content.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
-      </a>
-      <a href="https://github.com/daniel-st3/sql-chicago-data-analysis" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="github_images/_ (2).jpeg" alt="Chicago BI Dashboard" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">BI / SQL · Streamlit</div><div class="proj-name">Chicago BI Dashboard</div><div class="proj-desc">Crime, socioeconomic, and school data across 77 Chicago communities.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
-      </a>
-    </div>
-  </div>
-
-  <div class="proj-row-wrap" id="pr3-wrap">
-    <div class="proj-row-track" id="pr3">
-      <a href="https://github.com/daniel-st3/fraud-detection-system" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="github_images/Nowhere.jpeg" alt="Fraud Detection System" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">ML · Finance · Risk</div><div class="proj-name">Fraud Detection System</div><div class="proj-desc">Calibrated RandomForest fraud scorer with a real time interactive Dash dashboard.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
-      </a>
-      <a href="https://github.com/daniel-st3/personal-growth-command-center" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="github_images/Dreamscape.jpeg" alt="Growth Command Center" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">Personal · AI powered</div><div class="proj-name">Personal Growth Command Center</div><div class="proj-desc">Goal setting, habit tracking, and AI powered insights for continuous growth.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
-      </a>
-      <a href="https://github.com/daniel-st3/ai-analytics-prompt-playbook" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="preview-assets/dreamscape.jpeg" alt="AI Analytics Playbook" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">Prompt Engineering · Analytics</div><div class="proj-name">AI Analytics Prompt Playbook</div><div class="proj-desc">Prompt templates for SQL generation, data cleaning, and insight synthesis.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
+        <div class="proj-body"><div class="proj-meta">Automation · Finance Workflow</div><div class="proj-name">B2B Reconciliation Automation</div><div class="proj-desc">A synthetic-data prototype for matching payments and reviewing exceptions.</div><div class="proj-foot"><span class="proj-link">GitHub ↗</span><span class="proj-arr">↗</span></div></div>
       </a>
       <a href="https://github.com/daniel-st3" target="_blank" rel="noopener" class="proj-card" draggable="false">
-        <img src="preview-assets/colombia.jpeg" alt="More on GitHub" class="proj-img" draggable="false" />
-        <div class="proj-body"><div class="proj-meta">Open Source · All Projects</div><div class="proj-name">More on GitHub</div><div class="proj-desc">Explore the full portfolio of open source data, AI, and analytics projects.</div><div class="proj-foot"><span class="proj-link">github.com/daniel-st3 ↗</span><span class="proj-arr">↗</span></div></div>
+        <img src="preview-assets/colombia.jpeg" alt="" class="proj-img" draggable="false" />
+        <div class="proj-body"><div class="proj-meta">Earlier Work · Experiments</div><div class="proj-name">More on GitHub</div><div class="proj-desc">Earlier projects in analytics, ML and automation.</div><div class="proj-foot"><span class="proj-link">github.com/daniel-st3 ↗</span><span class="proj-arr">↗</span></div></div>
       </a>
     </div>
   </div>
@@ -764,7 +797,7 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
 
 <!-- ── INTERLUDE (FULLWIDTH VIDEO) ── -->
 <section id="interlude">
-  <video class="interlude-video" id="interlude-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture>
+  <video class="interlude-video" poster="images/interlude-poster.jpg" aria-label="Atmospheric portfolio interlude" id="interlude-video" autoplay muted loop playsinline preload="auto" disablepictureinpicture>
     <source src="videos/interlude-bg.mp4" type="video/mp4" />
   </video>
   <div class="interlude-copy">
@@ -784,12 +817,10 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
     <div class="thesis-grid" id="thesis-grid">
       <div>
         <span class="thesis-badge">MSc Thesis · KEDGE Business School · 2026</span>
-        <h3 class="thesis-title">AI Driven Analysis of <i>Political Bias</i> in Financial Media</h3>
-        <p class="thesis-desc">End to end NLP pipeline quantifying political bias in financial news. Key finding. Retail Reddit sentiment outperforms professional financial news by 50× as a short term equity price predictor. Defended February 2026.</p>
+        <h2 class="thesis-title">AI-Driven Analysis of <i>Political Bias</i> in Financial Media</h2>
+        <p class="thesis-desc">Financial news, Reddit and market data: an NLP investigation of political bias and sentiment, tested with comparative models and time-aware validation. Best predictive AUC: <b>~0.523</b> versus a <b>0.500</b> baseline.</p>
         <div class="awards-list">
-          <div class="award-row"><span class="award-icon">🏆</span><div><div class="award-name">Best Thesis Finalist</div><div class="award-sub">KEDGE Business School · 2026</div></div></div>
-          <div class="award-row"><span class="award-icon">🎓</span><div><div class="award-name">Colfuturo Scholarship</div><div class="award-sub">Merit based national award, Colombia</div></div></div>
-          <div class="award-row"><span class="award-icon">⭐</span><div><div class="award-name">KEDGE Academic Excellence Grant</div><div class="award-sub">€5,000 scholarship</div></div></div>
+          <div class="award-row"><span class="award-icon">02</span><div><div class="award-name">2nd place · Mon mémoire à KEDGE en 180 secondes</div><div class="award-sub">2nd out of approximately 3,500 theses · KEDGE · 2026</div></div></div>
         </div>
         <div class="thesis-ctas">
           <a href="mailto:danielst.data@gmail.com?subject=Request%20to%20read%20your%20thesis" class="btn btn-orange">Request Access</a>
@@ -798,14 +829,15 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
       </div>
       <div>
         <div class="thesis-media">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/VvdvdvSqf1M?rel=0&modestbranding=1"
-            srcdoc="<style>*{box-sizing:border-box}body{margin:0;background:#0f0c0a;font-family:Arial,sans-serif}a{position:absolute;inset:0;display:grid;place-items:center;color:white;text-decoration:none;overflow:hidden}img{width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(1.05)}span{position:absolute;display:grid;place-items:center;width:76px;height:76px;border-radius:50%;background:rgba(255,188,149,.92);color:#1a1714;font-size:28px;box-shadow:0 18px 50px rgba(0,0,0,.35)}b{position:absolute;left:24px;bottom:22px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 2px 16px rgba(0,0,0,.8)}</style><a href='https://www.youtube-nocookie.com/embed/VvdvdvSqf1M?autoplay=1&amp;rel=0&amp;modestbranding=1'><img src='images/thesis-preview.png' alt='AI Driven Political Bias Analysis thesis defense video preview'><span>▶</span><b>Play thesis defense</b></a>"
-            title="AI Driven Political Bias Analysis in Financial Media · 3 Minute Thesis"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <button type="button" class="thesis-poster" aria-label="Play Daniel’s three-minute KEDGE thesis presentation">
+            <span class="poster-kicker">KEDGE BUSINESS SCHOOL · MSc RESEARCH</span>
+            <span class="poster-title">Bias. Sentiment.<br><i>What does the evidence say?</i></span>
+            <img src="images/thesis-preview.png" alt="Original thesis title page: AI-Driven Analysis of Political Bias in Financial Media, Daniel Rodriguez" width="992" height="254" />
+            <span class="poster-footer"><span class="poster-play" aria-hidden="true">▶</span><span>Watch the 3-minute presentation<br><small>2nd place · Mon mémoire à KEDGE en 180 secondes</small></span></span>
+          </button>
         </div>
+        <p class="research-meta">NLP / Financial news + Reddit / Time-aware validation</p>
+        <a class="research-video-link" href="https://www.youtube.com/watch?v=VvdvdvSqf1M" target="_blank" rel="noopener">Watch on YouTube ↗</a>
       </div>
     </div>
   </div>
@@ -821,39 +853,34 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
     </h2>
     <ul class="exp-list" id="exp-list">
       <li class="exp-row">
-        <div class="exp-yr">2026<br>Now</div>
-        <div><div class="exp-org">Gladly</div><div class="exp-role">Revenue Operations Analyst · GTM Systems and Analytics</div><ul class="exp-buls"><li>Building and optimizing Marketo campaign operations: program builds, email deployment, segmentation, lead scoring, and Marketo to Salesforce sync.</li><li>Maintaining Salesforce and Tableau reporting for pipeline health, rep performance, activity metrics, and full funnel conversion trends.</li><li>Owning GTM data quality across deduplication, field standards, lead routing, enrichment, and AI driven workflow improvements.</li></ul></div>
+        <div class="exp-yr">May 2026<br>Present</div>
+        <div><div class="exp-org">Gladly</div><div class="exp-role">Revenue Operations Analyst</div><ul class="exp-buls"><li>Account prioritization, territory and capacity analysis, reporting reliability, and CRM / GTM data quality.</li><li>Contributing to enrichment and governance, integrations and automation through cross-functional implementation and QA.</li></ul></div>
         <span class="exp-badge hl">Present</span>
       </li>
       <li class="exp-row">
-        <div class="exp-yr">2026</div>
-        <div><div class="exp-org">Freelance, AI and Data Analyst</div><div class="exp-role">Independent · Bogotá, Colombia · Remote</div><ul class="exp-buls"><li>Building agentic AI pipelines using Claude API, LangGraph, FastAPI for clients globally.</li><li>BI dashboards, pricing models, and data strategy across Europe and the Americas.</li><li>Open source AI CFO agent. 24 feature financial intelligence at $0.003 per run.</li></ul></div>
-        <span class="exp-badge">AI</span>
-      </li>
-      <li class="exp-row">
-        <div class="exp-yr">2025</div>
-        <div><div class="exp-org">Back Market</div><div class="exp-role">Strategic Partnerships, B2B · Paris, France</div><ul class="exp-buls"><li>SQL pricing models monitoring 200K+ weekly GMV. Renegotiated tender offers.</li><li>Automated Looker dashboards, saved 8 hours per week on reporting, expanded KPIs from 8 to 20+.</li><li>Pan European market mapping. €240K qualified pipeline across 5 countries.</li></ul></div>
+        <div class="exp-yr">Jul – Dec<br>2025</div>
+        <div><div class="exp-org">Back Market</div><div class="exp-role">Strategic Partnerships Management Intern (B2B) · Paris, France</div><ul class="exp-buls"><li>Pricing and partner analysis to inform B2B tender discussions.</li><li>Reporting workflows and KPI dashboards supporting commercial and operational decisions.</li><li>European partner research and cross-functional coordination across Product, Technology and Business.</li></ul></div>
         <span class="exp-badge">B2B</span>
       </li>
       <li class="exp-row">
-        <div class="exp-yr">2024 · 2026</div>
-        <div><div class="exp-org">KEDGE Business School</div><div class="exp-role">MSc Data Analytics for Business · Bordeaux, France</div><ul class="exp-buls"><li>Thesis. AI Driven Analysis of Political Bias in Financial Media. Best Thesis finalist.</li><li>Colfuturo Scholar plus €5,000 KEDGE Academic Scholarship.</li></ul></div>
+        <div class="exp-yr">2026</div>
+        <div><div class="exp-org">KEDGE Business School</div><div class="exp-role">MSc Data Analytics for Business · Bordeaux, France</div><ul class="exp-buls"><li>Thesis. AI Driven Analysis of Political Bias in Financial Media. 2nd place in “Mon mémoire à KEDGE en 180 secondes.”</li><li>Academically completed / awarded in 2026.</li></ul></div>
         <span class="exp-badge edu">MSc</span>
       </li>
       <li class="exp-row">
-        <div class="exp-yr">2024</div>
-        <div><div class="exp-org">U. de La Sabana</div><div class="exp-role">SME Consultant and AI Trainer · Bogotá, Colombia</div><ul class="exp-buls"><li>Advised 50+ SMEs on digitalization and AI based operational strategy.</li><li>Delivered in person data and AI training sessions to business owners.</li></ul></div>
+        <div class="exp-yr">Jan 2023<br>Jun 2024</div>
+        <div><div class="exp-org">U. de La Sabana</div><div class="exp-role">Strategic Consulting Lead, Consultorio de Servicio · Colombia</div><ul class="exp-buls"><li>Developed SME digitalization roadmaps around business needs and practical adoption of digital tools.</li><li>Designed and led data-literacy workshops for small-business owners.</li></ul></div>
         <span class="exp-badge">Consulting</span>
       </li>
       <li class="exp-row">
-        <div class="exp-yr">2022 · 2024</div>
-        <div><div class="exp-org">Universidad de La Sabana</div><div class="exp-role">BSc International Business · Bogotá</div><ul class="exp-buls"><li>Added as second undergraduate degree alongside Business Administration.</li><li>Focused on global trade, international market strategy, and cross-cultural management.</li><li>Graduated with distinction as part of the dual degree program.</li></ul></div>
-        <span class="exp-badge edu">B.Sc.</span>
+        <div class="exp-yr">May 2026</div>
+        <div><div class="exp-org">Universidad de La Sabana</div><div class="exp-role">International Business Administration · Chía, Colombia</div><ul class="exp-buls"><li>Added as second undergraduate degree alongside Business Administration.</li><li>Focused on global trade, international market strategy, and cross-cultural management.</li><li>Degree awarded / conferred May 2026.</li></ul></div>
+        <span class="exp-badge edu">Degree</span>
       </li>
       <li class="exp-row">
-        <div class="exp-yr">2020 · 2024</div>
-        <div><div class="exp-org">Universidad de La Sabana</div><div class="exp-role">BSc Business Administration · Bogotá</div><ul class="exp-buls"><li>Full Academic Excellence Scholarship. Top 1%. 3× Distinguished Student Award.</li><li>Teaching Assistant. 3 analytics modules, 60+ student cohort.</li></ul></div>
-        <span class="exp-badge edu">B.Sc.</span>
+        <div class="exp-yr">May 2026</div>
+        <div><div class="exp-org">Universidad de La Sabana</div><div class="exp-role">Business Administration · Chía, Colombia</div><ul class="exp-buls"><li>Degree awarded / conferred May 2026.</li><li>Teaching Assistant – Strategic Marketing &amp; International Financial Markets, Jan 2023 – Jun 2024. Created analytical teaching materials and interactive dashboards.</li></ul></div>
+        <span class="exp-badge edu">Degree</span>
       </li>
     </ul>
   </div>
@@ -878,40 +905,29 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
     <div class="certs-strip">
       <div class="certs-head">
         <div>
-          <div class="certs-label">15 visible certifications</div>
-          <p class="certs-sub">A moving certificate wall using the real certificate images. Open any frame to view the artifact.</p>
-        </div>
-        <a href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/details/certifications/" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn certs ↗</a>
-      </div>
-      <div class="cert-wall" id="cert-wall">
-        <div class="cert-row">
-          <div class="cert-track">
-            <a class="cert-card" href="certifications/Model Context Protocol Advanced Topics by Anthropic.png" target="_blank" rel="noopener"><img src="certifications/Model Context Protocol Advanced Topics by Anthropic.png" alt="Model Context Protocol Advanced Topics by Anthropic certificate" /><span class="cert-open">Open</span><span class="cert-title">Model Context Protocol: Advanced Topics · Anthropic</span></a>
-            <a class="cert-card" href="certifications/Claude Code in Action by Anthropic.png" target="_blank" rel="noopener"><img src="certifications/Claude Code in Action by Anthropic.png" alt="Claude Code in Action by Anthropic certificate" /><span class="cert-open">Open</span><span class="cert-title">Claude Code in Action · Anthropic</span></a>
-            <a class="cert-card" href="certifications/Google Advanced Data Analytics Specialization  Google.jpeg" target="_blank" rel="noopener"><img src="certifications/Google Advanced Data Analytics Specialization  Google.jpeg" alt="Google Advanced Data Analytics certificate" /><span class="cert-open">Open</span><span class="cert-title">Google Advanced Data Analytics</span></a>
-            <a class="cert-card" href="certifications/Google Business Intelligence Specialization  Google.jpeg" target="_blank" rel="noopener"><img src="certifications/Google Business Intelligence Specialization  Google.jpeg" alt="Google Business Intelligence certificate" /><span class="cert-open">Open</span><span class="cert-title">Google Business Intelligence</span></a>
-            <a class="cert-card" href="certifications/Natural Language Processing on Google Cloud  Google Cloud Skills Boost.jpeg" target="_blank" rel="noopener"><img src="certifications/Natural Language Processing on Google Cloud  Google Cloud Skills Boost.jpeg" alt="Natural Language Processing on Google Cloud certificate" /><span class="cert-open">Open</span><span class="cert-title">NLP on Google Cloud</span></a>
-          </div>
-        </div>
-        <div class="cert-row">
-          <div class="cert-track">
-            <a class="cert-card" href="certifications/Machine Learning for Trading Specialization  New York Institute of Finance.jpeg" target="_blank" rel="noopener"><img src="certifications/Machine Learning for Trading Specialization  New York Institute of Finance.jpeg" alt="Machine Learning for Trading certificate" /><span class="cert-open">Open</span><span class="cert-title">Machine Learning for Trading · NYIF</span></a>
-            <a class="cert-card" href="certifications/Microsoft Certified- Azure AI Fundamentals AI 900  Microsoft.jpeg" target="_blank" rel="noopener"><img src="certifications/Microsoft Certified- Azure AI Fundamentals AI 900  Microsoft.jpeg" alt="Azure AI Fundamentals certificate" /><span class="cert-open">Open</span><span class="cert-title">Azure AI Fundamentals · AI-900</span></a>
-            <a class="cert-card" href="certifications/Machine Learning Algorithms- Supervised Learning Tip to Tail  Amii (Alberta Machine Intelligence Institute).jpeg" target="_blank" rel="noopener"><img src="certifications/Machine Learning Algorithms- Supervised Learning Tip to Tail  Amii (Alberta Machine Intelligence Institute).jpeg" alt="Machine Learning Algorithms certificate" /><span class="cert-open">Open</span><span class="cert-title">ML Algorithms · Amii</span></a>
-            <a class="cert-card" href="certifications/Machine Learning with Python  IBM.jpeg" target="_blank" rel="noopener"><img src="certifications/Machine Learning with Python  IBM.jpeg" alt="Machine Learning with Python certificate" /><span class="cert-open">Open</span><span class="cert-title">Machine Learning with Python · IBM</span></a>
-            <a class="cert-card" href="certifications/Python for Data Science, AI &amp; Development  IBM.jpeg" target="_blank" rel="noopener"><img src="certifications/Python for Data Science, AI &amp; Development  IBM.jpeg" alt="Python for Data Science certificate" /><span class="cert-open">Open</span><span class="cert-title">Python for Data Science · IBM</span></a>
-          </div>
-        </div>
-        <div class="cert-row">
-          <div class="cert-track">
-            <a class="cert-card" href="certifications/Databases and SQL for Data Science with Python (with Honors).jpeg" target="_blank" rel="noopener"><img src="certifications/Databases and SQL for Data Science with Python (with Honors).jpeg" alt="Databases and SQL for Data Science certificate" /><span class="cert-open">Open</span><span class="cert-title">Databases and SQL for Data Science · IBM</span></a>
-            <a class="cert-card" href="certifications/Advanced Data Visualization with Tableau  Tableau.jpeg" target="_blank" rel="noopener"><img src="certifications/Advanced Data Visualization with Tableau  Tableau.jpeg" alt="Advanced Data Visualization with Tableau certificate" /><span class="cert-open">Open</span><span class="cert-title">Advanced Data Visualization · Tableau</span></a>
-            <a class="cert-card" href="certifications/Digital Marketing.jpeg" target="_blank" rel="noopener"><img src="certifications/Digital Marketing.jpeg" alt="Digital Marketing certificate" /><span class="cert-open">Open</span><span class="cert-title">Digital Marketing</span></a>
-            <a class="cert-card" href="certifications/Advanced Excel and Data Modeling.png" target="_blank" rel="noopener"><img src="certifications/Advanced Excel and Data Modeling.png" alt="Advanced Excel and Data Modeling certificate" /><span class="cert-open">Open</span><span class="cert-title">Advanced Excel and Data Modeling</span></a>
-            <a class="cert-card" href="certifications/Total Python Advanced Programming.jpeg" target="_blank" rel="noopener"><img src="certifications/Total Python Advanced Programming.jpeg" alt="Total Python Advanced Programming certificate" /><span class="cert-open">Open</span><span class="cert-title">Total Python Advanced</span></a>
-          </div>
+          <div class="certs-label">Selected Learning / Credentials</div>
+          <p class="certs-sub">Seven completed credentials across applied AI, analytics and BI. Focused learning that supports the work.</p>
         </div>
       </div>
+      <!-- credentials:start -->
+<div class="cert-controls"><span>Drag to explore · Select a credential to visit LinkedIn</span><button type="button" class="btn btn-outline" id="cert-pause" aria-pressed="false">Pause credentials</button></div>
+<div class="cert-wall" aria-label="Seven selected credentials">
+<div class="cert-row" tabindex="0" role="region" aria-label="Credential row 1; use left and right arrow keys"><div class="cert-track" id="cert-track-0">
+<a class="cert-card" data-credential="ibm-ai-engineering" href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/?isSelfProfile=true" target="_blank" rel="noopener"><img src="/certifications/ibm-ai-engineering.jpg" alt="IBM AI Engineering Professional Certificate completion certificate" width="900" height="696" draggable="false"/><span class="cert-title">IBM AI Engineering Professional Certificate<small>IBM · 2026</small></span><span class="cert-open">LinkedIn ↗</span></a>
+<a class="cert-card" data-credential="ibm-genai-engineering" href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/?isSelfProfile=true" target="_blank" rel="noopener"><img src="/certifications/ibm-genai-engineering.jpg" alt="IBM Generative AI Engineering Professional Certificate completion certificate" width="900" height="696" draggable="false"/><span class="cert-title">IBM Generative AI Engineering Professional Certificate<small>IBM · 2026</small></span><span class="cert-open">LinkedIn ↗</span></a>
+<a class="cert-card" data-credential="google-bi" href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/?isSelfProfile=true" target="_blank" rel="noopener"><img src="/certifications/Google Business Intelligence Specialization  Google.jpeg" alt="Google Business Intelligence completion certificate" width="900" height="696" draggable="false"/><span class="cert-title">Google Business Intelligence<small>Google · 2024</small></span><span class="cert-open">LinkedIn ↗</span></a>
+</div></div>
+<div class="cert-row" tabindex="0" role="region" aria-label="Credential row 2; use left and right arrow keys"><div class="cert-track" id="cert-track-1">
+<a class="cert-card" data-credential="anthropic-mcp-advanced" href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/?isSelfProfile=true" target="_blank" rel="noopener"><img src="/certifications/Model Context Protocol Advanced Topics by Anthropic.png" alt="Model Context Protocol: Advanced Topics completion certificate" width="900" height="696" draggable="false"/><span class="cert-title">Model Context Protocol: Advanced Topics<small>Anthropic · 2026</small></span><span class="cert-open">LinkedIn ↗</span></a>
+<a class="cert-card" data-credential="microsoft-ai-900" href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/?isSelfProfile=true" target="_blank" rel="noopener"><img src="/certifications/Microsoft Certified- Azure AI Fundamentals AI 900  Microsoft.jpeg" alt="Microsoft Certified: Azure AI Fundamentals completion certificate" width="900" height="696" draggable="false"/><span class="cert-title">Microsoft Certified: Azure AI Fundamentals<small>Microsoft · 2025</small></span><span class="cert-open">LinkedIn ↗</span></a>
+</div></div>
+<div class="cert-row" tabindex="0" role="region" aria-label="Credential row 3; use left and right arrow keys"><div class="cert-track" id="cert-track-2">
+<a class="cert-card" data-credential="tableau-advanced-viz" href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/?isSelfProfile=true" target="_blank" rel="noopener"><img src="/certifications/Advanced Data Visualization with Tableau  Tableau.jpeg" alt="Advanced Data Visualization with Tableau completion certificate" width="900" height="696" draggable="false"/><span class="cert-title">Advanced Data Visualization with Tableau<small>Tableau Learning Partner · 2025</small></span><span class="cert-open">LinkedIn ↗</span></a>
+<a class="cert-card" data-credential="google-cloud-nlp" href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/?isSelfProfile=true" target="_blank" rel="noopener"><img src="/certifications/Natural Language Processing on Google Cloud  Google Cloud Skills Boost.jpeg" alt="Natural Language Processing on Google Cloud completion certificate" width="900" height="696" draggable="false"/><span class="cert-title">Natural Language Processing on Google Cloud<small>Google Cloud · 2024</small></span><span class="cert-open">LinkedIn ↗</span></a>
+</div></div>
+</div>
+<p class="specialization-areas"><b>Specializations · focused study</b><span>Generative AI · AI Engineering · LLMs &amp; Transformers · RAG &amp; LangChain · Deep Learning · Business Intelligence</span></p>
+<!-- credentials:end -->
     </div>
   </div>
 </section>
@@ -950,7 +966,7 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
   <div class="wrap">
     <div class="ft-name">Daniel<br><i>Rodriguez</i></div>
     <div class="ft-bottom">
-      <p class="ft-copy">© 2026 Daniel Rodriguez · Business and Data Analyst · Bogotá, Colombia</p>
+      <p class="ft-copy">© 2026 Daniel Rodriguez · Applied AI &amp; Revenue Systems · Bogotá, Colombia</p>
       <div class="ft-links">
         <a href="mailto:danielst.data@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/daniel-steven-rodriguez-sandoval/" target="_blank" rel="noopener">LinkedIn</a>
@@ -964,6 +980,8 @@ footer { background: var(--dark); padding: 0 2.5rem 3rem; overflow: hidden; bord
 /* ════════════════════════════════════════════════════
    GSAP + LENIS + CUSTOM EASE
 ══════════════════════════════════════════════════════ */
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let ambientPaused = reducedMotion;
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create('osmo', '0.625, 0.05, 0, 1');
 gsap.defaults({ ease: 'osmo', duration: 0.7, overwrite: 'auto' });
@@ -977,7 +995,7 @@ const lenis = new Lenis({
   lerp: 0.1,
   wheelMultiplier: 1,
   gestureOrientation: 'vertical',
-  smoothWheel: true,
+  smoothWheel: !reducedMotion,
 });
 lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
@@ -987,7 +1005,7 @@ gsap.ticker.lagSmoothing(0);
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const tgt = document.querySelector(a.getAttribute('href'));
-    if (tgt) { e.preventDefault(); lenis.scrollTo(tgt, { offset: -64, duration: 1.4 }); }
+    if (tgt) { e.preventDefault(); if (a.classList.contains('skip-link')) { tgt.tabIndex = -1; tgt.focus({preventScroll:true}); } lenis.scrollTo(tgt, { offset: tgt.id === 'valrun' ? -90 : -64, duration: reducedMotion ? 0 : 1.4, immediate: reducedMotion }); }
   });
 });
 
@@ -1011,7 +1029,7 @@ updateHdr();
 gsap.set('#hero-name .word', { yPercent: 110 });
 gsap.set('#hero-bottom, #hero-meta-r, .hero-foot', { opacity: 0, y: 16 });
 // Subtle slow zoom while keeping the subject higher and brighter.
-gsap.fromTo('#hero-video', { scale: 1.08, yPercent: -15 }, { scale: 1.03, yPercent: -13, duration: 9, ease: 'osmo' });
+// Keep the native video framing: no vertical overscan or upward translation.
 
 const heroTl = gsap.timeline({ delay: 0.25 });
 heroTl
@@ -1027,21 +1045,27 @@ document.fonts && document.fonts.ready.then(() => setTimeout(() => ScrollTrigger
 /* ════════════════════════════════════════════════════
    PINNED · ABOUT — text builds while page is held
 ══════════════════════════════════════════════════════ */
-gsap.set('#about-headline .word', { yPercent: 110 });
-
-const aboutTl = gsap.timeline({
-  scrollTrigger: {
-    trigger: '#about-pin',
-    start: 'top top',
-    end: '+=2400',
-    pin: true,
-    scrub: 1,
-    anticipatePin: 1,
-  }
-});
-aboutTl
-  .to('#about-headline .word', { yPercent: 0, stagger: 0.05, duration: 0.6, ease: 'osmo' })
-  .from('.about-tags .about-tag, .about-ctas .btn', { opacity: 0, y: 12, stagger: 0.035, duration: 0.45 }, '-=0.1');
+let aboutTl;
+// Stable small-viewport sizing avoids rebuilding pins as iPhone browser chrome moves.
+ScrollTrigger.config({ignoreMobileResize:true});
+if (!reducedMotion) {
+ const section=document.querySelector('#about-pin'), inner=section.querySelector('.about-inner');
+ const overflow=()=>Math.max(0,inner.offsetHeight-section.clientHeight+120);
+ const panTo=selector=>()=>-Math.min(overflow(),Math.max(0,section.querySelector(selector).offsetTop-inner.offsetTop-100));
+ gsap.set('#about-headline .word',{yPercent:110});
+ gsap.set('.about-eyebrow,.about-bio,.about-tags,.about-ctas',{autoAlpha:0,y:18});
+ aboutTl=gsap.timeline({scrollTrigger:{id:'about-story',trigger:section,start:'top top',
+   end:()=>'+='+Math.max(950,overflow()+850),pin:true,pinType:'transform',scrub:.35,anticipatePin:1,invalidateOnRefresh:true}});
+ aboutTl.to('.about-eyebrow',{autoAlpha:1,y:0,duration:.15})
+  .to('#about-headline .word',{yPercent:0,stagger:.025,duration:.45})
+  .to(inner,{y:panTo('.about-bio'),duration:.35,ease:'none'})
+  .to('.about-bio',{autoAlpha:1,y:0,duration:.45},'<')
+  .to(inner,{y:panTo('.about-tags'),duration:.35,ease:'none'})
+  .to('.about-tags,.about-ctas',{autoAlpha:1,y:0,stagger:.15,duration:.35},'<')
+  .to({}, {duration:.3})
+  .to(inner,{y:()=>-overflow(),duration:.7,ease:'none'})
+  .to({}, {duration:.3});
+}
 
 /* ── Stat counters ── */
 ScrollTrigger.create({
@@ -1066,16 +1090,11 @@ ScrollTrigger.create({
 ══════════════════════════════════════════════════════ */
 gsap.set('#svc-list .svc-name .word', { yPercent: 110 });
 
-gsap.timeline({
-  scrollTrigger: {
-    trigger: '#svc-pin',
-    start: 'top top',
-    end: '+=2000',
-    pin: true,
-    scrub: 1,
-    anticipatePin: 1,
-  }
-}).to('#svc-list .svc-name .word', { yPercent: 0, stagger: 0.3, duration: 0.6, ease: 'osmo' });
+document.querySelectorAll('.svc-row').forEach(row=>{
+ gsap.timeline({scrollTrigger:{trigger:row,start:'top 95%'}})
+  .to(row.querySelector('.word'),{yPercent:0,duration:.6,ease:'osmo'})
+  .from(row.querySelectorAll('.svc-keyword'),{autoAlpha:0,y:12,stagger:.07,duration:.45},.15);
+});
 
 /* ════════════════════════════════════════════════════
    WORKING NOW
@@ -1103,127 +1122,43 @@ gsap.to('.wn-card', {
 /* ════════════════════════════════════════════════════
    INFINITE DRAG ROWS (projects)
 ══════════════════════════════════════════════════════ */
-function makeInfiniteRow(trackId, direction, speed) {
-  const track = document.getElementById(trackId);
-  if (!track) return;
-  track.innerHTML = track.innerHTML + track.innerHTML + track.innerHTML;
-  const wrap = track.parentElement;
-  const GAP = 20;
-  let frameW = 0;
-  function measure() {
-    const cards = track.querySelectorAll('.proj-card');
-    const third = Math.floor(cards.length / 3);
-    let w = 0;
-    for (let i = 0; i < third; i++) w += cards[i].offsetWidth + GAP;
-    frameW = w;
-    if (frameW > 0) wrap.scrollLeft = pos = frameW;
-  }
-  let pos = 0, vel = 0, dragging = false, paused = false;
-  let lastX = 0, lastT = 0, suppress = false;
-  function clamp(p) {
-    if (!frameW) return p;
-    if (p >= frameW * 2) return p - frameW;
-    if (p <= 0) return p + frameW;
-    return p;
-  }
-  function tick() {
-    if (!dragging && !paused) {
-      const step = (direction === 'left' ? 1 : -1) * speed / 60;
-      if (Math.abs(vel) > .1) { vel *= .93; pos = clamp(pos + vel); }
-      else { vel = 0; pos = clamp(pos + step); }
-      wrap.scrollLeft = pos;
-    }
+// Shared interaction for the existing project rows and restored credential rows.
+let credentialsPaused = false;
+function makeInteractiveRow(trackId, direction, speed, isCredential = false) {
+  const track = document.getElementById(trackId); if (!track) return;
+  const row = track.parentElement;
+  const originals = [...track.children];
+  const clone = () => originals.map(el => { const copy = el.cloneNode(true); copy.setAttribute('aria-hidden','true'); copy.tabIndex = -1; return copy; });
+  if (!reducedMotion) { track.prepend(...clone(), ...clone()); track.append(...clone(), ...clone()); }
+  row.tabIndex = 0;
+  if (!row.hasAttribute('aria-label')) row.setAttribute('aria-label','Selected projects; use left and right arrow keys');
+  row.setAttribute('role','region');
+  row.style.touchAction = 'pan-x pan-y';
+  let unit=0,pos=0,hover=false,focused=false,dragging=false,inView=false,suppress=false,touch=false,lastX=0,cooldown=0;
+  const measure=()=>{const gap=parseFloat(getComputedStyle(track).gap)||0;unit=originals.reduce((sum,e)=>sum+e.offsetWidth+gap,0); if(!focused)row.scrollLeft=pos=reducedMotion?0:unit*2;};
+  const wrap=p=>reducedMotion?Math.max(0,Math.min(p,row.scrollWidth-row.clientWidth)):p>=unit*3?p-unit:p<unit?p+unit:p;
+  new IntersectionObserver(([entry])=>{inView=entry.isIntersecting;}).observe(row);
+  let previous=performance.now();
+  function tick(now){const dt=Math.min(now-previous,50);previous=now;
+    if(!reducedMotion&&!ambientPaused&&!(isCredential&&credentialsPaused)&&inView&&!hover&&!focused&&!dragging&&!touch&&now>cooldown){pos=wrap(pos+(direction==='left'?1:-1)*speed*dt/1000);row.scrollLeft=pos;}
     requestAnimationFrame(tick);
   }
-  measure();
-  window.addEventListener('resize', measure);
-  requestAnimationFrame(tick);
-
-  wrap.addEventListener('mousedown', e => {
-    dragging = true; paused = true; suppress = false;
-    lastX = e.clientX; lastT = performance.now(); vel = 0;
-    wrap.style.cursor = 'grabbing';
-  });
-  window.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    const now = performance.now(), dt = Math.max(now - lastT, 1), dx = lastX - e.clientX;
-    vel = dx / dt * 16; lastX = e.clientX; lastT = now;
-    if (Math.abs(dx) > 2) suppress = true;
-    pos = clamp(pos + dx); wrap.scrollLeft = pos;
-  });
-  window.addEventListener('mouseup', () => {
-    if (!dragging) return;
-    dragging = false; wrap.style.cursor = 'grab';
-    setTimeout(() => { paused = false; suppress = false; }, 800);
-  });
-  wrap.addEventListener('wheel', e => {
-    const delta = Math.abs(e.deltaX) > 0 ? e.deltaX : e.shiftKey ? e.deltaY : 0;
-    if (!delta) return;
-    e.preventDefault();
-    paused = true; vel = 0;
-    pos = clamp(pos + delta);
-    wrap.scrollLeft = pos;
-    setTimeout(() => { if (!dragging) paused = false; }, 900);
-  }, { passive: false });
-  wrap.addEventListener('scroll', () => {
-    if (dragging || !frameW) return;
-    pos = clamp(wrap.scrollLeft);
-    if (pos !== wrap.scrollLeft) wrap.scrollLeft = pos;
-  }, { passive: true });
-  wrap.addEventListener('click', e => { if (suppress) { e.preventDefault(); e.stopPropagation(); } }, true);
-  wrap.addEventListener('mouseenter', () => { if (!dragging) paused = true; });
-  wrap.addEventListener('mouseleave', () => { if (!dragging) setTimeout(() => { paused = false; }, 350); });
+  measure();window.addEventListener('resize',measure);requestAnimationFrame(tick);
+  row.addEventListener('mouseenter',()=>hover=true);row.addEventListener('mouseleave',()=>hover=false);
+  row.addEventListener('focusin',()=>focused=true);row.addEventListener('focusout',e=>{focused=row.contains(e.relatedTarget);pos=row.scrollLeft;});
+  row.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();cooldown=performance.now()+1500;row.scrollLeft=pos=wrap(row.scrollLeft+(e.key==='ArrowRight'?260:-260));});
+  row.addEventListener('mousedown',e=>{if(e.button!==0)return;dragging=true;lastX=e.clientX;suppress=false;});
+  row.addEventListener('dragstart',e=>e.preventDefault());
+  window.addEventListener('mousemove',e=>{if(!dragging)return;const dx=lastX-e.clientX;lastX=e.clientX;if(Math.abs(dx)>2)suppress=true;row.scrollLeft=pos=wrap(row.scrollLeft+dx);});
+  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;cooldown=performance.now()+800;setTimeout(()=>suppress=false,0);});
+  row.addEventListener('click',e=>{if(suppress){e.preventDefault();e.stopPropagation();}},true);
+  row.addEventListener('touchstart',()=>{touch=true;},{passive:true});row.addEventListener('touchend',()=>{touch=false;cooldown=performance.now()+1200;},{passive:true});row.addEventListener('touchcancel',()=>touch=false,{passive:true});
+  row.addEventListener('wheel',e=>{const dx=e.deltaX||(e.shiftKey?e.deltaY:0);if(!dx)return;e.preventDefault();cooldown=performance.now()+1200;row.scrollLeft=pos=wrap(row.scrollLeft+dx);},{passive:false});
+  row.addEventListener('scroll',()=>{pos=row.scrollLeft;},{passive:true});
 }
-makeInfiniteRow('pr1', 'left', 32);
-makeInfiniteRow('pr2', 'right', 26);
-makeInfiniteRow('pr3', 'left', 29);
-
-function makeManualScrollRow(row, direction, speed) {
-  const track = row.querySelector('.cert-track');
-  if (!track) return;
-  track.innerHTML = track.innerHTML + track.innerHTML;
-  let frameW = 0, pos = 0, paused = false;
-  function measure() {
-    const cards = track.querySelectorAll('.cert-card');
-    const half = Math.floor(cards.length / 2);
-    if (!cards[0] || !cards[half]) return;
-    frameW = cards[half].offsetLeft - cards[0].offsetLeft;
-    if (frameW > 0 && !pos) row.scrollLeft = pos = frameW / 2;
-  }
-  function wrap(p) {
-    if (!frameW) return p;
-    if (p >= frameW) return p - frameW;
-    if (p <= 0) return p + frameW;
-    return p;
-  }
-  function tick() {
-    if (!paused && frameW) {
-      pos = wrap(pos + (direction === 'left' ? 1 : -1) * speed / 60);
-      row.scrollLeft = pos;
-    }
-    requestAnimationFrame(tick);
-  }
-  measure();
-  window.addEventListener('resize', measure);
-  row.addEventListener('mouseenter', () => { paused = true; });
-  row.addEventListener('mouseleave', () => { paused = false; });
-  row.addEventListener('wheel', e => {
-    const delta = Math.abs(e.deltaX) > 0 ? e.deltaX : e.shiftKey ? e.deltaY : 0;
-    if (!delta) return;
-    e.preventDefault();
-    paused = true;
-    pos = wrap(pos + delta);
-    row.scrollLeft = pos;
-    setTimeout(() => { paused = false; }, 900);
-  }, { passive: false });
-  row.addEventListener('scroll', () => {
-    if (!frameW) return;
-    pos = wrap(row.scrollLeft);
-    if (pos !== row.scrollLeft) row.scrollLeft = pos;
-  }, { passive: true });
-  requestAnimationFrame(tick);
-}
-document.querySelectorAll('.cert-row').forEach((row, idx) => makeManualScrollRow(row, idx === 1 ? 'right' : 'left', 18 + idx * 4));
+makeInteractiveRow('pr1','left',32);
+['cert-track-0','cert-track-1','cert-track-2'].forEach((id,i)=>makeInteractiveRow(id,i===1?'right':'left',18+i*4,true));
+document.getElementById('cert-pause').addEventListener('click',e=>{credentialsPaused=!credentialsPaused;e.currentTarget.setAttribute('aria-pressed',String(credentialsPaused));e.currentTarget.textContent=credentialsPaused?'Resume credentials':'Pause credentials';});
 
 /* ════════════════════════════════════════════════════
    INTERLUDE — parallax video + word reveal
@@ -1241,9 +1176,13 @@ gsap.to('#interlude-headline .word', {
 /* ════════════════════════════════════════════════════
    THESIS, EXPERIENCE, SKILLS CARDS — stagger in
 ══════════════════════════════════════════════════════ */
-gsap.from('#thesis-grid > *', {
-  opacity: 0, y: 50, stagger: 0.18, duration: 1,
-  scrollTrigger: { trigger: '#thesis-grid', start: 'top 80%' }
+const researchMedia=gsap.matchMedia();
+if(!reducedMotion) researchMedia.add('(min-width: 961px) and (min-height: 800px)',()=>{
+ const fits=document.querySelector('#thesis').offsetHeight<=innerHeight;
+ gsap.from('#thesis-grid > *',{opacity:0,y:35,stagger:.25,duration:1,scrollTrigger:{id:'research-story',trigger:'#thesis',start:fits?'top top':'top 65%',end:fits?'+=650':'bottom 85%',pin:fits,pinType:'transform',scrub:.4}});
+});
+if(!reducedMotion) researchMedia.add('(max-width: 960px), (max-height: 799px)',()=>{
+ document.querySelectorAll('#thesis-grid > *').forEach(el=>gsap.from(el,{opacity:0,y:30,duration:.8,scrollTrigger:{trigger:el,start:'top 85%'}}));
 });
 gsap.to('.exp-row', {
   opacity: 1, y: 0, stagger: 0.12, duration: 0.85,
@@ -1254,6 +1193,24 @@ gsap.to('.skill-group', {
   scrollTrigger: { trigger: '#skills-grid', start: 'top 85%' }
 });
 
+// Native button keeps the poster keyboard-accessible and avoids loading a player before intent.
+document.querySelector('.thesis-poster').addEventListener('click',e=>{
+  const frame=document.createElement('iframe');frame.src='https://www.youtube-nocookie.com/embed/VvdvdvSqf1M?autoplay=1&rel=0';frame.title='Daniel Rodriguez · KEDGE three-minute thesis presentation';frame.allow='autoplay; encrypted-media; picture-in-picture';frame.allowFullscreen=true;
+  e.currentTarget.replaceWith(frame);frame.tabIndex=0;frame.focus();
+});
+const motionButton=document.querySelector('.motion-toggle');
+function syncMotion(){
+ document.body.classList.toggle('motion-paused',ambientPaused);motionButton.setAttribute('aria-pressed',String(ambientPaused));motionButton.textContent=ambientPaused?'Resume motion':'Pause motion';
+ document.querySelectorAll('video').forEach(v=>{if(ambientPaused){v.pause();v.autoplay=false;}else{v.autoplay=true;v.play().catch(()=>{});}});
+}
+motionButton.addEventListener('click',()=>{ambientPaused=!ambientPaused;syncMotion();});
+if(reducedMotion){
+ ScrollTrigger.getAll().forEach(t=>t.kill(true));gsap.globalTimeline.getChildren().forEach(t=>t.kill());
+ gsap.set('.word',{yPercent:0});gsap.set('#hero-bottom,#hero-meta-r,.hero-foot,.wn-card,.exp-row,.skill-group,.about-eyebrow,.about-bio,.about-tags,.about-ctas,.svc-desc,.svc-keyword,#wn-headline,#thesis-grid > *',{autoAlpha:1,y:0});
+ document.getElementById('cert-pause').hidden=true;
+}
+syncMotion();
+window.addEventListener('load',()=>{if(reducedMotion)syncMotion();});
 /* (refresh handled above) */
 </script>
 </body>
